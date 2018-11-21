@@ -1,0 +1,65 @@
+<script>
+    const sideNav = document.querySelector('.sidenav');
+    M.Sidenav.init(sideNav, {});
+
+    //Side Menu
+    $("#drop-service").addClass("active");
+    //Side Menu
+    $('.item-all-service').css("background-color", "#80cbc4");
+</script>
+
+
+<script>
+    $('.btn-active').on('click', function () {
+        var serviceId = $(this).data("href");
+        if (confirm('Bạn muốn thực hiện thay đổi này?')) {
+            //Check
+            if ($('.btn-active' + serviceId).text().trim() == 'Ẩn') {
+                //Show
+                updateActive(serviceId, 1);
+
+            } else {
+                //Hide
+                updateActive(serviceId, 0);
+
+            }
+
+        };
+    });
+
+    function updateActive(_serviceId, _status) {
+        $.ajax({
+            method: "PUT",
+            dataType: "json",
+            beforeSend: function (request) {
+                request.setRequestHeader("secret", "12345");
+            },
+            url: "admin/service/update-active-service.html",
+            data: {
+                serviceId: _serviceId,
+                active: _status
+            },
+            success: function success(data) {
+                var result = "";
+                $.each(data, function (i, value) {
+                    result = value.update;
+                });
+                if (result == 1) {
+                    if (_status == 0) {
+                        $('.btn-active' + _serviceId).text('Ẩn');
+                        $('.btn-active' + _serviceId).removeClass('blue-text');
+                        $('.btn-active' + _serviceId).addClass('red-text');
+                    } else {
+                        $('.btn-active' + _serviceId).text('Hiện');
+                        $('.btn-active' + _serviceId).removeClass('red-text');
+                        $('.btn-active' + _serviceId).addClass('blue-text');
+                    }
+                    alert("Cập nhật thành công.");
+                } else {
+                    alert("Cập nhật thất bại.");
+                }
+
+            }
+        });
+    }
+</script>

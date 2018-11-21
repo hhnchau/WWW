@@ -1,0 +1,187 @@
+<!-- Section: Receiver -->
+<section id="receiver.html" class="section">
+    <!-- back -->
+    <i id="btn-back" class="material-icons grey-text" style="padding-left: 10px; font-size: 2.2rem; cursor: pointer;">arrow_back</i>
+
+        <h3 class="center flow-text">
+            <span class="teal-text" id="cart-title">THÔNG TIN ĐƠN HÀNG</span>
+        </h3>
+
+    <div class="row" style="margin-top: 50px;">
+
+        <div class="col s5">
+            <div class="container">
+                <h6>
+                    <span class="teal-text">Đơn hàng: </span>
+                    <%-'KP' + transaction.ProductForm[0].transactionId%>
+                </h6>
+
+                <h6>
+                    <span class="teal-text">Ngày: </span>
+                    <%-transaction.ProductForm[0].time.getDate()%>/
+                        <%-transaction.ProductForm[0].time.getMonth()%>/
+                            <%-transaction.ProductForm[0].time.getFullYear()%>
+                </h6>
+
+                <h6>
+                    <span class="teal-text">Trạng thái: </span>
+                    <%if(transaction.ProductForm[0].status == 0){%>
+                        <a class="black-text">Chờ xác nhận</a>
+                        <%}else if(transaction.ProductForm[0].status == 1){%>
+                            <a class="teal-text">Đang xử lý</a>
+                            <%}else if(transaction.ProductForm[0].status == 2){%>
+                                <a class="purple-text">Đã hủy</a>
+                                <%}else if(transaction.ProductForm[0].status == 3){%>
+                                    <a class="pink-text">Hệ thống hủy</a>
+                                    <%}else if(transaction.ProductForm[0].status == 4){%>
+                                        <a class="lime-text">Thành công</a>
+                                        <%}else if(transaction.ProductForm[0].status == 5){%>
+                                            <a class="cyan-text">Thành công</a>
+                                            <%}%>
+                </h6>
+
+            </div>
+        </div>
+        <div class="col s7">
+            <h6>
+                <span class="teal-text">Người nhận: </span>
+                <%-transaction.ProductForm[0].receiverName.toUpperCase()%>
+            </h6>
+
+            <h6>
+                <span class="teal-text">Địa chỉ: </span>
+                <%-transaction.ProductForm[0].receiverAddress%>
+            </h6>
+
+            <h6>
+                <span class="teal-text">Điện thoại: </span>
+                <%-transaction.ProductForm[0].receiverPhone%>
+            </h6>
+
+            <h6>
+                <span class="teal-text">Ghi chú:</span>
+                <%-transaction.ProductForm[0].receiverNote%>
+            </h6>
+        </div>
+    </div>
+
+</section>
+
+
+<!-- Section: Profile -->
+<section id="list-bought.html" class="section">
+
+    <table class="highlight centered flow-text" id="table-all-product">
+        <thead>
+            <tr>
+                <th style="font-size: 1rem">Hình ảnh</th>
+                <th style="font-size: 1rem">Mã sản phẩm</th>
+                <th style="font-size: 1rem;">Tên sản phẩm</th>
+                <th style="font-size: 1rem">Giá tiền</th>
+                <th style="font-size: 1rem">Số lượng</th>
+                <th style="font-size: 1rem">Thành tiền</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <%transaction.ProductForm.forEach(function(item, index){%>
+                <tr style="font-size: 1.1rem">
+
+                    <td>
+                        <span>
+
+                            <img src="upload/<%-item.image1%>" width="50px">
+
+                        </span>
+                    </td>
+
+                    <td>
+                        <span>
+
+                            <%-item.productSn%>
+
+                        </span>
+                    </td>
+
+                    <td>
+                        <span>
+
+                            <%-item.productName%>
+
+                        </span>
+                    </td>
+
+                    <td>
+                        <span>
+
+                            <%-item.price.toLocaleString()%>
+
+                        </span>
+                    </td>
+
+                    <td>
+                        <span>
+
+                            <%-item.amount%>
+
+                        </span>
+                    </td>
+
+                    <td>
+                        <span>
+
+                            <%-(item.price * item.amount).toLocaleString() %>
+
+                        </span>
+                    </td>
+                </tr>
+                <%})%>
+
+                    <%if(transaction.ProductForm[0].pointUse > 0 || transaction.ProductForm[0].giftId > 0){%>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td class="teal-text">Khuyến mãi:</td>
+                            <%if(transaction.ProductForm[0].pointUse > 0){%>
+                                <td style="font-size: 1rem">(Điểm)</td>
+                                <td>
+                                    <%-(transaction.ProductForm[0].pointUse*1000).toLocaleString()%>
+                                </td>
+                                <%}%>
+
+                                    <%if(transaction.ProductForm[0].giftId > 0){%>
+                                        <td style="font-size: 1rem">(Thẻ quà tặng
+                                            <%-transaction.ProductForm[0].giftValue%>%)</td>
+                                        <td>
+                                            <%-((transaction.ProductForm[0].totalFee * transaction.ProductForm[0].giftValue)/100).toLocaleString() %>
+                                        </td>
+                                        <%}%>
+                        </tr>
+                        <%}%>
+
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td class="red-text">Tổng cộng:</td>
+                                <td>
+                                    <%-transaction.ProductForm[0].totalFee.toLocaleString()%>
+                                </td>
+                            </tr>
+        </tbody>
+
+    </table>
+
+    <!-- Button -->
+    <div class="row">
+        <div class="col s6 offset-s3">
+            <p class="center-align" style="margin-top: 50px;">
+                <a id="btn-cancel" class="btn-small red gone">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hủy&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                <a id="btn-confirm" class="btn-small gone">Xác nhận</a>
+            </p>
+        </div>
+    </div>
+
+</section>

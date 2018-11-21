@@ -1,0 +1,81 @@
+<script src="js/jquery.form.min.js"></script>
+<script>
+    const sideNav = document.querySelector('.sidenav');
+    M.Sidenav.init(sideNav, {});
+
+    //Picker
+    $('.datepicker').datepicker({
+        selectMonths: false,
+        selectYears: 15,
+        format: 'dd-mm-yyyy',
+    });
+
+    //Side Menu
+    $("#drop-banner").addClass("active");
+    //Side Menu
+    $('.item-add-banner').css("background-color", "#80cbc4");
+</script>
+
+<script>
+
+    //Upload Image
+    $(document).ready(function () {
+
+        $('#addForm').submit(function () {
+            $('#btn-add').hide();
+            $(this).ajaxSubmit({
+                success: function (data) {
+                    if (data.length > 0) {
+                        var filename = data[0].filename;
+                        uploadData(filename);
+                    } else {
+                        alert('Đã xảy ra lỗi!');
+                        $('#btn-add').show();
+                    }
+                }
+            });
+            return false;
+        });
+    });
+
+
+    //Upload Data
+    function uploadData(filename) {
+        $.ajax({
+            method: "POST",
+            dataType: "json",
+            beforeSend: function (request) {
+                request.setRequestHeader("secret", "12345");
+            },
+            url: "/admin/banner/add-data-banner.html",
+            data: {
+                bannerTitle: $('#banner-title').val(),
+                bannerContent: $('#banner-content').val(),
+                productSn: $('#product-sn').val(),
+                bannerPriority: $('#banner-priority').val(),
+                bannerStart: formatDateYYYYMMDD($('#banner-start').val()),
+                bannerEnd: formatDateYYYYMMDD($('#banner-end').val()),
+                bannerImage: filename,
+            },
+            success: function success(data) {
+                var result = "";
+                $.each(data, function (i, value) {
+                    result = value.insert;
+                });
+                if (result === 1) {
+                    //Successfull
+                    alert('Thêm sản phẩm thành công.');
+                    location.reload();
+                } else {
+                    //Fail
+                    alert('Đã xảy ra lỗi!');
+                    $('#btn-add').show();
+                }
+            }
+        });
+    }
+
+    function formatDateYYYYMMDD(date) {
+        return date.split("-").reverse().join("-");
+    }
+</script>

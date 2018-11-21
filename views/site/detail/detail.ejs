@@ -1,0 +1,42 @@
+<% var userId = 1%>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%include ../base/meta.ejs%>
+
+        <%include ../base/css.ejs%>
+            <link rel="stylesheet" href="css/home-style.css">
+            <link rel="stylesheet" href="css/detail-style.css">
+            <link rel="stylesheet" href="css/rating-style.css">
+
+            <title>Thông tin sản phẩm - Đồ chơi trẻ em Kingpes</title>
+</head>
+
+<body class="grey lighten-3">
+
+    <header>
+        <%include ../base/header.ejs%>
+    </header>
+
+    <main>
+        <%include layout.ejs%>
+    </main>
+
+    <footer>
+        <%include ../base/footer.ejs%>
+    </footer>
+
+    <%include modal.ejs%>
+
+    <%include modal-image.ejs%>
+
+        <%include ../base/js.ejs%>
+
+            <%include ../base/header-script.ejs%>
+
+                <%include script.ejs%>
+
+</body>
+
+</html>

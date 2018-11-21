@@ -1,0 +1,123 @@
+<script src="js/jquery.lazyload.min.js"></script>
+<script>
+    // Sidenav
+    const sideNav = document.querySelector('.sidenav');
+    M.Sidenav.init(sideNav, {});
+</script>
+
+<script type="text/javascript">
+    var limit = 10;
+    var offset = 0;
+    loadData(offset, limit);
+
+    // loadmore
+    $('#load-more').on('click', function () {
+        loadData(offset, limit);
+    });
+
+
+    function loadData(_offset, _limit) {
+        $('#load-more').hide();
+        $.ajax({
+            method: "GET",
+            dataType: "json",
+            beforeSend: function (request) {
+                request.setRequestHeader("secret", "12345");
+            },
+            url: "api/findAllEvent?offset=" + _offset + "&limit=" + _limit,
+            success: function success(data) {
+                var count = 0;
+                $.each(data, function (i, value) {
+
+
+                    if (value.length == 0) {
+                        var output = "";
+
+                        output += '<div class="container" style="margin-top: 50px">';
+                        output += '<div class="card-panel">';
+                        output += '<h4 class="center flow-text" style="margin-top: -10px">';
+                        output += '<span class="teal-text">';
+                        output += '<br>';
+                        output += '<br class="teal-text"> CHƯA CÓ SỰ KIỆN NÀO.';
+                        output += '<br>';
+                        output += '<br>';
+                        output += '</span>';
+                        output += '</h4>';
+                        output += '</div>';
+                        output += '</div>';
+
+                        $('#all-blog').append(output);
+                    }
+
+                    value.forEach(function (entry) {
+                        count++;
+                        var output = "";
+
+                        output += '<div class="card horizontal hoverable">';
+                        output += '<div class="card-image hide-on-small-only" style="margin: 30px;">';
+                        output += '<a href="site/event/id:' + entry.eventId + '.html">';
+                        //output += '<img src="upload/' + entry.blogImage + '" height="130px;">';
+                        output += '<img class="lazy" data-original="upload/' + entry.eventImage + '" height="130px;">';
+                        output += '</a>';
+                        output += '</div>';
+
+                        output += '<div class="card-stacked">';
+
+                        output += '<a href="site/event/id:' + entry.eventId + '.html">';
+                        //output += '<img class="responsive-img hide-on-med-and-up" src="upload/' + entry.blogImage + '">';
+                        output += '<img class="lazy responsive-img hide-on-med-and-up" data-original="upload/' + entry.eventImage + '">';
+                        output += '</a>';
+                        output += '<div class="card-content">';
+                        output += '<a href="site/event/id:' + entry.eventId + '.html" class="underline-on-hover">';
+                        output += '<h5>';
+                        output += entry.eventTitle;
+                        output += '</h5>';
+                        output += '</a>';
+
+                        output += '<a href="site/event/id:' + entry.eventId + '.html" class="black-text">';
+                        output += entry.eventContent.substring(0, 200) + ' ...';
+                        output += '</a>';
+                        output += '</div>';
+                        output += '<div style="margin-bottom: 10px;">';
+
+                        var start = new Date(entry.start);
+                        var current = new Date();
+                        var end = new Date(entry.end);
+
+
+                        if (current >= start && current < end) {
+                            output += '<a class="red-text right" style="margin-right: 10px;">';
+                            output += 'ĐANG DIỄN RA';
+                            output += '</a>';
+                        } else {
+                            output += '<a class="blue-text right" style="margin-right: 10px;">';
+                            output += 'SẮP DIỄN RA';
+                            output += '</a>';
+                        }
+
+
+                        output += '</div>';
+
+                        output += '</div>';
+
+                        output += '</div>';
+
+                        $('#all-blog').append(output);
+                    });
+                });
+
+                //Check exist product
+                if (count === limit) {
+                    $('#load-more').show();
+                }
+                //Set Offset
+                offset += count;
+
+                //Lazy load
+                $("img.lazy").lazyload();
+
+            }
+        });
+    }
+
+</script>

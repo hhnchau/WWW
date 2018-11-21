@@ -1,0 +1,169 @@
+<!-- Section: Contact -->
+<section id="product-add" class="section section-add grey lighten-3">
+    <div class="container">
+        <div class="row">
+            <div class="card-panel grey lighten-3">
+
+                <form id="addForm" enctype="multipart/form-data" action="admin/product/add-image-product.html" method="post">
+
+                    <!-- PRODUCT SN -->
+                    <div class="input-field" style="display:table; width: 100%">
+                        <input id="product-code" type="text" name="productCode" oninput="this.setCustomValidity('')" oninvalid="this.setCustomValidity('Vui lòng nhập mã sản phẩm')"
+                            required>
+                        <label for="product-code">Mã sản phẩm</label>
+                        <span style="display: table-cell;">
+                            <a id="btn-check" class="btn-small">Kiểm tra</a>
+                        </span>
+                    </div>
+
+                    <!-- PRODUCT NAME -->
+                    <div class="input-field gone">
+                        <input id="product-name" type="text" name="productName" oninput="this.setCustomValidity('')" oninvalid="this.setCustomValidity('Vui lòng nhập tên sản phẩm')"
+                            required>
+                        <label for="product-name">Tên sản phẩm</label>
+                    </div>
+
+                    <!-- AMOUNT BUY -->
+                    <div class="input-field gone">
+                        <input id="product-amount" type="text" name="productAmount" oninput="this.setCustomValidity('')" oninvalid="this.setCustomValidity('Vui lòng nhập mã sản phẩm')"
+                            required>
+                        <label for="product-amount">Số lượng</label>
+                    </div>
+
+                    <!-- PRICE BUY -->
+                    <div class="input-field gone">
+                        <input id="product-buy" type="text" name="productBuy" oninput="this.setCustomValidity('')" oninvalid="this.setCustomValidity('Vui lòng nhập mã sản phẩm')"
+                            required>
+                        <label for="product-buy">Giá mua</label>
+                    </div>
+
+                    <!-- PRICE SELL -->
+                    <div class="input-field gone">
+                        <input id="product-sell" type="text" name="productSell" oninput="this.setCustomValidity('')" oninvalid="this.setCustomValidity('Vui lòng nhập mã sản phẩm')"
+                            required>
+                        <label for="product-sell">Giá bán</label>
+                    </div>
+
+                    <!-- CATEGORY -->
+                    <div class="input-field gone">
+                        <span class="grey-text" style="font-size: 0.8rem;">Danh mục</span>
+                        <select class="browser-default" id="cb-category">
+                            <%discount.Category.forEach(function(item, index){%>
+                                <%if(index==0){%>
+                                    <option value="<%-item.categoryId%>" selected>
+                                        <%}else{%>
+                                            <option value="<%-item.categoryId%>">
+                                                <%}%>
+                                                    <%-item.categoryName%>
+                                            </option>
+                                            <%})%>
+                        </select>
+                    </div>
+
+                    <!-- PROMOTION -->
+                    <div class="input-field gone">
+                        <span class="grey-text" style="font-size: 0.8rem;">Khuyến mãi</span>
+                        <select class="browser-default" id="cb-promotion">
+                            <option value="" selected></option>
+                            <%discount.Promotion.forEach(function(item, index){%>
+                                <option value="<%-item.promotionId%>">
+                                    <%-item.promotionName%> &nbsp;-&nbsp;
+                                        <%-item.promotionDiscount%>%
+                                </option>
+                                <%})%>
+                        </select>
+                    </div>
+
+                    <!-- FLASHSALE -->
+                    <div class="input-field gone">
+                        <span class="grey-text" style="font-size: 0.8rem;">Giảm sốc</span>
+                        <select class="browser-default" id="cb-flashsale">
+                            <option value="" selected></option>
+                            <%discount.Flashsale.forEach(function(item, index){%>
+                                <option value="<%-item.flashsaleId%>">
+                                    <%-item.flashsaleName%>&nbsp;-&nbsp;
+                                        <%-item.flashsaleDiscount%>%
+                                </option>
+                                <%})%>
+                        </select>
+                    </div>
+
+                    <!-- POINT -->
+                    <div class="input-field gone">
+                        <span class="grey-text" style="font-size: 0.8rem;">Điểm</span>
+                        <select class="browser-default" id="cb-point">
+                            <option value="" selected></option>
+                            <%discount.Point.forEach(function(item, index){%>
+                                <option value="<%-item.pointId%>">
+                                    <%-item.pointName%>&nbsp;-&nbsp;
+                                        <%-item.pointValue%>
+                                </option>
+                                <%})%>
+                        </select>
+                    </div>
+
+                    <!-- VOUCHER -->
+                    <div class="input-field gone">
+                        <span class="grey-text" style="font-size: 0.8rem;">Mã giảm giá</span>
+                        <select class="browser-default" id="cb-voucher">
+                            <option value="" selected></option>
+                            <%discount.Voucher.forEach(function(item, index){%>
+                                <option value="<%-item.voucherId%>">
+                                    <%-item.voucherName%>&nbsp;-&nbsp;
+                                        <%-item.voucherValue%>%
+                                </option>
+                                <%})%>
+                        </select>
+                    </div>
+
+                    <!-- SHIP -->
+                    <div class="input-field gone">
+                        <span class="grey-text" style="font-size: 0.8rem;">Phí vận chuyển</span>
+                        <select class="browser-default" id="cb-ship">
+                            <%discount.Ship.forEach(function(item, index){%>
+                                <%if(index==0){%>
+                                    <option value="<%-item.shipId%>" selected>
+                                        <%}else{%>
+                                            <option value="<%-item.shipId%>">
+                                                <%}%>
+                                                    <%-item.shipName%>
+                                                        &nbsp;-&nbsp;
+                                                        <%-item.shipValue%>%
+                                            </option>
+                                            <%})%>
+                        </select>
+                    </div>
+
+                    <!-- IMAGE -->
+                    <div class="input-field file-field image-input gone">
+                        <input id="file" type="file" name="userPhoto" required="" accept="image/*" multiple>
+                        <div class="file-path-wrapper">
+                            <input class="file-path" type="text" placeholder="Chọn hình ảnh cho sản phẩm">
+                        </div>
+                    </div>
+
+                    <!-- VIDEO -->
+                    <div class="input-field gone">
+                        <div id="product-video" class="chips chips-placeholder"></div>
+                    </div>
+
+                    <!-- DESCRIPTION -->
+                    <div class="file-field margin-top-20 gone">
+                        <p class="grey-text">Thông tin sản phẩm</p>
+                        <textarea id="editor" name="editor"></textarea>
+                    </div>
+
+                    <!-- BUTTON -->
+                    <div class="margin-top-20 gone">
+                        <input type="submit" value="Thêm" class="btn bottom" id="btn-add">
+                    </div>
+
+                </form>
+
+                <div id="progress" class="progress">
+                    <div class="indeterminate"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

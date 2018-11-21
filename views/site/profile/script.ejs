@@ -1,0 +1,556 @@
+<script src="js/jquery.lazyload.min.js"></script>
+<!-- Account -->
+<script type="text/javascript">
+
+    // Sidenav
+    const sideNav = document.querySelector('.sidenav');
+    M.Sidenav.init(sideNav, {});
+
+    var user = {
+        userId: '<%-userId%>',
+        address: '',
+        email: '',
+        password: '',
+        sex: ''
+    }
+
+    $('.gone').hide();
+    //Nickname
+    $(".disable").attr("disabled", true);
+
+    //Address Change
+    $('#profile-adrress').on('input', function (e) {
+        var address = $('#profile-adrress').val();
+        if (address !== "") {
+            $('#btn-address-save').show();
+        }
+    });
+    $('#btn-address-save').on('click', function () {
+        var address = $('#profile-adrress').val();
+        $('#btn-address-save').hide();
+        user.address = address;
+        updateUser(user);
+    });
+
+    //Phone Change
+    $('#profile-phone').on('input', function (e) {
+        var phone = $('#profile-phone').val();
+        if (phone !== "") {
+            $('#btn-phone-save').show();
+        }
+    });
+    $("#profile-phone").keydown(function (e) {
+        // Allow: backspace, delete, tab, escape, enter and .
+        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+            // Allow: Ctrl/cmd+A
+            (e.keyCode == 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+            // Allow: Ctrl/cmd+C
+            (e.keyCode == 67 && (e.ctrlKey === true || e.metaKey === true)) ||
+            // Allow: Ctrl/cmd+X
+            (e.keyCode == 88 && (e.ctrlKey === true || e.metaKey === true)) ||
+            // Allow: home, end, left, right
+            (e.keyCode >= 35 && e.keyCode <= 39)) {
+            // let it happen, don't do anything
+            return;
+        }
+        // Ensure that it is a number and stop the keypress
+        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+            e.preventDefault();
+        }
+    });
+    $('#btn-phone-save').on('click', function () {
+        var phone = $('#profile-phone').val();
+        $('#btn-phone-save').hide();
+        alert('Disable');
+    });
+
+    //Password Change
+    $('#profile-password').on('input', function (e) {
+        var pass = $('#profile-password').val();
+        if (pass !== "") {
+            $('#btn-password-save').show();
+        }
+    });
+    $('#btn-password-save').on('click', function () {
+        var pass = $('#profile-password').val();
+        if (pass.length >= 6) {
+            $('#btn-password-save').hide();
+            user.password = pass;
+            updateUser(user);
+        }
+    });
+
+    //Email Change
+    $('#profile-email').on('input', function (e) {
+        var email = $('#profile-email').val();
+        if (email !== "") {
+            $('#btn-email-save').show();
+        }
+    });
+    $('#btn-email-save').on('click', function () {
+        var email = $('#profile-email').val();
+        if (validEmail(email)) {
+            $('#valid-email').empty();
+            $('#btn-email-save').hide();
+            user.email = email;
+            updateUser(user);
+        } else {
+            $('#valid-email').text("Email không đúng định dạng");
+        }
+    });
+
+    function validEmail(v) {
+        var r = new RegExp("[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?");
+        return (v.match(r) == null) ? false : true;
+    }
+
+    //Gift
+    //Address Change
+    $('#profile-gift').on('input', function (e) {
+        var gift = $('#profile-gift').val();
+        if (gift !== "") {
+            $('#btn-gift-save').show();
+        }
+    });
+    $('#btn-gift-save').on('click', function () {
+        var gift = $('#profile-gift').val();
+        $('#btn-gift-save').hide();
+        alert('Chua xu ly');
+    });
+
+    $('#btn-logout').on('click', function () {
+        $.ajax({
+            method: "GET",
+            dataType: "json",
+            url: "/logout.html"
+        });
+    });
+
+    //Sex
+    $('select').on('change', function () {
+        $('#btn-sex-save').show();
+    })
+    $('#btn-sex-save').on('click', function () {
+        var sex = $('#cb-sex option:selected').val();
+        $('#btn-sex-save').hide();
+        user.sex = sex;
+        updateUser(user);
+    });
+
+    function updateUser(user) {
+        $.ajax({
+            method: "PUT",
+            dataType: "json",
+            beforeSend: function (request) {
+                request.setRequestHeader("secret", "12345");
+            },
+            url: "api/updateUser",
+            data: user,
+            success: function success(data) {
+                var result = "";
+                $.each(data, function (i, value) {
+                    result = value.update;
+                });
+                if (result == 0) {
+                    alert('Hệ thống lỗi. Vui lòng thử lại sau.');
+                } else if (result == 1) {
+                    alert('Cập nhật thành công.');
+                    user.address = "";
+                    user.email = "";
+                    user.password = "";
+                    user.sex = "";
+                }
+            }
+        });
+    }
+
+</script>
+
+<!-- Receiver -->
+<script type="text/javascript">
+    var recei = true;
+    $('#btn-receiver').on('click', function () {
+        if (recei) {
+            recei = false;
+            findReceiver('<%-userId%>');
+        }
+    });
+
+    $('#receiver-names').val(' ');
+    $('#receiver-adrress').val(' ');
+    $('#receiver-phone').val(' ');
+    $('#receiver-note').val(' ');
+
+    var _receiverId = 0;
+
+    function findReceiver(userId) {
+        $.ajax({
+            method: "GET",
+            dataType: "json",
+            beforeSend: function (request) {
+                request.setRequestHeader("secret", "12345");
+            },
+            url: "api/findReceiver?userId=" + userId,
+            success: function success(data) {
+                $.each(data, function (i, entry) {
+                    _receiverId = entry.receiverId;
+                    $('#receiver-names').val(entry.receiverName);
+                    $('#receiver-adrress').val(entry.receiverAddress);
+                    $('#receiver-phone').val(entry.receiverPhone);
+                    $('#receiver-note').val(entry.receiverNote);
+
+                });
+            }
+        });
+    }
+
+    $("#receiver-phone").keydown(function (e) {
+        // Allow: backspace, delete, tab, escape, enter and .
+        if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110, 190]) !== -1 ||
+            // Allow: Ctrl/cmd+A
+            (e.keyCode == 65 && (e.ctrlKey === true || e.metaKey === true)) ||
+            // Allow: Ctrl/cmd+C
+            (e.keyCode == 67 && (e.ctrlKey === true || e.metaKey === true)) ||
+            // Allow: Ctrl/cmd+X
+            (e.keyCode == 88 && (e.ctrlKey === true || e.metaKey === true)) ||
+            // Allow: home, end, left, right
+            (e.keyCode >= 35 && e.keyCode <= 39)) {
+            // let it happen, don't do anything
+            return;
+        }
+        // Ensure that it is a number and stop the keypress
+        if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+            e.preventDefault();
+        }
+    });
+
+    function phoneIsValid(phone) {
+        var flag = false;
+        if (phone != '') {
+            var firstNumber = phone.substring(0, 2);
+            if ((firstNumber == '09' || firstNumber == '08') && phone.length == 10) {
+                if (phone.match(/^\d{10}/)) {
+                    flag = true;
+                }
+            } else if (firstNumber == '01' && phone.length == 11) {
+                if (phone.match(/^\d{11}/)) {
+                    flag = true;
+                }
+            }
+        }
+        return flag;
+    }
+
+    $('#btn-finish').on('click', function () {
+        if ($('#receiver-names').val() == "")
+            return alert('Vui lòng nhập tên người nhận');
+        if ($('#receiver-adrress').val() == "")
+            return alert('Vui lòng nhập địa chỉ người nhận');
+        if ($('#receiver-phone').val() == "")
+            return alert('Vui lòng nhập số điện thoại người nhận');
+        if (!phoneIsValid($("#receiver-phone").val())) {
+            return alert('Vui lòng nhập đúng số điện thoại.');
+        }
+
+        var receiver = {
+            receiverName: $('#receiver-names').val(),
+            receiverAddress: $('#receiver-adrress').val(),
+            receiverPhone: $('#receiver-phone').val(),
+            receiverNote: $('#receiver-note').val(),
+            receiverPayment: 1,
+            receiverLatitude: 0,
+            receiverLongitude: 0,
+            receiverId: _receiverId
+        }
+
+        $('#btn-finish').hide();
+        updateReceiver(receiver);
+
+    });
+
+    function updateReceiver(receiver) {
+        $.ajax({
+            method: "PUT",
+            dataType: "json",
+            beforeSend: function (request) {
+                request.setRequestHeader("secret", "12345");
+            },
+            url: "api/updateReceiver",
+            data: receiver,
+            success: function success(data) {
+                $('#btn-finish').show();
+                var result = "";
+                $.each(data, function (i, value) {
+                    result = value.update;
+                });
+                if (result == 0) {
+                    alert('Hệ thống lỗi. Vui lòng thử lại sau.');
+                } else if (result == 1) {
+                    alert('Cập nhật thành công.');
+                }
+            }
+        });
+    }
+</script>
+
+<!-- Watched -->
+<script type="text/javascript">
+    var watched = true;
+    $('#btn-watched').on('click', function () {
+        if (watched) {
+            watched = false;
+            findHistoryWatched('<%-userId%>', 0, 12);
+        }
+    });
+
+    function findHistoryWatched(userId, offset, limit) {
+        $.ajax({
+            method: "GET",
+            dataType: "json",
+            beforeSend: function (request) {
+                request.setRequestHeader("secret", "12345");
+            },
+            url: "api/findHistory?userId=" + userId + "&offset=" + offset + "&limit=" + limit,
+            success: function success(data) {
+                $.each(data, function (i, value) {
+                    value.forEach(function (entry) {
+                        var output = "";
+
+                        var productId = entry.productId;
+                        var productName = entry.productName;
+                        var sell = entry.sell;
+                        var discount = entry.promotionDiscount;
+                        var image1 = entry.image1;
+                        var likeTotal = entry.likeTotal;
+                        var rateTotal = entry.rateTotal;
+                        var rateValue = entry.rateValue;
+                        var commentTotal = entry.commentTotal;
+                        var superSale = entry.flashsaleDiscount;
+                        var point = entry.pointValue;
+                        var ship = entry.shipValue;
+
+                        //New Product
+                        var newProduct = 0;
+                        var time = new Date(entry.time);
+                        time.setDate(time.getDate() + 7);
+                        var now = new Date();
+                        if (Math.floor(time - now) > 0)
+                            newProduct = 1;
+
+
+                        output += '<div class="col s12 m4">';
+                        output += '<a href="/site/detail/sn:' + productId + '.html">';
+                        output += '<div class="card hoverable">';
+
+                        output += '<div class="card-image">'; //Start card Image
+                        // Image
+                        output += '<img class="lazy" data-original="upload/' + image1 + '">';
+                        //output += '<img src="upload/' + image1 + '">';
+
+                        //Discount
+                        if (discount > 0 && superSale > 0) {
+                            output += '<div class="label-discount-bottom-left">';
+                            output += '<span>-' + discount + '%</span>';
+                            output += '<span class="label-discount-bottom-left-1">-' + superSale + '%</span>';
+                            output += '</div>';
+                        } else if (discount > 0 && superSale <= 0) {
+                            output += '<div class="label-discount-bottom-left">';
+                            output += '<span>-' + discount + '%</span>';
+                            output += '</div>';
+                        } else if (discount <= 0 && superSale > 0) {
+                            output += '<span class="label-discount-bottom-left-2">-' + superSale + '%</span>';
+                        }
+
+
+                        //Point
+                        //Point
+                        if (point == 5)
+                            output += '<span class="label-discount-bottom-right circles"><img src="img/point5.png" height="40px;"></span>';
+                        else if (point == 10)
+                            output += '<span class="label-discount-bottom-right circles"><img src="img/point10.png" height="40px;"></span>';
+                        else if (point == 20)
+                            output += '<span class="label-discount-bottom-right circles"><img src="img/point20.png" height="40px;"></span>';
+                        else if (point == 30)
+                            output += '<span class="label-discount-bottom-right circles"><img src="img/point30.png" height="40px;"></span>';
+                        else if (point == 40)
+                            output += '<span class="label-discount-bottom-right circles"><img src="img/point40.png" height="40px;"></span>';
+                        else if (point == 50)
+                            output += '<span class="label-discount-bottom-right circles"><img src="img/point50.png" height="40px;"></span>';
+
+
+                        //New product
+                        if (newProduct > 0) {
+                            output += '<span class="label-discount-top-left">';
+                            output += '<img src="img/new.png">';
+                            output += '</span>';
+                        }
+
+                        output += '</div>'; //End card Image
+
+                        output += '<div class="card-content">'; //Start card content
+                        // Title
+                        output += '<h6 class="teal-text ellipsis">' + productName + '</h6>';
+
+                        // Price
+                        output += '<div class="red-text">';
+                        //Price Original
+                        if (discount > 0 || superSale > 0) {
+                            var priceOld = sell;
+                            output += '<span class="teal-text line-through" style="font-size: 70%; margin-right: 5px;">' + priceOld + '</span>';
+                        }
+                        //Price Discount
+                        var priceNew = sell - ((sell * discount) / 100) - ((sell * superSale) / 100);
+                        if (priceNew < 0)
+                            priceNew = 0;
+                        output += priceNew.toLocaleString('it-IT', { style: 'currency', currency: 'VND' });
+                        output += '</div>';
+
+                        // Rating
+                        output += '<div class="">';
+
+                        var star = Math.floor(rateValue / rateTotal);
+                        var half = rateValue % rateTotal;
+                        if (rateTotal == null || rateTotal == 0) {
+                            half = 0;
+                            star = 0;
+                            rateTotal = 0;
+                        }
+                        for (i = 0; i < star; i++) {
+
+                            output += '<i class="material-icons yellow-text text-darken-2 icon-small">star</i>';
+
+                        }
+
+                        if (half > 0) {
+                            half = 1;
+                            output += '<i class="material-icons yellow-text text-darken-2 icon-small">star_half</i>';
+
+                        }
+
+                        for (i = 0; i < 5 - (star + half); i++) {
+
+                            output += '<i class="material-icons grey-text text-darken-2 icon-small">star</i>';
+
+                        }
+
+
+                        //Comment
+                        output += '<a class="text-small" style="margin-top: 3px">(' + rateTotal + 'nhận xét)</a>';
+                        output += '</div>';
+                        output += '</div>';
+                        output += '</div>';
+                        output += '</a>';
+                        output += '</div>';
+
+                        $('#history-product').append(output);
+                    });
+                });
+
+                //Lazy load
+                $("img.lazy").lazyload();
+            }
+        });
+    }
+</script>
+
+<!-- Bought -->
+<script type="text/javascript">
+    var bought = true;
+    $('#btn-bought').on('click', function () {
+        if (bought) {
+            bought = false;
+            findBought('<%-userId%>', 0, 30);
+        }
+    });
+
+    function findBought(userId, offset, limit) {
+        $.ajax({
+            method: "GET",
+            dataType: "json",
+            beforeSend: function (request) {
+                request.setRequestHeader("secret", "12345");
+            },
+            url: "api/findBought?userId=" + userId + "&offset=" + offset + "&limit=" + limit,
+            success: function success(data) {
+                $.each(data, function (i, value) {
+                    value.forEach(function (entry) {
+
+                        var output = "";
+                        output += '<tr>';
+                        output += '<td><a href="site/profile/order/detail/id:' + entry.transactionId + '.html" class="black-text underline-on-hover">KP' + entry.transactionId + '</a></td>';
+                        output += '<td>' + entry.totalProduct + '</td>';
+                        var priceTotalFee = entry.totalFee;
+                        priceTotalFee = priceTotalFee.toLocaleString('it-IT', { style: 'currency', currency: 'VND' });
+                        output += '<td>' + priceTotalFee + '</td>';
+                        if (entry.pointUse > 0 || entry.giftId > 0) {
+                            output += '<td class="underline-on-hover blue-text"">' + "KM" + '</td>';
+                        } else {
+                            output += '<td></td>';
+                        }
+                        output += '<td>' + entry.time.substring(0, 10) + '</td>';
+                        if (entry.status == 0) {
+                            output += '<td>Chờ xác nhận <span class="red-text underline-on-hover btn-cancel" data-href="' + entry.transactionId + '">Hủy</span></td>';
+                        } else if (entry.status == 1) {
+                            output += '<td class="teal-text">' + "Đang xử lý" + '</td>';
+                        } else if (entry.status == 2) {
+                            output += '<td class="purple-text">' + "Đã hủy" + '</td>';
+                        } else if (entry.status == 3) {
+                            output += '<td class="pink-text">' + "Hệ thống hủy" + '</td>';
+                        } else if (entry.status == 4) {
+                            output += '<td class="lime-text">' + "Thành công" + '</td>';
+                        } else if (entry.status == 5) {
+                            output += '<td class="cyan-text">' + "Thành công" + '</td>';
+                        }
+
+                        output += '</tr>';
+
+                        $('#table-bought > tbody:last').append(output);
+                    });
+                });
+
+
+                $('.btn-cancel').on('click', function () {
+                    if (confirm('Bạn muốn xoá đơn hàng này?')) {
+                        var transactionId = $(this).data("href");
+                        updateTransactionStatus(transactionId, 2); //User cancel
+                    }
+                });
+
+            }
+        });
+    }
+
+</script>
+
+<!-- Cancel Transaction -->
+<script type="text/javascript">
+    function updateTransactionStatus(_transactionId, _transactionStatus) {
+        $.ajax({
+            method: "PUT",
+            dataType: "json",
+            beforeSend: function (request) {
+                request.setRequestHeader("secret", "12345");
+            },
+            url: "api/updateTransactionStatus",
+            data: {
+                transactionId: _transactionId,
+                transactionStatus: _transactionStatus
+            },
+            success: function success(data) {
+                var result = "";
+                $.each(data, function (i, value) {
+                    result = value.update;
+                });
+                if (result == 1) {
+                    //Set Text
+                    alert("Đã xoá thành công..");
+                    //Clear table
+                    $('#table-bought > tbody:last').html("");
+                    findBought('<%-userId%>', 0, 30);
+                } else {
+                    alert("Hệ thống lỗi. Vui lòng thử lại sau.");
+                }
+            }
+        });
+    }
+</script>

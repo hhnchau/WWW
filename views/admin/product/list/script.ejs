@@ -1,0 +1,166 @@
+<script>
+    const sideNav = document.querySelector('.sidenav');
+    M.Sidenav.init(sideNav, {});
+
+    //Side Menu
+    $("#drop-product").addClass("active");
+    //Side Menu
+    $('.item-all-product').css("background-color", "#80cbc4");
+</script>
+
+<script>
+    findListProduct(0, 500);
+    function findListProduct(offset, limit) {
+        $.ajax({
+            method: "GET",
+            dataType: "json",
+            beforeSend: function (request) {
+                request.setRequestHeader("secret", "12345");
+            },
+            url: "admin/product/findListProduct?offset=" + offset + "&limit=" + limit,
+            success: function success(data) {
+                $.each(data, function (i, value) {
+                    value.forEach(function (entry, index) {
+
+                        var output = "";
+                        output += '<tr style="font-size: 1.0rem">';
+
+                        //Active
+                        output += '<td>';
+                        if (entry.active == 0) {
+                            output += '<span class="red-text underline-on-hover btn-active btn-active' + entry.productId + '" data-href="' + entry.productId + '">Ẩn';
+                        } else {
+                            output += '<span class="blue-text underline-on-hover btn-active btn-active' + entry.productId + '" data-href="' + entry.productId + '">Hiện';
+                        }
+                        output += '</span>';
+
+
+                        //Product Name
+                        output += '<td>';
+                        output += '<a href="admin/product/edit-product/id:' + entry.productId + '.html" class="underline-on-hover black-text">' + entry.productSn + ' - ' + entry.productName + '</a>';
+                        output += '</td>';
+
+                        //Product Amount
+                        output += '<td>';
+                        if (entry.amountBuy - entry.amountSell < 1)
+                            output += '<span class="red-text">' + entry.amountBuy + ' / ' + entry.amountSell + '</span>';
+                        else
+                            output += '<span>' + entry.amountBuy + ' / ' + entry.amountSell + '</span>';
+                        output += '</td>';
+
+                        //Product Price Buy
+                        output += '<td>';
+                        output += '<span>' + (entry.buy / 1000).toLocaleString() + ' K</span>';
+                        output += '</td>';
+
+                        //Product Price Sell
+                        output += '<td>';
+                        output += '<span>' + (entry.sell / 1000).toLocaleString() + ' K</span>';
+                        output += '</td>';
+
+                        //Product Promotion
+                        output += '<td>';
+                        var promotion = (entry.sell * entry.promotionDiscount) / 100;
+                        if (entry.promotionDiscount > 0)
+                            output += '<span>' + promotion / 1000 + ' K</span>';
+                        output += '</td>';
+
+                        //Product Flash Sale
+                        output += '<td>';
+                        var flashsale = (entry.sell * entry.flashsaleDiscount) / 100;
+                        if (entry.flashsaleDiscount > 0)
+                            output += '<span>' + flashsale / 1000 + ' K</span>';
+                        output += '</td>';
+
+                        //Product Voucher
+                        output += '<td>';
+                        var voucher = (entry.sell * entry.voucherValue) / 100;
+                        if (entry.voucherValue > 0)
+                            output += '<span>' + voucher / 1000 + ' K</span>';
+                        output += '</td>';
+
+                        //Product Point
+                        output += '<td>';
+                        if (entry.pointValue > 0)
+                            output += '<span>' + entry.pointValue + '</span>';
+                        output += '</td>';
+
+                        //Product Ship
+                        output += '<td>';
+                        if (entry.shipValue > 0)
+                            output += '<span>' + entry.shipValue / 1000 + ' K</span>';
+                        output += '</td>';
+
+                        //Product TotalFee
+                        output += '<td>';
+                        output += '<span>' + ((entry.sell - promotion - flashsale - voucher) / 1000).toLocaleString() + ' K</span>';
+                        output += '</td>';
+
+
+                        output += '</tr>';
+
+                        $('#table-all-product > tbody:last').append(output);
+
+                    });
+                });
+
+
+                $('.btn-active').on('click', function () {
+                    var productId = $(this).data("href");
+                    if (confirm('Bạn muốn thực hiện thay đổi này?')) {
+                        //Check
+                        if ($('.btn-active' + productId).text().trim() == 'Ẩn') {
+                            //Show
+                            updateProductActive(productId, 1);
+
+                        } else {
+                            //Hide
+                            updateProductActive(productId, 0);
+
+                        }
+
+                    };
+                });
+
+            }
+        });
+    }
+</script>
+
+<script>
+    function updateProductActive(_productId, _status) {
+        $.ajax({
+            method: "PUT",
+            dataType: "json",
+            beforeSend: function (request) {
+                request.setRequestHeader("secret", "12345");
+            },
+            url: "admin/product/update-active-product.html",
+            data: {
+                productId: _productId,
+                active: _status
+            },
+            success: function success(data) {
+                var result = "";
+                $.each(data, function (i, value) {
+                    result = value.update;
+                });
+                if (result == 1) {
+                    if (_status == 0) {
+                        $('.btn-active' + _productId).text('Ẩn');
+                        $('.btn-active' + _productId).removeClass('blue-text');
+                        $('.btn-active' + _productId).addClass('red-text');
+                    } else {
+                        $('.btn-active' + _productId).text('Hiện');
+                        $('.btn-active' + _productId).removeClass('red-text');
+                        $('.btn-active' + _productId).addClass('blue-text');
+                    }
+                    alert("Cập nhật thành công.");
+                } else {
+                    alert("Cập nhật thất bại.");
+                }
+
+            }
+        });
+    }
+</script>

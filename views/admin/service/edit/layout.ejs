@@ -1,0 +1,67 @@
+<!-- Section: Service Edit -->
+<section id="service-edit" class="section section-add grey lighten-3">
+
+    <!-- back -->
+    <i id="btn-back" class="material-icons grey-text" style="padding-left: 10px; font-size: 2.2rem; cursor: pointer;">arrow_back</i>
+
+    <div class="container">
+        <div class="row">
+            <div class="card-panel grey lighten-3">
+
+
+                <!-- SERVICE TITLE -->
+                <div class="row">
+                    <div class="input-field" style="display:table; width: 100%">
+                        <input id="banner-title" type="text" value="<%-service.ProductForm[0].serviceTitle%>">
+                        <label for="banner-title">Tiêu đề</label>
+                        <span style="display: table-cell;">
+                            <a id="btn-banner-title" class="btn-small gone">Lưu</a>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- IMAGE -->
+                <div class="row">
+                    <div class="input-field" style=" display:table; width: 100%;">
+                        <span style="display: table-cell; padding-right: 10px;">
+                            <div style="font-size: 15px; display:table;">
+                                <span style="display: table-cell;padding-right: 10px;">
+                                    <%if(service.ProductForm[0].seviceImage == ""){%>
+                                        <div class="input-field gone image">
+                                            <%}else{%>
+                                                <div class="input-field image">
+                                                    <%}%>
+                                                        <img id="image" src="upload/<%-service.ProductForm[0].serviceImage%>" height="60px" width="80px">
+                                                        <i class="material-icons hoverable red-text" style="cursor: pointer;" id="btn-delete">cancel</i>
+                                                </div>
+                                                <%if(service.ProductForm[0].serviceImage == ""){%>
+                                                    <div class="input-field file-field input-image">
+                                                        <%}else{%>
+                                                            <div class="input-field file-field gone input-image">
+                                                                <%}%>
+                                                                    <input id="input-image" type="file" accept="image/*">
+                                                                    <div class="file-path-wrapper">
+                                                                        <input class="file-path" type="text" placeholder="Hình ảnh">
+                                                                    </div>
+                                                            </div>
+                                </span>
+                                <span style="display: table-cell;">
+                                    <a id="btn-image-save" class="btn-small gone">Lưu</a>
+                                </span>
+                                </div>
+                        </span>
+                        </div>
+                  
+                
+
+                <!-- DESCRIPTION -->
+                <div class="file-field margin-top-20">
+                    <p class="grey-text">Nội dung</p>
+                    <textarea id="editor" name="editor"><%-service.ProductForm[0].serviceContent%></textarea>
+                </div>
+                <span style="margin-top: 10px;" id="btn-service-content" class="btn gone">Lưu</span>
+
+            </div>
+        </div>
+    </div>
+</section>

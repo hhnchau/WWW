@@ -1,0 +1,66 @@
+<!-- Section: Service -->
+<section id="service.html" class="section">
+    <div class="row">
+
+        <table class="highlight centered flow-text" id="table-service">
+            <thead>
+                <tr>
+                    <th style="font-size: 1.1rem">ID</th>
+                    <th style="font-size: 1.1rem">Tiêu đề</th>
+                    <th style="font-size: 1.1rem">Nội dung</th>
+                    <th style="font-size: 1.1rem">Hình ảnh</th>
+                    <th style="font-size: 1.1rem">Active</th>
+
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <%service.ProductForm.forEach(function(item, index){%>
+                    <tr style="font-size: 1.1rem">
+
+                        <!-- ID -->
+                        <td>
+                            <a href="admin/service/edit-service/id:<%-item.serviceId%>.html" style="cursor: pointer;">
+                                <%-item.serviceId%>
+                            </a>
+                        </td>
+
+                        <!-- Title -->
+                        <td>
+                            <a href="admin/service/edit-service/id:<%-item.serviceId%>.html" class="underline-on-hover black-text">
+                                <%-item.serviceTitle%>
+                            </a>
+                        </td>
+
+                        <!-- Content -->
+                        <td>
+                            <a href="admin/service/edit-service/id:<%-item.serviceId%>.html" class="underline-on-hover black-text">
+                                <%-item.serviceContent%>
+                            </a>
+                        </td>
+
+                        <!-- Image -->
+                        <td>
+                            <a href="admin/service/edit-service/id:<%-item.serviceId%>.html" class="underline-on-hover black-text">
+                                <img src="upload/<%-item.serviceImage%>" width="50px">
+                            </a>
+                        </td>
+
+                        <!-- Active -->
+                        <td>
+                            <%if(item.active ==0 ){%>
+                                <span class="red-text underline-on-hover btn-active btn-active<%-item.serviceId%>" data-href="<%-item.serviceId%>">Ẩn
+                                    <%}else{%>
+                                        <span class="blue-text underline-on-hover btn-active btn-active<%-item.serviceId%>" data-href="<%-item.serviceId%>">Hiện
+                                            <%}%>
+                                        </span>
+                        </td>
+                    </tr>
+                    <%})%>
+            </tbody>
+
+        </table>
+
+    </div>
+</section>

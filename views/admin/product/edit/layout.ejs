@@ -1,0 +1,481 @@
+<!-- Section: Rdit -->
+<section id="product-edit" class="section section-add grey lighten-3">
+    <div class="container">
+        <div class="row">
+            <div class="card-panel grey lighten-3">
+
+                <div class="row">
+
+                    <div class="col s12">
+                        <div class="card hoverable">
+                            <form class="col s12">
+
+                                <!-- ProductId -->
+                                <div class="row">
+                                    <div class="input-field">
+                                        <input class="disable" id="product-id" type="text" value="<%-product.ProductForm.productId%>">
+                                        <label for="product-id">ID sản phẩm</label>
+                                    </div>
+                                </div>
+
+                                <!-- ProductSn -->
+                                <div class="row">
+                                    <div class="input-field" style="display:table; width: 100%">
+                                        <input id="product-sn" type="text" value="<%-product.ProductForm.productSn%>">
+                                        <label for="product-sn">Mã sản phẩm</label>
+                                        <span style="display: table-cell;">
+                                            <a id="btn-product-sn" class="btn-small gone">Lưu</a>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <!-- ProductName -->
+                                <div class="row">
+                                    <div class="input-field" style="display:table; width: 100%">
+                                        <input id="product-name" type="text" value="<%-product.ProductForm.productName%>">
+                                        <label for="product-name">Tên sản phẩm</label>
+                                        <span style="display: table-cell;">
+                                            <a id="btn-product-name" class="btn-small gone">Lưu</a>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <!-- PriceBuy -->
+                                <div class="row">
+                                    <div class="input-field" style="display:table; width: 100%">
+                                        <input id="product-price-buy" type="text" value="<%-product.ProductForm.buy.toLocaleString()%>">
+                                        <label for="product-price-buy">Giá mua</label>
+                                        <span style="display: table-cell;">
+                                            <a id="btn-product-price-buy" class="btn-small gone">Lưu</a>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <!-- PriceSell -->
+                                <div class="row">
+                                    <div class="input-field" style="display:table; width: 100%">
+                                        <input id="product-price-sell" type="text" value="<%-product.ProductForm.sell.toLocaleString()%>">
+                                        <label for="product-price-sell">Giá bán</label>
+                                        <span style="display: table-cell;">
+                                            <a id="btn-product-price-sell" class="btn-small gone">Lưu</a>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <!-- AmountBuy -->
+                                <div class="row">
+                                    <div class="input-field" style="display:table; width: 100%">
+                                        <input id="product-amount-buy" type="text" value="<%-product.ProductForm.amountBuy%>">
+                                        <label for="product-amount-buy">Số lượng mua</label>
+                                        <span style="display: table-cell;">
+                                            <a id="btn-product-amount-buy" class="btn-small gone">Lưu</a>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <!-- AmountSell -->
+                                <div class="row">
+                                    <div class="input-field" style="display:table; width: 100%">
+                                        <input id="product-amount-sell" type="text" value="<%-product.ProductForm.amountSell%>">
+                                        <label for="product-amount-sell">Số lượng bán</label>
+                                        <span style="display: table-cell;">
+                                            <a id="btn-product-amount-sell" class="btn-small gone">Lưu</a>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <!-- CategoryId -->
+                                <div class="row">
+                                    <span class="grey-text" style="font-size: 0.8rem;">Danh mục</span>
+                                    <div class="input-field" style="font-size: 15px; display:table; width: 100%">
+                                        <select class="browser-default" id="cb-category">
+
+                                            <option value="" disabled>Danh mục</option>
+                                            <%discount.Category.forEach(function(item, index){%>
+                                                <%if(product.ProductForm.categoryId == item.categoryId){%>
+                                                    <option value="<%-item.categoryId%>" selected>
+                                                        <%-item.categoryName%>
+                                                    </option>
+                                                    <%}else{%>
+                                                        <option value="<%-item.categoryId%>">
+                                                            <%-item.categoryName%>
+                                                        </option>
+                                                        <%}%>
+                                                            <%})%>
+
+
+                                        </select>
+                                        <span style="display: table-cell;">
+                                            <a id="btn-category-save" class="btn-small gone">Lưu</a>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <!-- Promotion -->
+                                <div class="row">
+                                    <span class="grey-text" style="font-size: 0.8rem;">Khuyến mãi</span>
+                                    <div class="input-field" style="font-size: 15px; display:table; width: 100%">
+                                        <select class="browser-default" id="cb-promotion">
+
+                                            <option value="" disabled selected>Khuyến mãi</option>
+                                            <%discount.Promotion.forEach(function(item, index){%>
+                                                <%if(product.ProductForm.promotionId == item.promotionId){%>
+                                                    <option value="<%-item.promotionId%>" selected>
+                                                        <%-item.promotionName%> &nbsp;-&nbsp;
+                                                            <%-item.promotionDiscount%>% &nbsp;-&nbsp;
+                                                                <%-(product.ProductForm.sell * item.promotionDiscount/100).toLocaleString()%>
+                                                    </option>
+                                                    <%}else{%>
+                                                        <option value="<%-item.promotionId%>">
+                                                            <%-item.promotionName%> &nbsp;-&nbsp;
+                                                                <%-item.promotionDiscount%>% &nbsp;-&nbsp;
+                                                                    <%-(product.ProductForm.sell * item.promotionDiscount/100).toLocaleString()%>
+                                                        </option>
+                                                        <%}%>
+                                                            <%})%>
+
+
+                                        </select>
+                                        <span style="display: table-cell;">
+                                            <a id="btn-promotion-save" class="btn-small gone">Lưu</a>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <!-- Flashsale -->
+                                <div class="row">
+                                    <span class="grey-text" style="font-size: 0.8rem;">Giảm sốc</span>
+                                    <div class="input-field" style="font-size: 15px; display:table; width: 100%">
+                                        <select class="browser-default" id="cb-flashsale">
+
+                                            <option value="" disabled selected>Giảm sốc</option>
+                                            <%discount.Flashsale.forEach(function(item, index){%>
+                                                <%if(product.ProductForm.flashsaleId == item.flashsaleId){%>
+                                                    <option value="<%-item.flashsaleId%>" selected>
+                                                        <%-item.flashsaleName%> &nbsp;-&nbsp;
+                                                            <%-item.flashsaleDiscount%>% &nbsp;-&nbsp;
+                                                                <%-(product.ProductForm.sell * item.flashsaleDiscount/100).toLocaleString()%>
+                                                    </option>
+                                                    <%}else{%>
+                                                        <option value="<%-item.flashsaleId%>">
+                                                            <%-item.flashsaleName%> &nbsp;-&nbsp;
+                                                                <%-item.flashsaleDiscount%>% &nbsp;-&nbsp;
+                                                                    <%-(product.ProductForm.sell * item.flashsaleDiscount/100).toLocaleString()%>
+                                                        </option>
+                                                        <%}%>
+                                                            <%})%>
+
+
+                                        </select>
+                                        <span style="display: table-cell;">
+                                            <a id="btn-flashsale-save" class="btn-small gone">Lưu</a>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <!-- Voucher -->
+                                <div class="row">
+                                    <span class="grey-text" style="font-size: 0.8rem;">Mã giảm giá</span>
+                                    <div class="input-field" style="font-size: 15px; display:table; width: 100%">
+                                        <select class="browser-default" id="cb-voucher">
+
+                                            <option value="" disabled selected>Mã giảm giá</option>
+                                            <%discount.Voucher.forEach(function(item, index){%>
+                                                <%if(product.ProductForm.voucherId == item.voucherId){%>
+                                                    <option value="<%-item.voucherId%>" selected>
+                                                        <%-item.voucherName%> &nbsp;-&nbsp;
+                                                            <%-item.voucherValue%>% &nbsp;-&nbsp;
+                                                                <%-(product.ProductForm.sell * item.voucherValue/100).toLocaleString()%>
+                                                    </option>
+                                                    <%}else{%>
+                                                        <option value="<%-item.voucherId%>">
+                                                            <%-item.voucherName%> &nbsp;-&nbsp;
+                                                                <%-item.voucherValue%>% &nbsp;-&nbsp;
+                                                                    <%-(product.ProductForm.sell * item.voucherValue/100).toLocaleString()%>
+                                                        </option>
+                                                        <%}%>
+                                                            <%})%>
+
+
+                                        </select>
+                                        <span style="display: table-cell;">
+                                            <a id="btn-voucher-save" class="btn-small gone">Lưu</a>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <!-- Ship -->
+                                <div class="row">
+                                    <span class="grey-text" style="font-size: 0.8rem;">Phí vận chuyển</span>
+                                    <div class="input-field" style="font-size: 15px; display:table; width: 100%">
+                                        <select class="browser-default" id="cb-ship">
+
+                                            <option value="" disabled selected>Phí vận chuyển</option>
+                                            <%discount.Ship.forEach(function(item, index){%>
+                                                <%if(product.ProductForm.shipId == item.shipId){%>
+                                                    <option value="<%-item.shipId%>" selected>
+                                                        <%-item.shipName%> &nbsp;-&nbsp;
+                                                            <%-item.shipValue.toLocaleString()%>
+                                                    </option>
+                                                    <%}else{%>
+                                                        <option value="<%-item.shipId%>">
+                                                            <%-item.shipName%> &nbsp;-&nbsp;
+                                                                <%-item.shipValue.toLocaleString()%>
+                                                        </option>
+                                                        <%}%>
+                                                            <%})%>
+
+
+                                        </select>
+                                        <span style="display: table-cell;">
+                                            <a id="btn-ship-save" class="btn-small gone">Lưu</a>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <!-- Point -->
+                                <div class="row">
+                                    <span class="grey-text" style="font-size: 0.8rem;">Điểm</span>
+                                    <div class="input-field" style="font-size: 15px; display:table; width: 100%">
+                                        <select class="browser-default" id="cb-point">
+
+                                            <option value="" disabled selected>Điểm</option>
+                                            <%discount.Point.forEach(function(item, index){%>
+                                                <%if(product.ProductForm.pointId == item.pointId){%>
+                                                    <option value="<%-item.pointId%>" selected>
+                                                        <%-item.pointName%> &nbsp;-&nbsp;
+                                                            <%-item.pointValue%>
+                                                    </option>
+                                                    <%}else{%>
+                                                        <option value="<%-item.pointId%>">
+                                                            <%-item.pointName%> &nbsp;-&nbsp;
+                                                                <%-item.pointValue%>
+                                                        </option>
+                                                        <%}%>
+                                                            <%})%>
+
+
+                                        </select>
+                                        <span style="display: table-cell;">
+                                            <a id="btn-point-save" class="btn-small gone">Lưu</a>
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <!-- Video -->
+                                <div class="row">
+                                    <div class="input-field" style=" display:table; width: 100%;">
+
+                                        <span style="display: table-cell; padding-right: 10px;">
+                                            <div style="font-size: 15px; display:table;">
+                                                <span style="display: table-cell;padding-right: 10px;">
+                                                    <div class="input-field">
+                                                        <input id="product-video1" type="text" value="<%-product.ProductForm.yt1%>">
+                                                        <label for="product-video1">Video 1</label>
+                                                    </div>
+                                                </span>
+                                                <span style="display: table-cell;">
+                                                    <a id="btn-video1-save" class="btn-small gone">Lưu</a>
+                                                </span>
+                                            </div>
+                                        </span>
+
+                                        <span style="display: table-cell; padding-right: 10px;">
+                                            <div style="font-size: 15px; display:table;">
+                                                <span style="display: table-cell;padding-right: 10px;">
+                                                    <div class="input-field">
+                                                        <input id="product-video2" type="text" value="<%-product.ProductForm.yt2%>">
+                                                        <label for="product-video2">Video 2</label>
+                                                    </div>
+                                                </span>
+                                                <span style="display: table-cell;">
+                                                    <a id="btn-video2-save" class="btn-small gone">Lưu</a>
+                                                </span>
+                                            </div>
+                                        </span>
+
+                                        <span style="display: table-cell; padding-right: 10px;">
+                                            <div style="font-size: 15px; display:table;">
+                                                <span style="display: table-cell;padding-right: 10px;">
+                                                    <div class="input-field">
+                                                        <input id="product-video3" type="text" value="<%-product.ProductForm.yt3%>">
+                                                        <label for="product-video3">Video 3</label>
+                                                    </div>
+                                                </span>
+                                                <span style="display: table-cell;">
+                                                    <a id="btn-video3-save" class="btn-small gone">Lưu</a>
+                                                </span>
+                                            </div>
+                                        </span>
+
+                                    </div>
+                                </div>
+
+                                <!-- PICTURE -->
+                                <div class="row">
+                                    <div class="input-field" style=" display:table; width: 100%;">
+
+                                        <!-- Picture 1 -->
+                                        <span style="display: table-cell; padding-right: 10px;">
+                                            <div style="font-size: 15px; display:table;">
+                                                <span style="display: table-cell;padding-right: 10px;">
+                                                    <%if(product.ProductForm.image1 == ""){%>
+                                                        <div class="input-field gone image1">
+                                                            <%}else{%>
+                                                                <div class="input-field image1">
+                                                                    <%}%>
+                                                                        <img id="image1" src="upload/<%-product.ProductForm.image1%>" height="40px" width="60px">
+                                                                        <i class="material-icons hoverable red-text" style="cursor: pointer;" id="btn-delete1">cancel</i>
+                                                                </div>
+                                                                <%if(product.ProductForm.image1 == ""){%>
+                                                                    <div class="input-field file-field input-image1">
+                                                                        <%}else{%>
+                                                                            <div class="input-field file-field gone input-image1">
+                                                                                <%}%>
+                                                                                    <input id="input-image1" type="file" accept="image/*">
+                                                                                    <div class="file-path-wrapper">
+                                                                                        <input class="file-path" type="text" placeholder="Hình ảnh 1">
+                                                                                    </div>
+                                                                            </div>
+                                                </span>
+                                                <span style="display: table-cell;">
+                                                    <a id="btn-image1-save" class="btn-small gone">Lưu</a>
+                                                </span>
+                                                </div>
+                                        </span>
+
+                                        <!-- Picture 2 -->
+                                        <span style="display: table-cell; padding-right: 10px;">
+                                            <div style="font-size: 15px; display:table;">
+                                                <span style="display: table-cell;padding-right: 10px;">
+                                                    <%if(product.ProductForm.image2 == ""){%>
+                                                        <div class="input-field gone image2">
+                                                            <%}else{%>
+                                                                <div class="input-field image2">
+                                                                    <%}%>
+                                                                        <img id="image2" src="upload/<%-product.ProductForm.image2%>" height="40px" width="60px">
+                                                                        <i class="material-icons hoverable red-text" style="cursor: pointer;" id="btn-delete2">cancel</i>
+                                                                </div>
+                                                                <%if(product.ProductForm.image2 == ""){%>
+                                                                    <div class="input-field file-field input-image2">
+                                                                        <%}else{%>
+                                                                            <div class="input-field file-field gone input-image2">
+                                                                                <%}%>
+                                                                                    <input id="input-image2" type="file" accept="image/*">
+                                                                                    <div class="file-path-wrapper">
+                                                                                        <input class="file-path" type="text" placeholder="Hình ảnh 2">
+                                                                                    </div>
+                                                                            </div>
+                                                </span>
+                                                <span style="display: table-cell;">
+                                                    <a id="btn-image2-save" class="btn-small gone">Lưu</a>
+                                                </span>
+                                                </div>
+                                        </span>
+
+                                        <!-- Picture 3 -->
+                                        <span style="display: table-cell; padding-right: 10px;">
+                                            <div style="font-size: 15px; display:table;">
+                                                <span style="display: table-cell;padding-right: 10px;">
+                                                    <%if(product.ProductForm.image3 == ""){%>
+                                                        <div class="input-field gone image3">
+                                                            <%}else{%>
+                                                                <div class="input-field image3">
+                                                                    <%}%>
+                                                                        <img id="image3" src="upload/<%-product.ProductForm.image3%>" height="40px" width="60px">
+                                                                        <i class="material-icons hoverable red-text" style="cursor: pointer;" id="btn-delete3">cancel</i>
+                                                                </div>
+                                                                <%if(product.ProductForm.image3 == ""){%>
+                                                                    <div class="input-field file-field input-image3">
+                                                                        <%}else{%>
+                                                                            <div class="input-field file-field gone input-image3">
+                                                                                <%}%>
+                                                                                    <input id="input-image3" type="file" accept="image/*">
+                                                                                    <div class="file-path-wrapper">
+                                                                                        <input class="file-path" type="text" placeholder="Hình ảnh 3">
+                                                                                    </div>
+                                                                            </div>
+                                                </span>
+                                                <span style="display: table-cell;">
+                                                    <a id="btn-image3-save" class="btn-small gone">Lưu</a>
+                                                </span>
+                                                </div>
+                                        </span>
+
+                                        <!-- Picture 4 -->
+                                        <span style="display: table-cell; padding-right: 10px;">
+                                            <div style="font-size: 15px; display:table;">
+                                                <span style="display: table-cell;padding-right: 10px;">
+                                                    <%if(product.ProductForm.image4 == ""){%>
+                                                        <div class="input-field gone image4">
+                                                            <%}else{%>
+                                                                <div class="input-field image4">
+                                                                    <%}%>
+                                                                        <img id="image4" src="upload/<%-product.ProductForm.image4%>" height="40px" width="60px">
+                                                                        <i class="material-icons hoverable red-text" style="cursor: pointer;" id="btn-delete4">cancel</i>
+                                                                </div>
+                                                                <%if(product.ProductForm.image4 == ""){%>
+                                                                    <div class="input-field file-field input-image4">
+                                                                        <%}else{%>
+                                                                            <div class="input-field file-field gone input-image4">
+                                                                                <%}%>
+                                                                                    <input id="input-image4" type="file" accept="image/*">
+                                                                                    <div class="file-path-wrapper">
+                                                                                        <input class="file-path" type="text" placeholder="Hình ảnh 4">
+                                                                                    </div>
+                                                                            </div>
+                                                </span>
+                                                <span style="display: table-cell;">
+                                                    <a id="btn-image4-save" class="btn-small gone">Lưu</a>
+                                                </span>
+                                                </div>
+                                        </span>
+
+                                        <!-- Picture 5 -->
+                                        <span style="display: table-cell; padding-right: 10px;">
+                                            <div style="font-size: 15px; display:table;">
+                                                <span style="display: table-cell;padding-right: 10px;">
+                                                    <%if(product.ProductForm.image5 == ""){%>
+                                                        <div class="input-field gone image5">
+                                                            <%}else{%>
+                                                                <div class="input-field image5">
+                                                                    <%}%>
+                                                                        <img id="image5" src="upload/<%-product.ProductForm.image5%>" height="40px" width="60px">
+                                                                        <i class="material-icons hoverable red-text" style="cursor: pointer;" id="btn-delete5">cancel</i>
+                                                                </div>
+                                                                <%if(product.ProductForm.image5 == ""){%>
+                                                                    <div class="input-field file-field input-image5">
+                                                                        <%}else{%>
+                                                                            <div class="input-field file-field gone input-image5">
+                                                                                <%}%>
+                                                                                    <input id="input-image5" type="file" accept="image/*">
+                                                                                    <div class="file-path-wrapper">
+                                                                                        <input class="file-path" type="text" placeholder="Hình ảnh 5">
+                                                                                    </div>
+                                                                            </div>
+                                                </span>
+                                                <span style="display: table-cell;">
+                                                    <a id="btn-image5-save" class="btn-small gone">Lưu</a>
+                                                </span>
+                                                </div>
+                                        </span>
+
+                                        </div>
+                                        </div>
+
+                                        <!-- EDITOR -->
+                                        <div class="file-field">
+                                            <p class="grey-text">Thông tin sản phẩm</p>
+                                            <textarea id="editor" name="editor"><%-product.ProductForm.description%></textarea>
+                                        </div>
+                                        <span style="margin-top: 10px;" id="btn-product-description" class="btn gone">Lưu</span>
+
+                                        </div>
+
+                                        </div>
+                                        </div>
+                                        </div>
+                                        </div>
+                                        </div>
+
+</section>

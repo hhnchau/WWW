@@ -1,0 +1,63 @@
+<!-- Section: Contact -->
+<section id="banner-add" class="section section-add grey lighten-3">
+    <div class="container">
+        <div class="row">
+            <div class="card-panel grey lighten-3">
+
+                <form id="addForm" enctype="multipart/form-data" action="admin/banner/add-image-banner.html" method="post">
+
+                    <!-- BANNER TITLE -->
+                    <div class="input-field">
+                        <input id="banner-title" type="text" name="bannerTile">
+                        <label for="banner-title">Tiêu đề</label>
+                    </div>
+
+                    <!-- BANNER CONNTENT -->
+                    <div class="input-field">
+                        <input id="banner-content" type="text" name="bannerContent">
+                        <label for="banner-content">Nội dung</label>
+                    </div>
+
+                    <!-- PRODUCT SN -->
+                    <div class="input-field">
+                        <input id="product-sn" type="text" name="productSn">
+                        <label for="product-sn">Mã sản phẩm</label>
+                    </div>
+
+                    <!-- BANNER PRIORITY -->
+                    <div class="input-field">
+                        <input id="banner-priority" type="text" name="bannerPriority">
+                        <label for="banner-priority">Ưu tiên</label>
+                    </div>
+
+                    <!-- BANNER START -->
+                    <div class="input-field">
+                        <input id="banner-start" type="text" name="bannerStart" class="datepicker">
+                        <label for="banner-start">Thời gian bắt đầu</label>
+                    </div>
+
+                    <!-- BANNER END -->
+                    <div class="input-field">
+                        <input id="banner-end" type="text" name="bannerEnd" class="datepicker">
+                        <label for="banner-end">Thời gian kết thúc</label>
+                    </div>
+
+                    <!-- IMAGE -->
+                    <div class="input-field file-field image-input">
+                        <input id="file-banner" type="file" name="userPhoto" required="" accept="image/*">
+                        <div class="file-path-wrapper">
+                            <input class="file-path" type="text" placeholder="Chọn hình ảnh cho banner">
+                        </div>
+                    </div>
+
+                    <!-- BUTTON -->
+                    <div class="margin-top-20">
+                        <input type="submit" value="Thêm" class="btn bottom" id="btn-add">
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</section>

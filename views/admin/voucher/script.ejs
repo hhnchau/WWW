@@ -1,0 +1,233 @@
+<script>
+    const sideNav = document.querySelector('.sidenav');
+    M.Sidenav.init(sideNav, {});
+
+    //Side Menu
+    $('.item-voucher').css("background-color", "#80cbc4");
+</script>
+
+<script>
+    findAllVoucher();
+    function findAllVoucher() {
+        $.ajax({
+            method: "GET",
+            dataType: "json",
+            beforeSend: function (request) {
+                request.setRequestHeader("secret", "12345");
+            },
+            url: "api/findAllVoucherForAdmin",
+            success: function success(data) {
+                $.each(data, function (i, value) {
+                    value.forEach(function (entry, index) {
+
+                        var output = "";
+                        output += '<tr style="font-size: 1.1rem">';
+
+                        // ID
+                        output += '<td>';
+                        output += '<span class="voucher' + index + '" id="id' + index + '" >' + entry.voucherId + '</span>';
+                        output += '</td>';
+                        // NAME
+                        output += '<td>';
+                        output += '<div class="input-field center">';
+                        output += '<input class="disable voucher' + index + '" id="name' + index + '" type="text" value="' + entry.voucherName + '">';
+                        output += '</div>';
+                        output += '</td>';
+
+                        // VALUE
+                        output += '<td>';
+                        output += '<div class="input-field center">';
+                        output += '<input class="disable voucher' + index + '" id="value' + index + '" type="text" value="' + entry.voucherValue + '">';
+                        output += '</div>';
+                        output += '</td>';
+
+                        // START
+                        output += '<td>';
+                        output += '<div class="input-field center">';
+                        var start = new Date(entry.start);
+                        output += '<input class="datepicker disable voucher' + index + '" id="start' + index + '" type="text" value="' + start.getDate() + "-" + (start.getMonth() + 1) + "-" + start.getFullYear() + '">';
+                        output += '</div>';
+                        output += '</td>';
+
+                        // END
+                        output += '<td>';
+                        output += '<div class="input-field center">';
+                        var end = new Date(entry.end);
+                        output += '<input class="datepicker disable voucher' + index + '" id="end' + index + '" type="text" value="' + end.getDate() + "-" + (end.getMonth() + 1) + "-" + end.getFullYear() + '">';
+                        output += '</div>';
+                        output += '</td>';
+
+                        // ACTION
+                        output += '<td>';
+                        output += '<a class="blue-text underline-on-hover btn-edit btn-save' + index + '" data-href="' + index + '">Sửa</a>';
+                        output += '<a>&nbsp;&nbsp;</a>';
+                        output += '<a class="red-text underline-on-hover btn-delete" data-href="' + index + '">Xoá</a>';
+                        output += '</td>';
+
+                        output += '</tr>';
+
+                        $('#table-voucher > tbody:last').append(output);
+
+                    });
+                });
+
+
+                //Picker
+                $('.datepicker').datepicker({
+                    selectMonths: false,
+                    selectYears: 15,
+                    format: 'dd-mm-yyyy',
+                });
+
+
+                //Disable Input
+                $('.disable').attr("disabled", true);
+
+                //btn edit
+                $('.btn-edit').on('click', function () {
+                    var index = $(this).data("href");
+                    //Check
+                    if ($('.btn-save' + index).text() == 'Sửa') {
+                        //Edit
+                        $('.btn-save' + index).text('Lưu');
+                        $('.voucher' + index).attr("disabled", false);
+                    } else {
+                        //Save
+                        updateVoucher(index);
+                    }
+
+                });
+
+                //btn delete
+                $('.btn-delete').on('click', function () {
+                    var index = $(this).data("href");
+                    var id = $('#id' + index).text();
+                    //Alert Confirm
+                    if (confirm('Bạn có chắc chắn muốn xóa cái này không?')) {
+                        deleteVoucher(id);
+                    } else {
+                        //alert('cancel');
+                    }
+                });
+            }
+        });
+    }
+
+    //Btn Add New
+    $('#btn-add-new').on('click', function () {
+        if ($('#btn-add-new').text() == 'Lưu') {
+            if ($('#voucher-new-name').val() == "")
+                return alert('Vui lòng nhập mã giảm giá');
+            if ($('#voucher-new-value').val() == "")
+                return alert('Vui lòng nhập giá trị');
+            if ($('#voucher-new-start').val() == "")
+                return alert('Vui lòng nhập ngày bắt đầu');
+            if ($('#voucher-new-end').val() == "")
+                return alert('Vui lòng nhập ngày kết thúc');
+            $('#btn-add-new').hide();
+            //Save
+            addVoucher();
+        } else {
+            //Add
+            $('#btn-add-new').text('Lưu');
+            $('.voucher-new').attr("disabled", false);
+        }
+
+    });
+
+    function updateVoucher(index) {
+        $.ajax({
+            method: "PUT",
+            dataType: "json",
+            beforeSend: function (request) {
+                request.setRequestHeader("secret", "12345");
+            },
+            url: "api/updateVoucher",
+            data: {
+                voucherId: $('#id' + index).text(),
+                voucherName: $('#name' + index).val(),
+                voucherValue: $('#value' + index).val(),
+                voucherStart: formatDateYYYYMMDD($('#start' + index).val()),
+                voucherEnd: formatDateYYYYMMDD($('#end' + index).val())
+            },
+            success: function success(data) {
+                var result = "";
+                $.each(data, function (i, value) {
+                    result = value.update;
+                });
+                if (result == 1) {
+                    //Set Text
+                    $('.btn-save' + index).text('Sửa');
+                    $('.voucher' + index).attr("disabled", true);
+                    alert("Cập nhật thành công.");
+                } else {
+                    alert("Cập nhật thất bại.");
+                }
+
+            }
+        });
+    }
+
+    function addVoucher() {
+        $.ajax({
+            method: "POST",
+            dataType: "json",
+            beforeSend: function (request) {
+                request.setRequestHeader("secret", "12345");
+            },
+            url: "api/insertVoucher",
+            data: {
+                voucherName: $('#voucher-new-name').val(),
+                voucherValue: $('#voucher-new-value').val(),
+                voucherStart: formatDateYYYYMMDD($('#voucher-new-start').val()),
+                voucherEnd: formatDateYYYYMMDD($('#voucher-new-end').val())
+            },
+            success: function success(data) {
+                var result = "";
+                $.each(data, function (i, value) {
+                    result = value.insert;
+                });
+                if (result == 1) {
+                    $('#btn-add-new').show();
+                    $('#btn-add-new').text('Thêm mới');
+                    $('.voucher-new').attr("disabled", true);
+                    alert('Thêm mới thành công.');
+                    //Reload Page
+                    window.location.reload();
+                } else {
+                    alert('Thêm mới thất bại.');
+                }
+            }
+        });
+    }
+
+    function deleteVoucher(id) {
+        $.ajax({
+            method: "DELETE",
+            dataType: "json",
+            beforeSend: function (request) {
+                request.setRequestHeader("secret", "12345");
+            },
+            url: "api/deleteVoucher",
+            data: {
+                voucherId: id
+            },
+            success: function success(data) {
+                var result = "";
+                $.each(data, function (i, value) {
+                    result = value.delete;
+                });
+                if (result == 1) {
+                    window.location.reload();
+                    alert('Đã xoá thành công.');
+                } else {
+                    alert('Không thể xoá được.');
+                }
+            }
+        });
+    }
+
+    function formatDateYYYYMMDD(date) {
+        return date.split("-").reverse().join("-");
+    }
+</script>

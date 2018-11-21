@@ -1,0 +1,91 @@
+<!-- Section: Profile -->
+<section id="list-bought.html" class="section">
+    <div class="row">
+
+        <table class="highlight centered flow-text" id="table-all-product">
+            <thead>
+                <tr>
+                    <th style="font-size: 1rem">Đơn hàng</th>
+                    <th style="font-size: 1rem;">SL sản phẩm</th>
+                    <th style="font-size: 1rem">Tổng tiền</th>
+                    <th style="font-size: 1rem">Khuyến mãi</th>
+                    <th style="font-size: 1rem">Ngày</th>
+                    <th style="font-size: 1rem">Trạng thái</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <%bought.ProductForm.forEach(function(item, index){%>
+                    <tr style="font-size: 1.1rem">
+                        <td>
+                            <span>
+                                <a href="admin/sell/cancel/detail/id:<%-item.transactionId%>.html" class="underline-on-hover black-text">
+                                    KP
+                                    <%-item.transactionId%>
+                                </a>
+                            </span>
+                        </td>
+
+                        <td>
+                            <span>
+                                <a href="admin/sell/cancel/detail/id:<%-item.transactionId%>.html" class="underline-on-hover black-text">
+                                    <%-item.totalProduct%>
+                                </a>
+                            </span>
+                        </td>
+
+                        <td>
+                            <span>
+                                <a href="admin/sell/cancel/detail/id:<%-item.transactionId%>.html" class="underline-on-hover black-text">
+                                    <%-item.totalFee.toLocaleString()%>
+                                </a>
+                            </span>
+                        </td>
+
+                        <td>
+                            <span>
+                                <a href="admin/sell/cancel/detail/id:<%-item.transactionId%>.html" class="underline-on-hover blue-text">
+                                    <%if(item.pointUse > 0 || item.giftId > 0){%>
+                                        KM
+                                        <%}%>
+                                </a>
+                            </span>
+                        </td>
+
+                        <td>
+                            <span>
+                                <a href="admin/sell/cancel/detail/id:<%-item.transactionId%>.html" class="underline-on-hover black-text">
+                                    <%-item.time.getDate()%>/
+                                        <%-item.time.getMonth() + 1%>/
+                                            <%-item.time.getFullYear()%>
+                                </a>
+                            </span>
+                        </td>
+
+                        <td>
+                            <span>
+                                <a href="admin/sell/cancel/detail/id:<%-item.transactionId%>.html" class="underline-on-hover red-text">
+                                    <%if(item.status == 0){%>
+                                        Chờ xác nhận
+                                        <%}else if(item.status == 1){%>
+                                            Đang xử lý
+                                            <%}else if(item.status == 2){%>
+                                                User hủy
+                                                <%}else if(item.status == 3){%>
+                                                    Admin hủy
+                                                    <%}else if(item.status == 4){%>
+                                                        Thành công
+                                                        <%}else if(item.status == 5){%>
+                                                            Tại cửa hàng
+                                                            <%}%>
+                                </a>
+                            </span>
+                        </td>
+                    </tr>
+                    <%})%>
+            </tbody>
+
+        </table>
+
+    </div>
+</section>

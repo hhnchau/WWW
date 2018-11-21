@@ -1,0 +1,65 @@
+<script>
+    const sideNav = document.querySelector('.sidenav');
+    M.Sidenav.init(sideNav, {});
+
+    //Side Menu
+    $("#drop-banner").addClass("active");
+    //Side Menu
+    $('.item-all-banner').css("background-color", "#80cbc4");
+</script>
+
+
+<script>
+    $('.btn-active').on('click', function () {
+        var bannerId = $(this).data("href");
+        if (confirm('Bạn muốn thực hiện thay đổi này?')) {
+            //Check
+            if ($('.btn-active' + bannerId).text().trim() == 'Ẩn') {
+                //Show
+                updateActive(bannerId, 1);
+
+            } else {
+                //Hide
+                updateActive(bannerId, 0);
+
+            }
+
+        };
+    });
+
+    function updateActive(_bannerId, _status) {
+        $.ajax({
+            method: "PUT",
+            dataType: "json",
+            beforeSend: function (request) {
+                request.setRequestHeader("secret", "12345");
+            },
+            url: "admin/banner/update-active-banner.html",
+            data: {
+                bannerId: _bannerId,
+                active: _status
+            },
+            success: function success(data) {
+                var result = "";
+                $.each(data, function (i, value) {
+                    result = value.update;
+                });
+                if (result == 1) {
+                    if (_status == 0) {
+                        $('.btn-active' + _bannerId).text('Ẩn');
+                        $('.btn-active' + _bannerId).removeClass('blue-text');
+                        $('.btn-active' + _bannerId).addClass('red-text');
+                    } else {
+                        $('.btn-active' + _bannerId).text('Hiện');
+                        $('.btn-active' + _bannerId).removeClass('red-text');
+                        $('.btn-active' + _bannerId).addClass('blue-text');
+                    }
+                    alert("Cập nhật thành công.");
+                } else {
+                    alert("Cập nhật thất bại.");
+                }
+
+            }
+        });
+    }
+</script>

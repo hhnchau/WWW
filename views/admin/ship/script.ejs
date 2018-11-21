@@ -1,0 +1,196 @@
+<script>
+    const sideNav = document.querySelector('.sidenav');
+    M.Sidenav.init(sideNav, {});
+
+    //Side Menu
+    $('.item-ship').css("background-color", "#80cbc4");
+</script>
+
+<script>
+    findAllShip();
+    function findAllShip() {
+        $.ajax({
+            method: "GET",
+            dataType: "json",
+            beforeSend: function (request) {
+                request.setRequestHeader("secret", "12345");
+            },
+            url: "api/findAllShipForAdmin",
+            success: function success(data) {
+                $.each(data, function (i, value) {
+                    value.forEach(function (entry, index) {
+
+                        var output = "";
+                        output += '<tr style="font-size: 1.1rem">';
+
+                        // ID
+                        output += '<td>';
+                        output += '<span class="voucher' + index + '" id="id' + index + '" >' + entry.shipId + '</span>';
+                        output += '</td>';
+                        // NAME
+                        output += '<td>';
+                        output += '<div class="input-field center">';
+                        output += '<input class="disable voucher' + index + '" id="name' + index + '" type="text" value="' + entry.shipName + '">';
+                        output += '</div>';
+                        output += '</td>';
+
+                        // VALUE
+                        output += '<td>';
+                        output += '<div class="input-field center">';
+                        output += '<input class="disable voucher' + index + '" id="value' + index + '" type="text" value="' + entry.shipValue + '">';
+                        output += '</div>';
+                        output += '</td>';
+
+                        // ACTION
+                        output += '<td>';
+                        output += '<a class="blue-text underline-on-hover btn-edit btn-save' + index + '" data-href="' + index + '">Sửa</a>';
+                        output += '<a>&nbsp;&nbsp;</a>';
+                        output += '<a class="red-text underline-on-hover btn-delete" data-href="' + index + '">Xoá</a>';
+                        output += '</td>';
+
+                        output += '</tr>';
+
+                        $('#table-voucher > tbody:last').append(output);
+
+                    });
+                });
+
+                //Disable Input
+                $('.disable').attr("disabled", true);
+
+                //btn edit
+                $('.btn-edit').on('click', function () {
+                    var index = $(this).data("href");
+                    //Check
+                    if ($('.btn-save' + index).text() == 'Sửa') {
+                        //Edit
+                        $('.btn-save' + index).text('Lưu');
+                        $('.voucher' + index).attr("disabled", false);
+                    } else {
+                        //Save
+                        updateShip(index);
+                    }
+
+                });
+
+                //btn delete
+                $('.btn-delete').on('click', function () {
+                    var index = $(this).data("href");
+                    var id = $('#id' + index).text();
+                    //Alert Confirm
+                    if (confirm('Bạn có chắc chắn muốn xóa cái này không?')) {
+                        deleteShip(id);
+                    } else {
+                        //alert('cancel');
+                    }
+                });
+            }
+        });
+    }
+
+    //Btn Add New
+    $('#btn-add-new').on('click', function () {
+        if ($('#btn-add-new').text() == 'Lưu') {
+            if ($('#voucher-new-name').val() == "")
+                return alert('Vui lòng nhập tên dịch vụ');
+            if ($('#voucher-new-value').val() == "")
+                return alert('Vui lòng nhập giá tiền');
+            $('#btn-add-new').hide();
+            //Save
+            addShip();
+        } else {
+            //Add
+            $('#btn-add-new').text('Lưu');
+            $('.voucher-new').attr("disabled", false);
+        }
+
+    });
+
+    function updateShip(index) {
+        $.ajax({
+            method: "PUT",
+            dataType: "json",
+            beforeSend: function (request) {
+                request.setRequestHeader("secret", "12345");
+            },
+            url: "api/updateShip",
+            data: {
+                shipId: $('#id' + index).text(),
+                shipName: $('#name' + index).val(),
+                shipValue: $('#value' + index).val()
+            },
+            success: function success(data) {
+                var result = "";
+                $.each(data, function (i, value) {
+                    result = value.update;
+                });
+                if (result == 1) {
+                    //Set Text
+                    $('.btn-save' + index).text('Sửa');
+                    $('.voucher' + index).attr("disabled", true);
+                    alert("Cập nhật thành công.");
+                } else {
+                    alert("Cập nhật thất bại.");
+                }
+
+            }
+        });
+    }
+
+    function addShip() {
+        $.ajax({
+            method: "POST",
+            dataType: "json",
+            beforeSend: function (request) {
+                request.setRequestHeader("secret", "12345");
+            },
+            url: "api/insertShip",
+            data: {
+                shipName: $('#voucher-new-name').val(),
+                shipValue: $('#voucher-new-value').val()
+            },
+            success: function success(data) {
+                var result = "";
+                $.each(data, function (i, value) {
+                    result = value.insert;
+                });
+                if (result == 1) {
+                    $('#btn-add-new').show();
+                    $('#btn-add-new').text('Thêm mới');
+                    $('.voucher-new').attr("disabled", true);
+                    alert('Thêm mới thành công.');
+                    //Reload Page
+                    window.location.reload();
+                } else {
+                    alert('Thêm mới thất bại.');
+                }
+            }
+        });
+    }
+
+    function deleteShip(id) {
+        $.ajax({
+            method: "DELETE",
+            dataType: "json",
+            beforeSend: function (request) {
+                request.setRequestHeader("secret", "12345");
+            },
+            url: "api/deleteShip",
+            data: {
+                shipId: id
+            },
+            success: function success(data) {
+                var result = "";
+                $.each(data, function (i, value) {
+                    result = value.delete;
+                });
+                if (result == 1) {
+                    window.location.reload();
+                    alert('Đã xoá thành công.');
+                } else {
+                    alert('Không thể xoá được.');
+                }
+            }
+        });
+    }
+</script>

@@ -1,0 +1,265 @@
+<script>
+    const sideNav = document.querySelector('.sidenav');
+    M.Sidenav.init(sideNav, {});
+
+    //Picker
+    $('.datepicker').datepicker({
+        selectMonths: false,
+        selectYears: 15,
+        format: 'dd-mm-yyyy',
+    });
+
+    //Side Menu
+    $("#drop-banner").addClass("active");
+    //Side Menu
+    $('.item-all-banner').css("background-color", "#80cbc4");
+</script>
+
+<script>
+
+    $('#btn-back').on('click', function () {
+        window.history.back();
+    });
+
+    $('.gone').hide();
+
+    var banner = {
+        bannerId: '<%-banner.ProductForm[0].bannerId%>', bannerTitle: "", bannerContent: "", productSn: "", bannerPriority: "", bannerStart: "", bannerEnd: "", bannerImage: ""
+    }
+
+    //Title Change
+    $('#banner-title').on('input', function (e) {
+        var s = $('#banner-title').val();
+        if (s !== "") {
+            $('#btn-banner-title').show();
+        } else {
+            $('#btn-banner-title').hide();
+        }
+    });
+    $('#btn-banner-title').on('click', function () {
+        var title = $('#banner-title').val();
+        $('#btn-banner-title').hide();
+        banner.bannerTitle = title;
+        updateBanner(banner);
+    });
+
+    //Content Change
+    $('#banner-content').on('input', function (e) {
+        var s = $('#banner-content').val();
+        if (s !== "") {
+            $('#btn-banner-content').show();
+        } else {
+            $('#btn-banner-content').hide();
+        }
+    });
+    $('#btn-banner-content').on('click', function () {
+        var content = $('#banner-content').val();
+        $('#btn-banner-content').hide();
+        banner.bannerContent = content;
+        updateBanner(banner);
+    });
+
+    //ProductSn Change
+    $('#product-sn').on('input', function (e) {
+        var s = $('#product-sn').val();
+        if (s !== "") {
+            $('#btn-product-sn').show();
+        } else {
+            $('#btn-product-sn').hide();
+        }
+    });
+    $('#btn-product-sn').on('click', function () {
+        var productSn = $('#product-sn').val();
+        $('#btn-product-sn').hide();
+        banner.productSn = productSn;
+        updateBanner(banner);
+    });
+
+    //Priority Change
+    $('#banner-priority').on('input', function (e) {
+        var s = $('#banner-priority').val();
+        if (s !== "") {
+            $('#btn-banner-priority').show();
+        } else {
+            $('#btn-banner-priority').hide();
+        }
+    });
+    $('#btn-banner-priority').on('click', function () {
+        var priority = $('#banner-priority').val();
+        $('#btn-banner-priority').hide();
+        banner.bannerPriority = priority;
+        updateBanner(banner);
+    });
+
+    //Start Change
+    $('#banner-start').on('change', function (e) {
+        var s = $('#banner-start').val();
+        if (s !== "") {
+            $('#btn-banner-start').show();
+        } else {
+            $('#btn-banner-start').hide();
+        }
+    });
+    $('#btn-banner-start').on('click', function () {
+        var start = formatDateYYYYMMDD($('#banner-start').val());
+        $('#btn-banner-start').hide();
+        banner.bannerStart = start;
+        updateBanner(banner);
+    });
+
+    //End Change
+    $('#banner-end').on('change', function (e) {
+        var s = $('#banner-end').val();
+        if (s !== "") {
+            $('#btn-banner-end').show();
+        } else {
+            $('#btn-banner-end').hide();
+        }
+    });
+    $('#btn-banner-end').on('click', function () {
+        var end = formatDateYYYYMMDD($('#banner-end').val());
+        $('#btn-banner-end').hide();
+        banner.bannerEnd = end;
+        updateBanner(banner);
+    });
+
+
+    function updateBanner(banner) {
+        $.ajax({
+            method: "PUT",
+            dataType: "json",
+            beforeSend: function (request) {
+                request.setRequestHeader("secret", "12345");
+            },
+            url: "admin/banner/update-banner.html",
+            data: banner,
+            success: function success(data) {
+                var result = "";
+                $.each(data, function (i, value) {
+                    result = value.update;
+                });
+                if (result == 1) {
+                    alert("Cập nhật thành công.");
+                } else {
+                    alert("Cập nhật thất bại.");
+                }
+
+                //Clear data
+                banner.bannerTitle = "";
+                banner.bannerContent = "";
+                banner.productSn = "";
+                banner.bannerPriority = "";
+                banner.bannerStart = "";
+                banner.bannerEnd = "";
+
+
+            }
+        });
+    }
+</script>
+
+<script>
+    // Picture
+    $('#input-image').on('change', function () {
+        $('#btn-image-save').show();
+    })
+    $('#btn-image-save').on('click', function () {
+        $('#btn-image-save').hide();
+        var form_data = new FormData();
+        form_data.append('file', $('#input-image').prop('files')[0]);
+        updateImage(form_data);
+    });
+    //Delete Image
+    $('#btn-delete').on('click', function () {
+        $('.image').hide();
+        $('.input-image').show();
+        var filename = '<%-banner.ProductForm[0].image%>';
+        deleteImage(filename);
+    });
+
+
+    function deleteImage(filename) {
+        $.ajax({
+            method: "DELETE",
+            dataType: "json",
+            beforeSend: function (request) {
+                request.setRequestHeader("secret", "12345");
+            },
+            url: "admin/banner/delete-image-banner.html",
+            data: {
+                bannerId: '<%-banner.ProductForm[0].bannerId%>',
+                imageName: filename,
+            },
+            success: function success(data) {
+                var result = "";
+                $.each(data, function (i, value) {
+                    result = value.update;
+                });
+                if (result == 1) {
+                    alert("Xoá file thành công.");
+                } else {
+                    alert("Xoá file thất bại.");
+                }
+            }
+        });
+    }
+
+    function updateImage(image) {
+        $.ajax({
+            method: "POST",
+            dataType: "json",
+            cache: false,
+            contentType: false,
+            processData: false,
+            beforeSend: function (request) {
+                request.setRequestHeader("secret", "12345");
+            },
+            url: "admin/banner/add-image-banner.html",
+            data: image,
+            success: function success(data) {
+
+                if (data.length > 0) {
+                    var filename = data[0].filename;
+                    updateImageData(filename);
+                } else {
+                    alert("Cập nhật thất bại.");
+                }
+            }
+        });
+    }
+
+    function updateImageData(filename) {
+        $.ajax({
+            method: "PUT",
+            dataType: "json",
+            beforeSend: function (request) {
+                request.setRequestHeader("secret", "12345");
+            },
+            url: "admin/banner/update-data-banner.html",
+            data: {
+                bannerId: '<%-banner.ProductForm[0].bannerId%>',
+                imageName: filename,
+            },
+            success: function success(data) {
+                var result = "";
+                $.each(data, function (i, value) {
+                    result = value.update;
+                });
+                if (result == 1) {
+                    alert("Cập nhật thành công.");
+
+                    $('.image').show();
+                    $('#image').attr('src', 'upload/' + filename);
+                    $('.input-image').hide();
+
+                } else {
+                    alert("Cập nhật thất bại.");
+                }
+            }
+        });
+    }
+
+    function formatDateYYYYMMDD(date) {
+        return date.split("-").reverse().join("-");
+    }
+</script>

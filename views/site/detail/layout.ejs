@@ -1,0 +1,264 @@
+<!-- Section: Detail -->
+<section id="detail" class="section">
+    <div class="container">
+        <div class="row">
+
+            <!-- Title -->
+            <h4 class="flow-text">
+                <span class="teal-text" style="margin-left: 2%">
+                    <%=product.ProductForm.productName%>
+                </span>
+            </h4>
+            <!-- Slider Image -->
+            <div class="col s12 m8">
+                <div class="card-panel grey lighten-3 hoverable">
+                    <div class="carousel carousel-slider">
+                        <!-- Image 1 -->
+                        <%if (product.ProductForm.image1 != ""){%>
+                            <a class="carousel-item">
+                                <img id="image1"  style="cursor: pointer;" class="carousel-image responsive-img" src="upload/<%=product.ProductForm.image1%>">
+                            </a>
+                            <%}%>
+                                <!-- Image 2 -->
+                                <%if (product.ProductForm.image2 != ""){%>
+                                    <a class="carousel-item">
+                                        <img id="image2"  style="cursor: pointer;" class="carousel-image responsive-img" src="upload/<%=product.ProductForm.image2%>">
+                                    </a>
+                                    <%}%>
+                                        <!-- Image 3 -->
+                                        <%if (product.ProductForm.image3 != ""){%>
+                                            <a class="carousel-item">
+                                                <img id="image3"  style="cursor: pointer;" class="carousel-image responsive-img" src="upload/<%=product.ProductForm.image3%>">
+                                            </a>
+                                            <%}%>
+                                                <!-- Image 4 -->
+                                                <%if (product.ProductForm.image4 != ""){%>
+                                                    <a class="carousel-item">
+                                                        <img id="image4"  style="cursor: pointer;" class="carousel-image responsive-img" src="upload/<%=product.ProductForm.image4%>">
+                                                    </a>
+                                                    <%}%>
+                                                        <!-- Image 5 -->
+                                                        <%if (product.ProductForm.image5 != ""){%>
+                                                            <a class="carousel-item">
+                                                                <img id="image5"  style="cursor: pointer;" class="carousel-image responsive-img" src="upload/<%=product.ProductForm.image5%>">
+                                                            </a>
+                                                            <%}%>
+
+                                                                <!-- Youtube 1-->
+                                                                <%if (product.ProductForm.yt1 != null){%>
+                                                                    <a class="carousel-item">
+                                                                        <div class="video-container resp-iframe">
+                                                                            <iframe width="853" height="480" src="//www.youtube.com/embed/<%=product.ProductForm.yt1%>" frameborder="0" allowfullscreen></iframe>
+                                                                        </div>
+                                                                    </a>
+                                                                    <%}%>
+
+                                                                        <!-- Youtube 2-->
+                                                                        <%if (product.ProductForm.yt2 != null){%>
+                                                                            <a class="carousel-item">
+                                                                                <div class="video-container resp-iframe">
+                                                                                    <iframe width="853" height="480" src="//www.youtube.com/embed/<%=product.ProductForm.yt2%>" frameborder="0" allowfullscreen></iframe>
+                                                                                </div>
+                                                                            </a>
+                                                                            <%}%>
+
+                                                                                <!-- Youtube 3-->
+                                                                                <%if (product.ProductForm.yt3 != null){%>
+                                                                                    <a class="carousel-item">
+                                                                                        <div class="video-container resp-iframe">
+                                                                                            <iframe width="853" height="480" src="//www.youtube.com/embed/<%=product.ProductForm.yt3%>" frameborder="0" allowfullscreen></iframe>
+                                                                                        </div>
+                                                                                    </a>
+                                                                                    <%}%>
+
+                                                                                        <a class="prev">&#10094;</a>
+                                                                                        <a class="next">&#10095;</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Buy now -->
+            <div class="col s12 m4">
+                <div class="card-panel grey lighten-3 hoverable">
+
+                    <div class="section" style="margin-top: -35px">
+                        <div class="input-field">
+                            <span class="grey-text" id="product-code">Giá bán:</span>
+                            <label class="teal-text" for="product-code" style="position: absolute; left: 50%;" id="price-sell"></label>
+                        </div>
+
+                        <div class="divider"></div>
+
+                        <div class="input-field">
+                            <span class="grey-text" id="product-code">Khuyến mãi: <span class="red-text" style="font-size: 0.8rem" id="percent-discount"></span></span>
+                            <label class="teal-text" for="product-code" style="position: absolute; left: 50%;" id="price-discount"></label>
+                        </div>
+
+                        <div class="divider"></div>
+
+                        <div class="input-field center">
+                            <input id="voucher-code" type="text" name="voucher-code" placeholder="Mã giảm giá" style="width: 50%; height: 35px;">
+                            <a class="btn" id="btn-voucher" style="height: 36px;">Áp dụng</a>
+                        </div>
+
+                        <div class="divider"></div>
+
+                        <div class="input-field">
+                            <span class="grey-text" id="product-code">Phí vận chuyển:</span>
+                            <label class="teal-text" for="product-code" style="position: absolute; left: 50%;" id="price-ship"></label>
+                        </div>
+
+                        <div class="divider"></div>
+
+                        <div class="input-field">
+                            <span class="grey-text" id="product-code">Tổng cộng:</span>
+                            <label class="red-text" for="product-code" style="position: absolute; left: 40%; top: 60%; font-size: 28px;" id="price-total"></label>
+                        </div>
+
+
+                    </div>
+                    <div class="input-field center">
+                        <a href="/site/cart.html" class="btn-large" style="width: 100%; margin-top: 25px;" id="btn-buy-now">Mua ngay</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section: Info -->
+<section id="info" class="section">
+    <div class="container">
+        <div class="row">
+            <!-- Tab -->
+            <div class="card hoverable">
+                <div class="card-tabs hover">
+                    <ul class="tabs tabs-fixed-width">
+                        <li class="tab col s3 btn grey lighten-2">
+                            <a class="active grey-text" href="#thong-tin">Thông tin</a>
+                        </li>
+                        <li class="tab col s3 btn grey lighten-2">
+                            <a class="grey-text" href="#danh-gia" id="btn-rate">Đánh giá</a>
+                        </li>
+                        <li class="tab col s3 btn grey lighten-2">
+                            <a class="grey-text" href="#cau-hoi" id="btn-comment">Câu hỏi</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="card-content grey lighten-3">
+                    <!-- Tab Info -->
+                    <div id="thong-tin">
+
+                        <%-product.ProductForm.description%>
+
+                    </div>
+
+                    <!-- Tab Raiting -->
+                    <div id="danh-gia">
+                        <ul class="collection" id="rate-item"></ul>
+
+                        <!-- <div style="text-align: right">
+                    <a class="btn-floating" id="btn-new-rate">
+                        <i class="large material-icons red">mode_edit</i>
+                    </a>
+                </div> -->
+
+                        <fieldset id="box-rating">
+                            <legend>Đánh giá</legend>
+                            <div class="rating" style="margin-top: 1% !important">
+                                <input type="radio" name="star" id="star1">
+                                <label for="star1"></label>
+                                <input type="radio" name="star" id="star2">
+                                <label for="star2"></label>
+                                <input type="radio" name="star" id="star3">
+                                <label for="star3"></label>
+                                <input type="radio" name="star" id="star4">
+                                <label for="star4"></label>
+                                <input type="radio" name="star" id="star5">
+                                <label for="star5"></label>
+                            </div>
+
+                            <div style=" margin-top: 7%;">
+                                <div class="input-field" style="display:table; margin-bottom: -10px">
+                                    <input id="rate-content" type="text" class="validate">
+                                    <label for="rate-content" class="">Nhập nhận xét của bạn</label>
+                                    <span style="display: table-cell; width: 1%;">
+                                        <a id="btn-new-rate" class="btn waves-light">Gửi</a>
+                                    </span>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                    </div>
+
+                    <!-- Tab Question -->
+                    <div id="cau-hoi">
+                        <ul class="collection" id="comment-item"></ul>
+
+                        <!-- <div style="text-align: right">
+                    <a class="btn-floating" id="btn-new-comment">
+                        <i class="large material-icons red">mode_edit</i>
+                    </a>
+                </div> -->
+
+                        <fieldset id="box-comment">
+                            <legend>Câu hỏi</legend>
+
+                            <div style=" margin-top: 1%;">
+                                <div class="input-field" style="display:table; margin-bottom: -10px">
+                                    <input id="comment-content" type="text" class="validate">
+                                    <label for="comment-content" class="">Nhập nội dung câu hỏi</label>
+                                    <span style="display: table-cell; width: 1%;">
+                                        <a id="btn-new-comment" class="btn waves-light">Gửi</a>
+                                    </span>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Section: Same Product -->
+<section id="product.html" class="section scrollspy">
+    <div class="container">
+        <div class="row">
+            <h4 class="center flow-text">
+                <span class="teal-text" id="title-product">SẢN PHẨM CÙNG LOẠI</span>
+            </h4>
+
+            <div id="all-product"></div>
+
+        </div>
+
+        <div class="center">
+            <span class="white-text btn" id="load-more">Hiển thị thêm</span>
+        </div>
+
+    </div>
+</section>
+
+<!-- <ul class="collection">
+    <li class="collection-item avatar">
+        <img class="circle" width="60" height="60" avatar="dndyDandy">
+        <span class="title" style="font-weight: bold;">Title</span>
+        <p>Cau hoi:
+            <br>
+            <span style="font-weight: bold;">Admin: </span> Cau loi Cau tra loooiCau tra loi
+            <p class="grey-text" style="text-align: right"> 22/05/2018</p>
+        </p>
+        <a href="#!" class="secondary-content">
+            <i class="material-icons tiny yellow-text text-darken-2">star</i>
+            <i class="material-icons tiny yellow-text text-darken-2">star</i>
+            <i class="material-icons tiny yellow-text text-darken-2">star</i>
+            <i class="material-icons tiny yellow-text text-darken-2">star</i>
+            <i class="material-icons tiny yellow-text text-darken-2">star</i>
+        </a>
+    </li>
+</ul> -->

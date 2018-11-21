@@ -1,0 +1,45 @@
+<!-- Section: Service -->
+<div id="service.html" class="section darken-1">
+  <div class="container">
+
+    <div class="row">
+
+      <%service.ProductForm.forEach(function(item, index){%>
+        <div class="col s4">
+          <div class="card">
+            <div class="card-image">
+              <img src="upload/<%-item.serviceImage%>">
+            </div>
+            <div class="card-content">
+              <p>
+                <%-item.serviceContent%>                 
+              </p>
+            </div>
+            <div class="card-action center">
+              <a>
+                <%-item.serviceTitle%>
+              </a>
+            </div>
+          </div>
+        </div>
+        <%})%>
+
+          <%if(service.ProductForm.length == 0){%>
+            <div class="container" style="margin-top: 50px">
+              <div class="card-panel">
+                <h4 class="center flow-text" style="margin-top: -10px">
+                  <span class="teal-text">
+                    <br>
+                    <br class="teal-text"> CHƯA CÓ DỊCH VỤ NÀO.
+                    <br>
+                    <br>
+                  </span>
+                </h4>
+              </div>
+            </div>
+            <%}%>
+
+    </div>
+
+  </div>
+</div>

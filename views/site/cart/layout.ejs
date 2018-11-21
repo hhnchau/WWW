@@ -1,0 +1,106 @@
+<!-- Section: Selected Products -->
+<section id="bought.html" class="section scrollspy">
+    <div class="container">
+        <div class="row">
+            <h4 class="center flow-text">
+                <span class="teal-text" id="cart-title">Sản phẩm đã chọn</span>
+            </h4>
+
+            <div class="col s12 m12">
+
+                <table class="highlight centered flow-text" id="table-product">
+                    <thead>
+                        <tr>
+                            <th style="font-size: 1.1rem">Hình ảnh</th>
+                            <th style="font-size: 1.1rem">Tên sp</th>
+                            <th style="font-size: 1.1rem">Giá tiền</th>
+                            <th style="font-size: 1.1rem">Số lượng</th>
+                            <th style="font-size: 1.1rem"></th>
+                        </tr>
+                    </thead>
+
+                    <tbody></tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- Section: Delivery Info -->
+<section id="receiver.html" class="section scrollspy">
+    <div class="container">
+        <div class="row">
+            <h4 class="center flow-text">
+                <span class="teal-text">Thông tin giao hàng</span>
+            </h4>
+
+            <div class="col s12">
+                <div class="card hoverable">
+                    <form class="col s12">
+
+                        <!-- Name Receiver -->
+                        <div class="row">
+                            <div class="input-field col s10 m8 l6 offset-s1 offset-m2 offset-l3">
+                                    <input id="receiver-names" type="text">
+                                    <label for="receiver-names">Tên Nguời Nhận</label>
+                            </div>
+                        </div>
+
+                        <!-- Address Receiver -->
+                        <div class="row">
+                            <div class="input-field col s10 m8 l6 offset-s1 offset-m2 offset-l3">
+                                <input id="receiver-adrress" type="text">
+                                <label for="receiver-adrress">Địa Chỉ Người Nhận</label>
+                            </div>
+                        </div>
+
+                        <!-- Phone Receiver -->
+                        <div class="row">
+                            <div class="input-field col s10 m8 l6 offset-s1 offset-m2 offset-l3">
+                                <input id="receiver-phone" maxlength="11" type="text">
+                                <label for="receiver-phone">Điện Thoại Người Nhận</label>
+                            </div>
+                        </div>
+
+                        <!-- Note Receiver -->
+                        <div class="row">
+                            <div class="input-field col s10 m8 l6 offset-s1 offset-m2 offset-l3">
+                                <textarea id="receiver-note" class="materialize-textarea"></textarea>
+                                <label for="receiver-note">Ghi Chú Thêm</label>
+                            </div>
+                        </div>
+
+                        <!-- Payment Method -->
+                        <div class="row">
+
+                            <div class="col s10 m8 l6 offset-s1 offset-m2 offset-l3">
+                                <p class="text-center center-align flow-text" style="font-size: 15px;">
+                                    <select class="browser-default" id="cb-payment">
+                                        <option value="1">Thanh Toán Khi Nhận Hàng</option>
+                                        <!-- <option value="2">Thanh Toán Trước Bằng Thẻ Ngân Hàng</option> -->
+                                    </select>
+                                </p>
+                            </div>
+
+
+                        </div>
+
+                        <!-- Button -->
+                        <div class="row">
+                            <div class="col s6 offset-s3">
+                                <p class="text-center center-align">
+                                    <a id="btn-finish" class="btn">Hoàn Tất</a>
+                                </p>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>

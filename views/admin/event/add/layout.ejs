@@ -1,0 +1,52 @@
+<!-- Section: Contact -->
+<section id="banner-add" class="section section-add grey lighten-3">
+    <div class="container">
+        <div class="row">
+            <div class="card-panel grey lighten-3">
+
+                <form id="addForm" enctype="multipart/form-data" action="admin/service/add-image-service.html" method="post">
+
+                    <!--TITLE -->
+                    <div class="input-field">
+                        <input id="event-title" type="text" oninput="this.setCustomValidity('')" oninvalid="this.setCustomValidity('Vui lòng nhập tên sự kiện')" required>
+                        <label for="service-title">Tiêu đề</label>
+                    </div>
+
+                    <!-- START -->
+                    <div class="input-field">
+                        <input class="datepicker" id="event-start" type="text" required>
+                        <label for="service-title">Bắt đầu</label>
+                    </div>
+
+                    <!-- END -->
+                    <div class="input-field">
+                            <input class="datepicker" id="event-end" type="text" required>
+                        <label for="service-title">Kết thúc</label>
+                    </div>
+
+
+                    <!-- IMAGE -->
+                    <div class="input-field file-field image-input">
+                        <input id="file-banner" type="file" name="userPhoto" required="" accept="image/*">
+                        <div class="file-path-wrapper">
+                            <input class="file-path" type="text" placeholder="Chọn hình ảnh">
+                        </div>
+                    </div>
+
+                    <!-- DESCRIPTION -->
+                    <div class="file-field margin-top-20">
+                        <p class="grey-text">Nội dung</p>
+                        <textarea id="editor" name="editor"></textarea>
+                    </div>
+
+                    <!-- BUTTON -->
+                    <div class="margin-top-20">
+                        <input type="submit" value="Thêm" class="btn bottom" id="btn-add">
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</section>

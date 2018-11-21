@@ -1,0 +1,168 @@
+<script>
+    const sideNav = document.querySelector('.sidenav');
+    M.Sidenav.init(sideNav, {});
+
+    //Side Menu
+    $("#drop-report").addClass("active");
+    //Side Menu
+    $('.item-signup').css("background-color", "#80cbc4");
+
+    //Picker
+    $('.datepicker').datepicker({
+        selectMonths: false,
+        selectYears: 15,
+        format: 'dd-mm-yyyy',
+    });
+</script>
+
+<script>
+    $('.gone').hide();
+    $("#load-more").hide();
+    var offset = 0;
+    var limit = 5;
+    var from = formatDateDDMMYYYY(new Date());
+    var to = formatDateDDMMYYYY(new Date());
+
+    findTransactions(formatDateYYYYMMDD(from), formatDateYYYYMMDD(to), offset, limit);
+
+    $('#date-from').val(from);
+
+    $('#date-to').val(to);
+
+    $('#load-more').on('click', function () {
+        $("#load-more").hide();
+        findTransactions(from, to, offset, limit);
+    });
+
+    $('#date-from').on('change', function () {
+        $('#btn-view').show();
+    });
+
+    $('#date-to').on('change', function () {
+        $('#btn-view').show();
+    });
+
+    $('#btn-view').on('click', function () {
+        $('#btn-view').hide();
+        offset = 0;
+        from = formatDateYYYYMMDD($('#date-from').val());
+        to = formatDateYYYYMMDD($('#date-to').val());
+        $("#table-all-transaction> tbody").html("");
+        findTransactions(from, to, offset, limit);
+    });
+
+    function formatDateDDMMYYYY(date) {
+        return date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear();
+    }
+
+    function formatDateYYYYMMDD(date) {
+        return date.split("-").reverse().join("-");
+    }
+
+    function findTransactions(from, to, _offset, _limit) {
+        $.ajax({
+            method: "GET",
+            dataType: "json",
+            beforeSend: function (request) {
+                request.setRequestHeader("secret", "12345");
+            },
+            data: {
+                dateFrom: from,
+                dateTo: to,
+                offset: _offset,
+                limit: _limit
+            },
+            url: "api/findAllTransaction",
+            success: function success(data) {
+                var count = 0;
+                $.each(data, function (i, value) {
+                    value.forEach(function (entry, index) {
+                        count++;
+                        var output = "";
+                        output += '<tr style="font-size: 1.1rem">';
+
+                        output += '<td>';
+                        output += '<span>';
+                        output += '<a href="admin/report/transaction/detail/id:' + entry.transactionId + '.html" class="underline-on-hover black-text">';
+                        output += 'KP' + entry.transactionId;
+                        output += '</a>';
+                        output += '</span>';
+                        output += '</td>';
+
+                        output += '<td>';
+                        output += '<span>';
+                        output += '<a href="admin/report/transaction/detail/id:' + entry.transactionId + '.html" class="underline-on-hover black-text">';
+                        output += entry.totalProduct;
+                        output += '</a>';
+                        output += '</span>';
+                        output += '</td>';
+
+                        output += '<td>';
+                        output += '<span>';
+                        output += '<a href="admin/report/transaction/detail/id:' + entry.transactionId + '.html" class="underline-on-hover black-text">';
+                        output += entry.totalFee.toLocaleString();
+                        output += '</a>';
+                        output += '</span>';
+                        output += '</td>';
+
+                        output += '<td>';
+                        output += '<span>';
+                        output += '<a href="admin/report/transaction/detail/id:' + entry.transactionId + '.html" class="underline-on-hover blue-text">';
+                        if (entry.pointUse > 0 || entry.giftId > 0)
+                            output += 'KM';
+                        output += '</a>';
+                        output += '</span>';
+                        output += '</td>';
+
+                        output += '<td>';
+                        output += '<span>';
+                        output += '<a href="admin/report/transaction/detail/id:' + entry.transactionId + '.html" class="underline-on-hover black-text">';
+                        output += formatDateYYYYMMDD(entry.time.substring(0, 10));
+                        output += '</a>';
+                        output += '</span>';
+                        output += '</td>';
+
+                        output += '<td>';
+                        output += '<span>';
+
+                        if (entry.status == 0) {
+                            output += '<a href="admin/report/transaction/detail/id:' + entry.transactionId + '.html" class="underline-on-hover red-text">';
+                            output += "Chờ xác nhận";
+                        } else if (entry.status == 1) {
+                            output += '<a href="admin/report/transaction/detail/id:' + entry.transactionId + '.html" class="underline-on-hover teal-text">';
+                            output += "Đang xử lý";
+                        } else if (entry.status == 2) {
+                            output += '<a href="admin/report/transaction/detail/id:' + entry.transactionId + '.html" class="underline-on-hover purple-text">';
+                            output += "User hủy";
+                        } else if (entry.status == 3) {
+                            output += '<a href="admin/report/transaction/detail/id:' + entry.transactionId + '.html" class="underline-on-hover pink-text">';
+                            output += "Admin hủy";
+                        } else if (entry.status == 4) {
+                            output += '<a href="admin/report/transaction/detail/id:' + entry.transactionId + '.html" class="underline-on-hover lime-text">';
+                            output += "Thành công";
+                        } else if (entry.status == 5) {
+                            output += '<a href="admin/report/transaction/detail/id:' + entry.transactionId + '.html" class="underline-on-hover cyan-text">';
+                            output += "Tại cửa hàng";
+                        }
+
+                        output += '</a>';
+                        output += '</span>';
+                        output += '</td>';
+
+                        output += '</tr>';
+                        $('#table-all-transaction> tbody:last').append(output);
+                    });
+
+                });
+
+                //Check exist product
+                if (count === limit) {
+                    $('#load-more').show();
+                }
+                //Set Offset
+                offset += count;
+
+            }
+        });
+    }
+</script>

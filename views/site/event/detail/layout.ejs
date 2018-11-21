@@ -1,0 +1,104 @@
+<!-- Section: Contact -->
+<div id="blog.html" class="section darken-1">
+
+    <div class="row">
+
+        <div class="container">
+
+        <!-- <div class="col s2 hide-on-med-and-down">
+            <div class="collection">
+                <a style="cursor: pointer;" class="collection-item guide-buy-product" onclick="guideBuyProduct()">Thang 1</a>
+                <a style="cursor: pointer;" class="collection-item policy-delivery" onclick="policyDelivery()">Thang 2</a>
+                <a style="cursor: pointer;" class="collection-item policy-return" onclick="policyReturn()">Thang 3</a>
+                <a style="cursor: pointer;" class="collection-item policy-warranty" onclick="policyWarranty()">Thang 4</a>
+                <a style="cursor: pointer;" class="collection-item contact" onclick="contact()">Thang 5</a>
+                <a style="cursor: pointer;" class="collection-item policy-warranty" onclick="policyWarranty()">Thang 6</a>
+                <a style="cursor: pointer;" class="collection-item contact" onclick="contact()">Thang 7</a>
+                <a style="cursor: pointer;" class="collection-item guide-buy-product" onclick="guideBuyProduct()">Thang 8</a>
+                <a style="cursor: pointer;" class="collection-item policy-delivery" onclick="policyDelivery()">Thang 9</a>
+                <a style="cursor: pointer;" class="collection-item policy-return" onclick="policyReturn()">Thang 10</a>
+                <a style="cursor: pointer;" class="collection-item policy-warranty" onclick="policyWarranty()">Thang 11</a>
+                <a style="cursor: pointer;" class="collection-item contact" onclick="contact()">Thang 12</a>
+            </div>
+        </div> -->
+<!-- 
+        <div class="col s12 m9 l8"> -->
+
+            <!-- <h4 class="flow-text">
+                <span class="teal-text">SỰ KIỆN ĐANG DIỄN RA</span>
+            </h4> -->
+
+            <%event.ProductForm.forEach(function(item, index){%>
+
+                <div class="card hoverable">
+
+                    <div class="card-content">
+                        <a>
+                            <h5>
+                                <%-item.eventTitle%>
+                            </h5>
+                        </a>
+
+                        <a class="black-text">
+                            <%-item.eventContent%>
+                        </a>
+
+                    </div>
+
+                </div>
+
+                <%})%>
+
+
+                    <h4 class="flow-text">
+                        <span class="teal-text">BẢNG XẾP HẠNG</span>
+                    </h4>
+
+                    <div class="card hoverable">
+                        <div class="card-content">
+
+                            <table class="highlight centered flow-text" id="table-ranking">
+                                <thead>
+                                    <tr>
+                                        <th style="font-size: 1.1rem">Xếp hạng</th>
+                                        <th style="font-size: 1.1rem">Nickname</th>
+                                        <th style="font-size: 1.1rem">Điểm</th>
+                                        <th style="font-size: 1.1rem">Cập nhật</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody></tbody>
+                            </table>
+
+                        </div>
+                    </div>
+
+
+                    <h4 class="flow-text">
+                        <span class="teal-text">SỰ KIỆN KHÁC</span>
+                    </h4>
+
+                    <div id="all-event"></div>
+                    
+        <!-- </div> -->
+
+        <!-- <div class="col s2 m3 l2 hide-on-small-only">
+            <div class="collection">
+                <a class="collection-item active">Thang 1</a>
+                <a style="cursor: pointer;" class="collection-item policy-delivery" onclick="policyDelivery()">Thang 2</a>
+                <a style="cursor: pointer;" class="collection-item policy-return" onclick="policyReturn()">Thang 3</a>
+                <a style="cursor: pointer;" class="collection-item policy-warranty" onclick="policyWarranty()">Thang 4</a>
+                <a style="cursor: pointer;" class="collection-item contact" onclick="contact()">Thang 5</a>
+                <a style="cursor: pointer;" class="collection-item policy-warranty" onclick="policyWarranty()">Thang 6</a>
+                <a style="cursor: pointer;" class="collection-item contact" onclick="contact()">Thang 7</a>
+                <a style="cursor: pointer;" class="collection-item guide-buy-product active" onclick="guideBuyProduct()">Thang 8</a>
+                <a style="cursor: pointer;" class="collection-item policy-delivery" onclick="policyDelivery()">Thang 9</a>
+                <a style="cursor: pointer;" class="collection-item policy-return" onclick="policyReturn()">Thang 10</a>
+                <a style="cursor: pointer;" class="collection-item policy-warranty" onclick="policyWarranty()">Thang 11</a>
+                <a style="cursor: pointer;" class="collection-item contact" onclick="contact()">Thang 12</a>
+            </div>
+        </div> -->
+
+        </div>
+    </div>
+</div>

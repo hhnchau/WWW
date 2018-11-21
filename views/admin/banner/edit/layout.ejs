@@ -1,0 +1,116 @@
+<!-- Section: Contact -->
+<section id="banner-add" class="section section-add grey lighten-3">
+
+<!-- back -->
+<i id="btn-back" class="material-icons grey-text" style="padding-left: 10px; font-size: 2.2rem; cursor: pointer;">arrow_back</i>
+
+    <div class="container">
+        <div class="row">
+            <div class="card-panel grey lighten-3">
+
+
+                <!-- BANNER TITLE -->
+                <div class="row">
+                    <div class="input-field" style="display:table; width: 100%">
+                        <input id="banner-title" type="text" value="<%-banner.ProductForm[0].title%>">
+                        <label for="banner-title">Tiêu đề</label>
+                        <span style="display: table-cell;">
+                            <a id="btn-banner-title" class="btn-small gone">Lưu</a>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- BANNER CONNTENT -->
+                <div class="row">
+                    <div class="input-field" style="display:table; width: 100%">
+                        <input id="banner-content" type="text" value="<%-banner.ProductForm[0].content%>">
+                        <label for="banner-content">Noi dung</label>
+                        <span style="display: table-cell;">
+                            <a id="btn-banner-content" class="btn-small gone">Lưu</a>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- PRODUCT SN -->
+                <div class="row">
+                    <div class="input-field" style="display:table; width: 100%">
+                        <input id="product-sn" type="text" value="<%-banner.ProductForm[0].productSn%>">
+                        <label for="product-sn">Ma san pham</label>
+                        <span style="display: table-cell;">
+                            <a id="btn-product-sn" class="btn-small gone">Lưu</a>
+                        </span>
+                    </div>
+                </div>
+
+
+                <!-- BANNER PRIORITY -->
+                <div class="row">
+                    <div class="input-field" style="display:table; width: 100%">
+                        <input id="banner-priority" type="text" value="<%-banner.ProductForm[0].priority%>">
+                        <label for="banner-priority">Ưu tiên</label>
+                        <span style="display: table-cell;">
+                            <a id="btn-banner-priority" class="btn-small gone">Lưu</a>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- BANNER START -->
+                <div class="row">
+                    <div class="input-field" style="display:table; width: 100%">
+                        <input class="datepicker" id="banner-start" type="text" value="<%- new Date(banner.ProductForm[0].start).getDate() + "-" + (new Date(banner.ProductForm[0].start).getMonth() + 1) + "-" + new Date(banner.ProductForm[0].start).getFullYear()%>">
+                        <label for="banner-start">Thời gian bắt đầu</label>
+                        <span style="display: table-cell;">
+                            <a id="btn-banner-start" class="btn-small gone">Lưu</a>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- BANNER END -->
+                <div class="row">
+                    <div class="input-field" style="display:table; width: 100%">
+                        <input class="datepicker" id="banner-end" type="text" value="<%- new Date(banner.ProductForm[0].end).getDate() + "-" + (new Date(banner.ProductForm[0].end).getMonth() + 1) + "-" + new Date(banner.ProductForm[0].end).getFullYear()%>">
+                        <label for="banner-end">Thời gian kết thúc</label>
+                        <span style="display: table-cell;">
+                            <a id="btn-banner-end" class="btn-small gone">Lưu</a>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- IMAGE -->
+                <div class="row">
+                    <div class="input-field" style=" display:table; width: 100%;">
+                        <span style="display: table-cell; padding-right: 10px;">
+                            <div style="font-size: 15px; display:table;">
+                                <span style="display: table-cell;padding-right: 10px;">
+                                    <%if(banner.ProductForm[0].image == ""){%>
+                                        <div class="input-field gone image">
+                                            <%}else{%>
+                                                <div class="input-field image">
+                                                    <%}%>
+                                                        <img id="image" src="upload/<%-banner.ProductForm[0].image%>" height="60px" width="80px">
+                                                        <i class="material-icons hoverable red-text" style="cursor: pointer;" id="btn-delete">cancel</i>
+                                                </div>
+                                                <%if(banner.ProductForm[0].image == ""){%>
+                                                    <div class="input-field file-field input-image">
+                                                        <%}else{%>
+                                                            <div class="input-field file-field gone input-image">
+                                                                <%}%>
+                                                                    <input id="input-image" type="file" accept="image/*">
+                                                                    <div class="file-path-wrapper">
+                                                                        <input class="file-path" type="text" placeholder="Hình ảnh">
+                                                                    </div>
+                                                            </div>
+                                </span>
+                                <span style="display: table-cell;">
+                                    <a id="btn-image-save" class="btn-small gone">Lưu</a>
+                                </span>
+                                </div>
+                        </span>
+                        </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+</section>

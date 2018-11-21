@@ -1,0 +1,180 @@
+<script src="ckeditor/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace('editor-bought');
+    CKEDITOR.replace('editor-delivery');
+    CKEDITOR.replace('editor-return');
+    CKEDITOR.replace('editor-warranty');
+    CKEDITOR.replace('editor-contact');
+</script>
+
+<script>
+    const sideNav = document.querySelector('.sidenav');
+    M.Sidenav.init(sideNav, {});
+
+    //Side Menu
+    $('.item-support').css("background-color", "#80cbc4");
+
+    //Scroll
+    var position = $("section:last").offset().top;
+    $('.sidenav').scrollTop(position);
+
+
+    $('.gone').hide();
+    var support = {
+        bought: "",
+        delivery: "",
+        returns: "",
+        warranty: "",
+        contact: ""
+    }
+</script>
+
+
+<!-- BOUGHT -->
+<script>
+
+    CKEDITOR.instances['editor-bought'].on('change', function (e) {
+        var s = CKEDITOR.instances['editor-bought'].getData();
+        if (s !== "") {
+            $('#btn-support-bought').show();
+        } else {
+            $('#btn-support-bought').hide();
+        }
+    });
+    $('#btn-support-bought').on('click', function () {
+        var bought = CKEDITOR.instances['editor-bought'].getData();
+
+        support.bought = bought;
+        updateSupport(support, 1);
+    });
+
+</script>
+
+
+<!-- DELIVERY -->
+<script>
+
+    CKEDITOR.instances['editor-delivery'].on('change', function (e) {
+        var s = CKEDITOR.instances['editor-delivery'].getData();
+        if (s !== "") {
+            $('#btn-support-delivery').show();
+        } else {
+            $('#btn-support-delivery').hide();
+        }
+    });
+    $('#btn-support-delivery').on('click', function () {
+        var delivery = CKEDITOR.instances['editor-delivery'].getData();
+
+        support.delivery = delivery;
+        updateSupport(support, 2);
+    });
+
+</script>
+
+
+<!-- RETURN -->
+<script>
+
+    CKEDITOR.instances['editor-return'].on('change', function (e) {
+        var s = CKEDITOR.instances['editor-return'].getData();
+        if (s !== "") {
+            $('#btn-support-return').show();
+        } else {
+            $('#btn-support-return').hide();
+        }
+    });
+    $('#btn-support-return').on('click', function () {
+        var retun = CKEDITOR.instances['editor-return'].getData();
+
+        support.returns = retun;
+        updateSupport(support, 3);
+    });
+
+</script>
+
+
+<!-- WARRANTY -->
+<script>
+
+    CKEDITOR.instances['editor-warranty'].on('change', function (e) {
+        var s = CKEDITOR.instances['editor-warranty'].getData();
+        if (s !== "") {
+            $('#btn-support-warranty').show();
+        } else {
+            $('#btn-support-warranty').hide();
+        }
+    });
+    $('#btn-support-warranty').on('click', function () {
+        var warranty = CKEDITOR.instances['editor-warranty'].getData();
+
+        support.warranty = warranty;
+        updateSupport(support, 4);
+    });
+
+</script>
+
+
+<!-- CONTACT -->
+<script>
+
+    CKEDITOR.instances['editor-contact'].on('change', function (e) {
+        var s = CKEDITOR.instances['editor-contact'].getData();
+        if (s !== "") {
+            $('#btn-support-contact').show();
+        } else {
+            $('#btn-support-contact').hide();
+        }
+    });
+    $('#btn-support-contact').on('click', function () {
+        var contact = CKEDITOR.instances['editor-contact'].getData();
+
+        support.contact = contact;
+        updateSupport(support, 5);
+    });
+
+</script>
+
+<!-- UPDATE SERVER -->
+<script>
+    function updateSupport(support, type) {
+        $.ajax({
+            method: "PUT",
+            dataType: "json",
+            beforeSend: function (request) {
+                request.setRequestHeader("secret", "12345");
+            },
+            url: "admin/support/update-support.html",
+            data: support,
+            success: function success(data) {
+                var result = "";
+                $.each(data, function (i, value) {
+                    result = value.update;
+                });
+                if (result == 1) {
+
+                    if(type == 1){
+                        $('#btn-support-bought').hide();
+                        support.bought = "";
+                    }else if (type ==2){
+                        $('#btn-support-delivery').hide();
+                        support.delivery = "";
+                    }else if(type ==3){
+                        $('#btn-support-return').hide();
+                        support.returns = "";
+                    }else if (type ==4){
+                        $('#btn-support-warranty').hide();
+                        support.warranty = "";
+                    }else{
+                        $('#btn-support-contact').hide();
+                        support.contact = "";
+                    }
+
+                    alert("Cập nhật thành công.");
+                } else {
+                    alert("Cập nhật thất bại.");
+                }
+
+            }
+        });
+    }
+</script>

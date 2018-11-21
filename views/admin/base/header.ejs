@@ -1,0 +1,281 @@
+<!-- Navbar -->
+<div class="navbar-fixed">
+    <nav class="teal">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href="#" class="brand-logo">Kingpes</a>
+                <a href="#" data-target="mobile-nav" class="sidenav-trigger">
+                    <i class="material-icons">menu</i>
+                </a>
+            </div>
+        </div>
+    </nav>
+</div>
+
+
+<ul class="sidenav sidenav-fixed" id="mobile-nav">
+    <li>
+        <div class="user-view">
+            <div class="background">
+                <img src="img/header.jpg">
+            </div>
+
+            <a href="/admin/profile.html">
+                <img class="circle" width="60" height="60" avatar="<%=user.nickname%>">
+            </a>
+
+            <a href="/admin/profile.html" style="margin-left: 5px">
+                <%=user.nickname%>
+            </a>
+
+        </div>
+    </li>
+
+    <!-- Category -->
+    <li class="item-dashboard">
+        <a href="/admin/dashboard.html" class="collapsible-header">DASHBOARD</a>
+    </li>
+
+    <!-- Report -->
+    <li class="no-padding">
+        <ul class="collapsible collapsible-accordion">
+            <li>
+                <a id="drop-report" class="collapsible-header">BÁO CÁO
+                    <i class="material-icons right">arrow_drop_down</i>
+                </a>
+                <div class="collapsible-body">
+                    <ul>
+                        <li class="item-open">
+                            <a href="/admin/report/open.html">Truy cập</a>
+                        </li>
+                        <li class="item-signup">
+                            <a href="/admin/report/signup.html">Đăng ký</a>
+                        </li>
+                        <li class="item-login">
+                            <a href="/admin/report/login.html">Đăng nhập</a>
+                        </li>
+                        <li class="item-transaction">
+                            <a href="/admin/report/transaction.html">Giao dịch</a>
+                        </li>
+                        <li class="item-revenue">
+                            <a href="/admin/report/revenue.html">Doanh thu</a>
+                        </li>
+                        <li class="item-profit">
+                            <a href="/admin/report/profit.html">Lợi nhuận</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </li>
+
+    <!-- Sell -->
+    <li class="no-padding">
+        <ul class="collapsible collapsible-accordion">
+            <li>
+                <a id="drop-sell" class="collapsible-header">BÁN HÀNG
+                    <i class="material-icons right">arrow_drop_down</i>
+                </a>
+                <div class="collapsible-body">
+                    <ul>
+                        <li class="item-store">
+                            <a href="/admin/sell/store.html">Bán lẻ</a>
+                        </li>
+                        <li class="item-bought">
+                            <a href="/admin/sell/bought.html">Đã mua</a>
+                        </li>
+                        <li class="item-processing">
+                            <a href="/admin/sell/processing.html">Đang xử lý</a>
+                        </li>
+                        <li class="item-cancel">
+                            <a href="/admin/sell/cancel.html">Đã hủy</a>
+                        </li>
+                        <li class="item-complete">
+                            <a href="/admin/sell/complete.html">Hoàn tất</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </li>
+
+    <!-- Banner -->
+    <li class="no-padding">
+        <ul class="collapsible collapsible-accordion">
+            <li>
+                <a id="drop-banner" class="collapsible-header">BANNER
+                    <i class="material-icons right">arrow_drop_down</i>
+                </a>
+                <div class="collapsible-body">
+                    <ul>
+                        <li class="item-all-banner">
+                            <a href="/admin/banner/list/all-banner.html">Tất cả banner</a>
+                        </li>
+                        <li class="item-add-banner">
+                            <a href="/admin/banner/add/add-banner.html">Thêm mới banner</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </li>
+
+    <!-- Category -->
+    <li class="item-category">
+        <a href="/admin/category/all-category.html" class="collapsible-header">DANH MỤC</a>
+    </li>
+
+    <!-- Product -->
+    <li class="no-padding">
+        <ul class="collapsible collapsible-accordion">
+            <li>
+                <a id="drop-product" class="collapsible-header">SẢN PHẨM
+                    <i class="material-icons right">arrow_drop_down</i>
+                </a>
+                <div class="collapsible-body">
+                    <ul>
+                        <li class="item-all-product">
+                            <a href="/admin/product/all-product.html">Danh sách sản phẩm</a>
+                        </li>
+                        <li class="item-add-product">
+                            <a href="/admin/product/add-product.html">Thêm sản phẩm</a>
+                        </li>
+                        <li class="item-edit-product">
+                            <a href="/admin/product/edit-product.html">Cập nhật sản phẩm</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </li>
+
+    <!-- Promotion -->
+    <li class="item-promotion">
+        <a href="/admin/promotion/all-promotion.html" class="collapsible-header">KHUYẾN MÃI</a>
+    </li>
+
+    <!-- Voucher -->
+    <li class="item-voucher">
+        <a href="/admin/voucher/all-voucher.html" class="collapsible-header">MÃ GIẢM GIÁ</a>
+    </li>
+
+    <!-- FlashSale -->
+    <li class="item-flashsale">
+        <a href="/admin/flashsale/all-flashsale.html" class="collapsible-header">GIẢM SỐC</a>
+    </li>
+
+    <!-- Point -->
+    <li class="item-point">
+        <a href="/admin/point/all-point.html" class="collapsible-header">ĐIỂM THƯỞNG</a>
+    </li>
+
+    <!-- Gift -->
+    <li class="item-gift">
+        <a href="/admin/gift/all-gift.html" class="collapsible-header">QUÀ TẶNG</a>
+    </li>
+
+    <!-- Ship -->
+    <li class="item-ship">
+        <a href="/admin/ship/all-ship.html" class="collapsible-header">PHÍ VẬN CHUYỂN</a>
+    </li>
+
+    <!-- Raiting -->
+    <li class="item-raiting">
+        <a href="/admin/raiting/new-raiting.html" class="collapsible-header">ĐÁNH GIÁ</a>
+    </li>
+
+    <!-- Comment -->
+    <li class="item-comment">
+        <a href="/admin/comment/new-comment.html" class="collapsible-header">CÂU HỎI</a>
+    </li>
+
+    <!-- Blog -->
+    <li class="no-padding">
+        <ul class="collapsible collapsible-accordion">
+            <li>
+                <a id="drop-blog" class="collapsible-header">BÀI VIẾT
+                    <i class="material-icons right">arrow_drop_down</i>
+                </a>
+                <div class="collapsible-body">
+                    <ul>
+                        <li class="item-all-blog">
+                            <a href="/admin/blog/list/all-blog.html">Tất cả bài viết</a>
+                        </li>
+                        <li class="item-add-blog">
+                            <a href="/admin/blog/add/add-blog.html">Thêm mới bài viết</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </li>
+
+    <!-- Event -->
+    <li class="no-padding">
+            <ul class="collapsible collapsible-accordion">
+                <li>
+                    <a id="drop-event" class="collapsible-header">SỰ KIỆN
+                        <i class="material-icons right">arrow_drop_down</i>
+                    </a>
+                    <div class="collapsible-body">
+                        <ul>
+                            <li class="item-all-event">
+                                <a href="/admin/event/list/all-event.html">Tất cả sự kiện</a>
+                            </li>
+                            <li class="item-add-event">
+                                <a href="/admin/event/add/add-event.html">Thêm mới sự kiện</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </li>
+
+    <!-- Service -->
+    <li class="no-padding">
+        <ul class="collapsible collapsible-accordion">
+            <li>
+                <a id="drop-service" class="collapsible-header">DỊCH VỤ
+                    <i class="material-icons right">arrow_drop_down</i>
+                </a>
+                <div class="collapsible-body">
+                    <ul>
+                        <li class="item-all-service">
+                            <a href="/admin/service/list/all-service.html">Tất cả dịch vụ</a>
+                        </li>
+                        <li class="item-add-service">
+                            <a href="/admin/service/add/add-service.html">Thêm mới dịch vụ</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </li>
+
+    <!-- Support -->
+    <li class="item-support">
+        <a href="/admin/support/all-support.html" class="collapsible-header">HỔ TRỢ</a>
+    </li>
+
+    <!-- Profile -->
+    <li class="no-padding">
+        <ul class="collapsible collapsible-accordion">
+            <li>
+                <a class="collapsible-header" id="drop-baiviet">TÀI KHOẢN
+                    <i class="material-icons right">arrow_drop_down</i>
+                </a>
+                <div class="collapsible-body">
+                    <ul>
+                        <li>
+                            <a href="admin/blog/list-blog.html">Thông tin</a>
+                        </li>
+                        <li>
+                            <a href="admin/blog/add-blog.html">Đăng xuất</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </li>
+
+</ul>

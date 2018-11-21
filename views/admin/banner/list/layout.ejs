@@ -1,0 +1,89 @@
+<!-- Section: Profile -->
+<section id="banner.html" class="section">
+    <div class="row">
+
+        <table class="highlight centered flow-text" id="table-banner">
+            <thead>
+                <tr>
+                    <th style="font-size: 1.1rem">Hình</th>
+                    <th style="font-size: 1.1rem">Tiêu đề</th>
+                    <th style="font-size: 1.1rem">Nội dung</th>
+                    <th style="font-size: 1.1rem">Mã sp</th>
+                    <th style="font-size: 1.1rem">Ưu tiên</th>
+                    <th style="font-size: 1.1rem">Thời gian</th>
+                    <th style="font-size: 1.1rem">Active</th>
+
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <%banner.ProductForm.forEach(function(item, index){%>
+                    <tr style="font-size: 1.1rem">
+
+                        <!-- Image -->
+                        <td>
+                            <a href="admin/banner/edit-banner/id:<%-item.bannerId%>.html" style="cursor: pointer;">
+                                <img src="upload/<%-item.image%>" width="50px">
+                            </a>
+                        </td>
+
+                        <!-- Title -->
+                        <td>
+                            <a href="admin/banner/edit-banner/id:<%-item.bannerId%>.html" class="underline-on-hover black-text">
+                                <%-item.title%>
+                            </a>
+                        </td>
+
+                        <!-- Sub Title -->
+                        <td>
+                            <a href="admin/banner/edit-banner/id:<%-item.bannerId%>.html" class="underline-on-hover black-text">
+                                <%-item.content%>
+                            </a>
+                        </td>
+
+                        <!-- Product Sn -->
+                        <td>
+                            <a href="admin/banner/edit-banner/id:<%-item.bannerId%>.html" class="underline-on-hover black-text">
+                                <%-item.productSn%>
+                            </a>
+                        </td>
+
+                        <!-- Priority -->
+                        <td>
+                            <a href="admin/banner/edit-banner/id:<%-item.bannerId%>.html" class="underline-on-hover black-text">
+                                <%-item.priority%>
+                            </a>
+                        </td>
+
+                        <!-- Date -->
+                        <td>
+                            <a href="admin/banner/edit-banner/id:<%-item.bannerId%>.html" class="underline-on-hover black-text">
+
+                                <%-item.start.getDate()%>-
+                                    <%-item.start.getMonth() + 1%>
+                                        <%if(item.end != null){%>
+                                            /
+                                            <%-item.end.getDate()%>-
+                                                <%-item.end.getMonth() + 1%>
+                                                    <%}%>
+                            </a>
+                        </td>
+
+                        <!-- Active -->
+                        <td>
+                            <%if(item.active ==0 ){%>
+                                <span class="red-text underline-on-hover btn-active btn-active<%-item.bannerId%>" data-href="<%-item.bannerId%>">Ẩn
+                                    <%}else{%>
+                                        <span class="blue-text underline-on-hover btn-active btn-active<%-item.bannerId%>" data-href="<%-item.bannerId%>">Hiện
+                                            <%}%>
+                                        </span>
+                        </td>
+                    </tr>
+                    <%})%>
+            </tbody>
+
+        </table>
+
+    </div>
+</section>

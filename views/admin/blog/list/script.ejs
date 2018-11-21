@@ -1,0 +1,65 @@
+<script>
+    const sideNav = document.querySelector('.sidenav');
+    M.Sidenav.init(sideNav, {});
+
+    //Side Menu
+    $("#drop-blog").addClass("active");
+    //Side Menu
+    $('.item-all-blog').css("background-color", "#80cbc4");
+</script>
+
+
+<script>
+    $('.btn-active').on('click', function () {
+        var blogId = $(this).data("href");
+        if (confirm('Bạn muốn thực hiện thay đổi này?')) {
+            //Check
+            if ($('.btn-active' + blogId).text().trim() == 'Ẩn') {
+                //Show
+                updateActive(blogId, 1);
+
+            } else {
+                //Hide
+                updateActive(blogId, 0);
+
+            }
+
+        };
+    });
+
+    function updateActive(_blogId, _status) {
+        $.ajax({
+            method: "PUT",
+            dataType: "json",
+            beforeSend: function (request) {
+                request.setRequestHeader("secret", "12345");
+            },
+            url: "admin/blog/update-active-blog.html",
+            data: {
+                blogId: _blogId,
+                active: _status
+            },
+            success: function success(data) {
+                var result = "";
+                $.each(data, function (i, value) {
+                    result = value.update;
+                });
+                if (result == 1) {
+                    if (_status == 0) {
+                        $('.btn-active' + _blogId).text('Ẩn');
+                        $('.btn-active' + _blogId).removeClass('blue-text');
+                        $('.btn-active' + _blogId).addClass('red-text');
+                    } else {
+                        $('.btn-active' + _blogId).text('Hiện');
+                        $('.btn-active' + _blogId).removeClass('red-text');
+                        $('.btn-active' + _blogId).addClass('blue-text');
+                    }
+                    alert("Cập nhật thành công.");
+                } else {
+                    alert("Cập nhật thất bại.");
+                }
+
+            }
+        });
+    }
+</script>

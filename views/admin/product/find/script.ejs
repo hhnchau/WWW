@@ -1,0 +1,52 @@
+<script>
+    const sideNav = document.querySelector('.sidenav');
+    M.Sidenav.init(sideNav, {});
+
+    //Side Menu
+    $("#drop-product").addClass("active");
+    //Side Menu
+    $('.item-edit-product').css("background-color", "#80cbc4");
+</script>
+
+<script>
+    $('.gone').hide();
+    //Address Change
+    $('#product-sn').on('input', function (e) {
+        var sn = $('#product-sn').val();
+        if (sn !== "") {
+            $('#btn-find').show();
+        } else {
+            $('#btn-find').hide();
+        }
+    });
+    $('#btn-find').on('click', function () {
+        var sn = $('#product-sn').val();
+        $('#btn-find').hide();
+        findProductId(sn);
+    });
+
+    function findProductId(sn) {
+        $.ajax({
+            method: "GET",
+            dataType: "json",
+            beforeSend: function (request) {
+                request.setRequestHeader("secret", "12345");
+            },
+            data: {
+                productSn: sn
+            },
+            url: "admin/product/find-product-id.html",
+            success: function success(data) {
+                $.each(data, function (i, value) {
+                    $('#btn-find').show();
+                    if (value == null || value == "") {
+                        alert('Mã sản phẩm không tồn tại.');
+                    }
+                    value.forEach(function (entry, index) {
+                        window.location.href = "admin/product/edit-product/id:" + entry.productId + ".html";
+                    });
+                });
+            }
+        });
+    }
+</script>

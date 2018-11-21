@@ -1,0 +1,289 @@
+<!-- Section: Profile -->
+<section id="profile.html" class="section">
+    <div class="container">
+        <div class="row">
+
+            <div class="card hoverable">
+                <div class="card-tabs hover">
+                    <ul class="tabs tabs-fixed-width">
+                        <li class="tab col s3 btn grey lighten-2">
+                            <a href="#tab-account" class="active grey-text">Tài khoản</a>
+                        </li>
+                        <li class="tab col s3 btn grey lighten-2">
+                            <a href="#tab-address" class="grey-text" id="btn-receiver">Giao nhận</a>
+                        </li>
+                        <li class="tab col s3 btn grey lighten-2">
+                            <a href="#tab-watched" class="grey-text" id="btn-watched">Đã xem</a>
+                        </li>
+                        <li class="tab col s3 btn grey lighten-2">
+                            <a href="#tab-bought" class="grey-text" id="btn-bought">Đã mua</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-content grey lighten-3">
+
+                    <!-- Account -->
+                    <div id="tab-account">
+                        <!-- Section: Account -->
+                        <section id="account.html" class="section">
+                            <div class="container">
+                                <div class="row">
+                                    <h4 class="center flow-text">
+                                        <span class="teal-text">Thông tin tài khoản</span>
+                                    </h4>
+
+                                    <div class="col s12">
+                                        <div class="card hoverable">
+                                            <form class="col s12">
+
+                                                <!-- Nickname -->
+                                                <div class="row">
+                                                    <div class="input-field col s10 m8 l6 offset-s1 offset-m2 offset-l3">
+                                                        <input class="disable" id="nickname" type="text" value="<%-user.nickname%>">
+                                                        <label for="nickname">Tên đăng nhập</label>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Address -->
+                                                <div class="row">
+                                                    <div class="input-field col s10 m8 l6 offset-s1 offset-m2 offset-l3" style="display:table;">
+                                                        <input id="profile-adrress" type="text" value="<%-user.address%>">
+                                                        <label for="profile-adrress">Địa chỉ</label>
+                                                        <span style="display: table-cell;">
+                                                            <a id="btn-address-save" class="btn gone">Lưu</a>
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Phone -->
+                                                <div class="row">
+                                                    <div class="input-field col s10 m8 l6 offset-s1 offset-m2 offset-l3" style="display:table;">
+                                                        <input class="disable" id="profile-phone" maxlength="11" type="text" value="<%-user.phone%>">
+                                                        <label for="profile-phone">Điện thoại</label>
+                                                        <span style="display: table-cell;">
+                                                            <a id="btn-phone-save" class="btn gone">Lưu</a>
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Email -->
+                                                <div class="row">
+                                                    <div class="input-field col s10 m8 l6 offset-s1 offset-m2 offset-l3" style="display:table;">
+                                                        <input id="profile-email" type="email" class="validate" value="<%-user.email%>">
+                                                        <label for="profile-email">Email</label>
+                                                        <span class="helper-text red-text" data-error="Email không đúng định dạng" id="valid-email"></span>
+                                                        <span style="display: table-cell;">
+                                                            <a id="btn-email-save" class="btn gone">Lưu</a>
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Password -->
+                                                <div class="row">
+                                                    <div class="input-field col s10 m8 l6 offset-s1 offset-m2 offset-l3" style="display:table;">
+                                                        <input id="profile-password" type="password" class="validate" minlength="6" value="<%-user.password%>">
+                                                        <label for="profile-password">Mật khẩu</label>
+                                                        <span class="helper-text" data-error="Phải nhiều hơn 6 ký tự"></span>
+                                                        <span style="display: table-cell;">
+                                                            <a id="btn-password-save" class="btn gone">Lưu</a>
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Sex -->
+                                                <div class="row">
+                                                    <div class="col s10 m8 l6 offset-s1 offset-m2 offset-l3">
+                                                        <p class="text-center center-align flow-text" style="font-size: 15px; display:table; width: 100%">
+                                                            <select class="browser-default" id="cb-sex">
+                                                                <%if(user.sex == 0){%>
+                                                                    <option value="0" disabled selected>Giới tính</option>
+                                                                    <option value="1">Nam</option>
+                                                                    <option value="2">Nữ</option>
+                                                                    <%}%>
+                                                                        <%if (user.sex == 1){%>
+                                                                            <option value="0" disabled>Giới tính</option>
+                                                                            <option value="1" selected>Nam</option>
+                                                                            <option value="2">Nữ</option>
+                                                                            <%}%>
+                                                                                <%if (user.sex == 2){%>
+                                                                                    <option value="0" disabled>Giới tính</option>
+                                                                                    <option value="1">Nam</option>
+                                                                                    <option value="2" selected>Nữ</option>
+                                                                                    <%}%>
+
+                                                            </select>
+                                                            <span style="display: table-cell;">
+                                                                <a id="btn-sex-save" class="btn gone">Lưu</a>
+                                                            </span>
+                                                        </p>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Point -->
+                                                <div class="row">
+                                                    <div class="input-field col s10 m8 l6 offset-s1 offset-m2 offset-l3">
+                                                        <input class="disable" id="nickname" type="text" value="<%-user.point%>">
+                                                        <label for="nickname">Điểm tích lũy</label>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Gift -->
+                                                <div class="row">
+                                                    <div class="input-field col s10 m8 l6 offset-s1 offset-m2 offset-l3" style="display:table;">
+                                                        <input id="profile-gift" type="text" value="<%-user.giftName%>">
+                                                        <label for="profile-gift">Mã quà tặng</label>
+                                                        <%if(user.giftId > 0){%>
+                                                        <span class="">Giảm: <%-user.giftValue%>% (đến hết: <%-user.end%>)</span>
+                                                        <%}%>
+                                                        <span style="display: table-cell;">
+                                                            <a id="btn-gift-save" class="btn gone">Nhận</a>
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Logout -->
+                                                <div class="row" style="margin-top: 10%">
+                                                    <div class="col s6 offset-s3">
+                                                        <p class="text-center center-align">
+                                                            <a href="/" id="btn-logout" class="btn">Đăng xuất</a>
+                                                        </p>
+                                                    </div>
+                                                </div>
+
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+
+                    <!-- Address -->
+                    <div id="tab-address">
+                        <!-- Section: Delivery Info -->
+                        <section id="receiver.html" class="section">
+                            <div class="container">
+                                <div class="row">
+                                    <h4 class="center flow-text">
+                                        <span class="teal-text">Thông tin giao hàng</span>
+                                    </h4>
+
+                                    <div class="col s12">
+                                        <div class="card hoverable">
+                                            <form class="col s12">
+
+                                                <!-- Name Receiver -->
+                                                <div class="row">
+                                                    <div class="input-field col s10 m8 l6 offset-s1 offset-m2 offset-l3">
+                                                        <input id="receiver-names" type="text">
+                                                        <label for="receiver-names">Tên Nguời Nhận</label>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Address Receiver -->
+                                                <div class="row">
+                                                    <div class="input-field col s10 m8 l6 offset-s1 offset-m2 offset-l3">
+                                                        <input id="receiver-adrress" type="text">
+                                                        <label for="receiver-adrress">Địa Chỉ Người Nhận</label>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Phone Receiver -->
+                                                <div class="row">
+                                                    <div class="input-field col s10 m8 l6 offset-s1 offset-m2 offset-l3">
+                                                        <input id="receiver-phone" maxlength="11" type="text">
+                                                        <label for="receiver-phone">Điện Thoại Người Nhận</label>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Note Receiver -->
+                                                <div class="row">
+                                                    <div class="input-field col s10 m8 l6 offset-s1 offset-m2 offset-l3">
+                                                        <textarea id="receiver-note" class="materialize-textarea"></textarea>
+                                                        <label for="receiver-note">Ghi Chú Thêm</label>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Button -->
+                                                <div class="row">
+                                                    <div class="col s6 offset-s3">
+                                                        <p class="text-center center-align">
+                                                            <a id="btn-finish" class="btn">Hoàn Tất</a>
+                                                        </p>
+                                                    </div>
+                                                </div>
+
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+
+                    <!-- Watched -->
+                    <div id="tab-watched">
+                        <!-- Section: Watched -->
+                        <section id="watched.html" class="section">
+
+                            <div class="row">
+                                <h4 class="center flow-text">
+                                    <span class="teal-text" id="title-flash-sale">Sản phẩm đã xem</span>
+                                </h4>
+
+                                <div style="overflow-x: auto; white-space: nowrap;  display: -webkit-flex;">
+
+                                    <div id="history-product"></div>
+
+                                </div>
+
+                            </div>
+
+                        </section>
+                    </div>
+
+                    <!-- Bought -->
+                    <div id="tab-bought">
+                        <!-- Section: Selected Products -->
+                        <section id="bought.html" class="section scrollspy">
+                            <div class="row">
+                                <h4 class="center flow-text">
+                                    <span class="teal-text" id="cart-title">Sản phẩm đã mua</span>
+                                </h4>
+
+                                <div class="col s12 m12">
+
+                                    <table class="highlight centered" id="table-bought">
+                                        <thead>
+                                            <tr>
+                                                <th style="font-size: 1rem">Đơn hàng</th>
+                                                <th style="font-size: 1rem;">SL sản phẩm</th>
+                                                <th style="font-size: 1rem">Tổng tiền</th>
+                                                <th style="font-size: 1rem">Khuyến mãi</th>
+                                                <th style="font-size: 1rem">Ngày</th>
+                                                <th style="font-size: 1rem">Trạng thái</th>
+                                                <th></th>
+        
+                                            </tr>
+                                        </thead>
+
+                                        <tbody></tbody>
+
+                                    </table>
+
+                                </div>
+
+                            </div>
+
+                        </section>
+                    </div>
+                    
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</section>
