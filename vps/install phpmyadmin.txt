@@ -1,0 +1,53 @@
+systemctl status httpd
+
+yum install httpd -y
+yum install epel-release
+
+yum install php56w php56w-opcache
+
+yum search phpmyadmin
+
+
+yum install phpmyadmin -y
+
+
+vi /etc/httpd/conf.d/php
+vi /etc/httpd/conf.d/phpMyAdmin.conf
+
+
+Require all granted
+:wq!
+
+systemctl start httpd
+mysql
+
+MariaDQ [(none)]> use mysql
+
+Maria [mysql]> update user set password=PASSWORD("kingpes") where User='root';
+
+Maria [mysql]> flush privileges;
+
+
+
+create user kingpes identified by '123456';
+
+select host, user from mysql.user;
+
+flush privileges;
+
+-- update configuration immediatelly
+
+quit
+
+
+
+find / -name my.cnf
+
+/etc/my.cnf
+
+vi /etc/mysql/my.cnf ->(chang bind address 0.0.0.0)--> :wq
+
+service mysql restart
+
+
+mysql -kingpes -p -h 149.28.147.165

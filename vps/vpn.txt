@@ -1,0 +1,148 @@
+apt-get install pptpd
+
+nano /ect/pptpd.conf
+
+add at bottom:
+localip 10.0.0.1
+remoteip 10.0.0.100-200
+
+nano /etc/ppp/chap-secrets
+
+add at bottom:
+gstuts pptpd test123 *
+
+
+nano /etc/ppp/pptpd-options
+add after:
+#ms-dns 10.0.0.2
+ms-dns 8.8.8.8
+ms-dns 8.8.4.4
+
+service pptpd restart
+
+
+nano /etc/sysctl.conf
+
+delete #:
+net.ipv4.ip_forward=1
+
+sysctl -p
+
+
+iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+
+iptables --table nat --append POSTROUTING --out-interface ppp0 -j MASQUERADE
+
+iptables -I INPUT -s 10.0.0.0/8 -i ppp0 ACCEPT
+
+iptables --append FORWARD --in-interface eth0 -j ACCEPT
+
+iptables-save > firewall (backup) --> iptables--restore < firewall (if want to restore)
+
+
+
+
+
+yum -y install epel-release
+
+yum -y install ppp pptpd net-tools iptables-services
+
+mv /etc/pptpd.conf /etc/pptpd.conf.bkp
+mv -f /etc/ppp/options.pptpd /etc/options.pptpd.bkp
+
+
+
+echo 'name pptpd
+refuse-pap
+refuse-chap
+refuse-mschap
+require-mschap-v2
+require-mppe-128
+proxyarp
+lock
+nobsdcomp
+novj
+novjccomp
+nologfd
+ms-dns 8.8.8.8
+ms-dns 8.8.4.4' > /etc/ppp/options.pptpd
+
+
+
+
+echo 'option /etc/ppp/options.pptpd
+logwtmp
+localip 10.0.10.1
+remoteip 10.0.10.2-254' > /etc/pptpd.conf
+
+
+
+
+echo net.ipv4.ip_forward = 1 >> /etc/sysctl.conf
+
+
+
+sysctl -p
+
+
+systemctl stop firewalld.service
+
+
+systemctl disable firewalld.service
+
+
+service iptables save
+
+
+service iptables stop
+
+
+chkconfig iptables off
+
+
+iptables -F
+
+
+chmod +x /etc/rc.d/rc.local
+
+
+
+echo "iptables -t nat -A POSTROUTING -o ens3 -j MASQUERADE" >> /etc/rc.d/rc.local
+
+
+iptables -t nat -A POSTROUTING -o ens3 -j MASQUERADE
+
+
+
+
+
+iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+
+iptables --table nat --append POSTROUTING --out-interface ppp0 -j MASQUERADE
+
+iptables -I INPUT -s 10.0.0.0/8 -i ppp0 -j ACCEPT
+
+iptables --append FORWARD --in-interface eth0 -j ACCEPT
+
+
+
+sudo iptables-save
+
+
+yum -y install nano
+
+
+nano /etc/ppp/chap-secrets
+add:
+# client        server  secret                  IP addresses
+vpn pptpd 123456 *
+
+
+service pptpd restart
+
+
+
+Link: https://www.vpstiger.com/2018/06/22/how-to-install-poptop-pptp-vpn-server-on-centos-7/
+https://www.youtube.com/watch?v=0XxzcJd9Vp0
+
+

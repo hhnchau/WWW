@@ -1,0 +1,202 @@
+hncch@u7283
+Hncch@u7283
+
+
+Huynh Ngoc Chau 4705700202815184 319
+
+//Kiem tra VPS
+hostname
+//Update Centos
+yum update
+
+//Download mysql
+wget http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm
+//Giai nen mysql
+rpm -ivh mysql-community-release-el7-5.noarch.rpm
+//Update
+yum update
+
+//Install Mysql
+yum install mysql-server
+//Start Mysql
+systemctl start mysqld
+//Change password
+mysql_secure_installation
+//Login Mysql
+mysql -u root -p
+//Show databases
+show databases;
+create database name;
+use batabase_name;
+drop database name;
+//Create database
+CREATE DATABASE db_demo -> CHARACTER SET utf8 -> COLLATE utf8_unicode_ci;
+//Use database
+use database;
+//Show table
+show tables;
+show table form database_name;
+create table tablename (column1 int(2), column2 varchar(255));
+insert into table tablename (column1, column2) value (value1, value2);
+select * from tablename;
+upate tablename set[cot muon sua] = [gia tri moi] where [dieu kien];
+select count(*) from tablename;
+delete from tablename where [dieu kien];
+desc tablename;
+drop tablename
+
+mysqldump -u root -p kingpes > kingpes_bk.sql;
+mysql -u root -p database new(emty) < kingpes_bk.sql;
+
+//Remove mysql
+mysql_secure_installation
+service mysql restart
+apt-get remove -y mysql-*
+
+//ReInstall Mysql
+apt-get purge -y mysql-*
+
+--------------------------------------------------------------
+//Backup DB
+mysqldump -u root -p kingpes > /home/sql/kingpes_bk.sql; (Enter Pass: chau123456) \/
+//Login mysql
+mysql -u root -p \/
+//Show DB
+show databases; \/
+//Delete DB
+drop database kingpes; \/
+//Create new DB
+CREATE DATABASE kingpes CHARACTER SET utf8 COLLATE utf8_unicode_ci; \/
+//Restore DB
+mysql -u root -p kingpes < /home/sql/kingpes_bk.sql; \/
+//Use DB
+use kingpes; \/
+//Show table
+show tables; \/
+--------------------------------------------------------------
+//Check Nginx
+sudo systemctl status nginx \/
+//Check Mysql
+sudo service mysql status \/
+//Check PM2
+pm2 list \/
+-------------------------------------------------------------
+//Start PM2
+pm2 start /home/kingpes/server.js  \/
+//Save PM2
+pm2 save \/
+-------------------------------------------------------------
+//Install Nodejs
+sudo yum install epel-release
+//
+sudo yum install nodejs (Neu Error : yum install https://kojipkgs.fedoraproject.org//packages/http-parser/2.7.1/3.el7/x86_64/http-parser-2.7.1-3.el7.x86_64.rpm)
+//Check Version Nodejs
+node -v
+
+
+//Install nvm (for update nodejs)
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.4/install.sh | bash
+source ~/.bashrc
+nvm --version
+nvm ls remote
+nvm install v7.10.0
+
+//Install PM2
+sudo npm install pm2 -g
+//Start server
+pm2 start /home/kingpes/server.js
+//Stop Server
+pm2 stop /home/kingpes/server.js
+//Test
+curl localhost:9000
+//Startup
+sudo pm2 startup systemd
+//Save list
+pm2 save 
+//Show list
+pm2 list
+//View Log
+pm2 logs (pm2 logs app)
+pm2 restart server.js
+pm2 info server.js
+pm2 monit
+
+//Install NginX
+sudo yum install epel-release
+sudo yum install nginx
+//Open Port nginx
+sudo systemctl start nginx
+sudo firewall-cmd --permanent --zone=public --add-service=http 
+sudo firewall-cmd --permanent --zone=public --add-service=https
+sudo firewall-cmd --reload
+//Test
+http://45.63.13.189
+
+//Config NginX
+//Open file config
+sudo nano /etc/nginx/nginx.conf
+//Server name: domain neu co
+//goto 
+location / {
+	    proxy_pass http://45.63.13.189:9000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+}
+//Save: Ctrl+O, Enter, Ctrl + X
+
+
+//Restart nginx
+sudo systemctl restart nginx
+sudo systemctl status nginx
+sudo systemctl enable nginx
+nginx -t
+
+//Config NginX
+
+worker_processes  1;
+
+events {
+    worker_connections  1024;
+}
+
+
+http {
+    include       mime.types;
+    default_type  application/octet-stream;
+
+    sendfile        on;
+    keepalive_timeout  65;
+
+    server {
+        listen       80;
+        server_name  localhost;
+
+        location / {
+			proxy_pass http://45.63.13.189:9000;
+			proxy_http_version 1.1;
+			proxy_set_header Upgrade $http_upgrade;
+			proxy_set_header Connection 'upgrade';
+			proxy_set_header Host $host;
+			proxy_cache_bypass $http_upgrade;
+        }
+		
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html {
+            root   html;
+        }
+    }
+}
+
+
+//Open
+curl -w "\n" http://169.254.169.254/metadata/v1/interfaces/private/0/ipv4/address 
+
+
+Banner
+ca-app-pub-6949871894045396/3604324160
+
+Interstitial
+ca-app-pub-6949871894045396/5655772436
