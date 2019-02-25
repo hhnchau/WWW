@@ -1,0 +1,36 @@
+--npm init
+--npm install mysql
+
+
+
+	CREATE TABLE IF NOT EXISTS tbl_faster_eyes (
+    id int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    device varchar(32) COLLATE utf8_general_ci DEFAULT NULL,
+    fullname varchar(32) COLLATE utf8_general_ci DEFAULT NULL,
+    address varchar(32) COLLATE utf8_general_ci DEFAULT NULL,
+    avatar varchar(200) COLLATE utf8_general_ci DEFAULT NULL,
+    score int(11) DEFAULT NULL,
+    event int(11) DEFAULT NULL,
+    day varchar(10) COLLATE utf8_general_ci DEFAULT NULL,
+    platform varchar(10) COLLATE utf8_general_ci DEFAULT NULL,
+    time varchar(10) COLLATE utf8_general_ci DEFAULT NULL,
+    version varchar(10) COLLATE utf8_general_ci DEFAULT NULL,
+    game varchar(100) COLLATE utf8_general_ci DEFAULT NULL
+    );
+	
+	
+	CREATE TABLE IF NOT EXISTS tbl_faster_eyes_statistic (
+    id int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    event int(11) DEFAULT NULL,
+    day varchar(10) COLLATE utf8_general_ci DEFAULT NULL,
+    month varchar(10) COLLATE utf8_general_ci DEFAULT NULL,
+    year varchar(10) COLLATE utf8_general_ci DEFAULT NULL
+    );
+	
+	INSERT INTO `tbl_faster_eyes` 
+	(`id`, `device`, `fullname`, `address`, `avatar`, `score`, `event`, `day`, `platform`, `time`, `version`, `game`) VALUES 
+	(NULL, 'computer1', 'Sinem', 'Turkey', NULL, '18', NULL, NULL, 'Android', NULL, '1', 'Faster Eyes'), 
+	(NULL, 'computer2', 'Gustavo', 'Colombia', NULL, '13', NULL, NULL, 'Android', NULL, '1', 'Faster Eyes'), 
+	(NULL, 'computer3', 'Felipe', 'Spain', NULL, '19', NULL, NULL, 'Android', NULL, '1', 'Faster Eyes'), 
+	(NULL, 'computer4', 'Veronica', 'Italy', NULL, '17', NULL, NULL, 'Android', NULL, '1', 'Faster Eyes'), 
+	(NULL, 'computer5', 'Julie', 'Belgium', NULL, '12', NULL, NULL, 'Android', NULL, '1', 'Faster Eyes');
