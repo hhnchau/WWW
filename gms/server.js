@@ -6,6 +6,9 @@ var find = require('./find');
 var log = require('./log');
 var controller = require('./controller');
 
+var push = require('./push');
+push.send("091", "999");
+
 http.createServer(function(req, res){
   var device = req.headers['device'];
 

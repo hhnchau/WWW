@@ -1,5 +1,6 @@
 --npm init
 --npm install mysql
+-- npm install request
 
 
 
@@ -34,3 +35,5 @@
 	(NULL, 'computer3', 'Felipe', 'Spain', NULL, '19', NULL, NULL, 'Android', NULL, '1', 'Faster Eyes'), 
 	(NULL, 'computer4', 'Veronica', 'Italy', NULL, '17', NULL, NULL, 'Android', NULL, '1', 'Faster Eyes'), 
 	(NULL, 'computer5', 'Julie', 'Belgium', NULL, '12', NULL, NULL, 'Android', NULL, '1', 'Faster Eyes');
+	
+	DROP TABLE IF EXISTS `tbl_faster_eyes`;
