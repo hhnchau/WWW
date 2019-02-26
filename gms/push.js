@@ -6,6 +6,8 @@ exports.send = function (phone, code) {
     sendToTopic(phone, code);
 }
 
+//Email: chau7283@MediaList.com
+//App: AnalyticsKingpes
 function sendToTopic(phone, code) {
     var options = {
         uri: 'https://fcm.googleapis.com/fcm/send',
