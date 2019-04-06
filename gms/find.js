@@ -74,7 +74,7 @@ exports.checkNewDay = function(table, callback){
             log.write("*/*find*/* checkNewDay successful", "Old Day");
             callback(true);
           }else{
-            log.write("*/*find*/* checkNewDay successful", "null");
+            log.write("*/*find*/* checkNewDay successful", "New Day");
 
             //Backup Event
             var sql = "SELECT day, sum(event) as event FROM " + table;
@@ -103,11 +103,17 @@ exports.checkNewDay = function(table, callback){
               db.execute(sql, function(){
                 log.write("*/*find*/* Moving Data: ", "OK: --->");
 
-                //Update New Day
-                var sql = "UPDATE "+ table + " SET day = '" + currentDay[2] + "'";
+                //Update Recent
+                var sql = "UPDATE " + table + " SET recent = score";
                 db.execute(sql, function(){
-                  log.write("*/*find*/* Update New Day", "OK");
-                  callback(true);
+                  log.write("*/*find*/* Update Recent", "OK");
+
+                  //Update New Day
+                  var sql = "UPDATE "+ table + " SET day = '" + currentDay[2] + "'";
+                  db.execute(sql, function(){
+                    log.write("*/*find*/* Update New Day", "OK");
+                    callback(true);
+                  });
                 });
               });
             });

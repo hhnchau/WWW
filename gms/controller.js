@@ -161,9 +161,18 @@ exports.updateScore = function(req, res, reqBody, table, device){
         if (result) {
           find.findCurrentScore(device, table, function(scores){
             if(scores != false && data.score > scores || scores == 0){
+              //Update Score
               var sql = "UPDATE "+ table + " SET score = '" + data.score + "', event = event + 1, time = '" + currentDate + "' WHERE device = '" + device +"'";
               db.execute(sql, function(){
                 log.write("*/*Controller*/* updateScore", " OK");
+                models.FormResult(status.updateInfoOk, status.updateInfoMessageOk);
+                response.sendJson(req, res, models.data);
+              });
+            }else{
+              //Score < Server Score --> Update event
+              var sql = "UPDATE "+ table + " SET event = event + 1" + " WHERE device = '" + device +"'";
+              db.execute(sql, function(){
+                log.write("*/*Controller*/* updateEvent", " OK");
                 models.FormResult(status.updateInfoOk, status.updateInfoMessageOk);
                 response.sendJson(req, res, models.data);
               });
@@ -185,7 +194,7 @@ exports.sendRanking = function(req, res, table, device){
   try {
     models = new Models({});
           //GET TOP RANKING
-          var sql = "SELECT device, fullname, address, avatar, score, version, FIND_IN_SET(score, (SELECT GROUP_CONCAT(score ORDER BY score DESC) FROM " + table + ")) AS rank FROM " + table + " ORDER BY score DESC LIMIT " + tools.getLimitFindData();
+          var sql = "SELECT device, fullname, address, avatar, score, version, notify, FIND_IN_SET(score, (SELECT GROUP_CONCAT(score ORDER BY score DESC) FROM " + table + ")) AS rank FROM " + table + " ORDER BY score DESC LIMIT " + tools.getLimitFindData();
           db.execute(sql, function(topRank, err){
             log.write("*/*Controller*/* Execute Sql Query - Top Ranking", "---------->OK<----------1");
             //GET MY RANKING

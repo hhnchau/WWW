@@ -2,7 +2,7 @@ exports.dbConfig = {
   host: 'localhost',
   user: 'root',
   pass: '',
-  database: 'game_maker_kingpes',
+  database: 'game',
   port: '3306'
 };
 

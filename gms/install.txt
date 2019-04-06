@@ -11,12 +11,14 @@
     address varchar(32) COLLATE utf8_general_ci DEFAULT NULL,
     avatar varchar(200) COLLATE utf8_general_ci DEFAULT NULL,
     score int(11) DEFAULT NULL,
+    recent int(11) DEFAULT NULL,
     event int(11) DEFAULT NULL,
     day varchar(10) COLLATE utf8_general_ci DEFAULT NULL,
     platform varchar(10) COLLATE utf8_general_ci DEFAULT NULL,
     time varchar(10) COLLATE utf8_general_ci DEFAULT NULL,
     version varchar(10) COLLATE utf8_general_ci DEFAULT NULL,
-    game varchar(100) COLLATE utf8_general_ci DEFAULT NULL
+    game varchar(100) COLLATE utf8_general_ci DEFAULT NULL,
+    notify text COLLATE utf8_general_ci DEFAULT NULL
     );
 	
 	
@@ -30,10 +32,10 @@
 	
 	INSERT INTO `tbl_faster_eyes` 
 	(`id`, `device`, `fullname`, `address`, `avatar`, `score`, `event`, `day`, `platform`, `time`, `version`, `game`) VALUES 
-	(NULL, 'computer1', 'Sinem', 'Turkey', NULL, '18', NULL, NULL, 'Android', NULL, '1', 'Faster Eyes'), 
-	(NULL, 'computer2', 'Gustavo', 'Colombia', NULL, '13', NULL, NULL, 'Android', NULL, '1', 'Faster Eyes'), 
-	(NULL, 'computer3', 'Felipe', 'Spain', NULL, '19', NULL, NULL, 'Android', NULL, '1', 'Faster Eyes'), 
-	(NULL, 'computer4', 'Veronica', 'Italy', NULL, '17', NULL, NULL, 'Android', NULL, '1', 'Faster Eyes'), 
-	(NULL, 'computer5', 'Julie', 'Belgium', NULL, '12', NULL, NULL, 'Android', NULL, '1', 'Faster Eyes');
+	(NULL, 'computer1', 'Sinem', 'Turkey', NULL, '18', 0, NULL, 'Android', NULL, '1', 'Faster Eyes'), 
+	(NULL, 'computer2', 'Gustavo', 'Colombia', NULL, '13', 0, NULL, 'Android', NULL, '1', 'Faster Eyes'), 
+	(NULL, 'computer3', 'Felipe', 'Spain', NULL, '19', 0, NULL, 'Android', NULL, '1', 'Faster Eyes'), 
+	(NULL, 'computer4', 'Veronica', 'Italy', NULL, '17', 0, NULL, 'Android', NULL, '1', 'Faster Eyes'), 
+	(NULL, 'computer5', 'Julie', 'Belgium', NULL, '12', 0, NULL, 'Android', NULL, '1', 'Faster Eyes');
 	
 	DROP TABLE IF EXISTS `tbl_faster_eyes`;
