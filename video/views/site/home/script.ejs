@@ -1,0 +1,91 @@
+<script type="text/javascript" src="js/jquery.lazyload.min.js"></script>
+<!-- Suggest Search -->
+<script>
+    var data = {}
+    //Add Cate
+    '<% lstCate.forEach(function(item, index){%>';
+    data['<%-item.cate%>'] = null;
+    '<%})%>'
+    //Add Sn
+    '<% lstSn.forEach(function(item, index){%>';
+    data['<%-item.sn%>'] = null;
+    '<%})%>'
+    // Autocomplete
+    const ac = document.querySelector('.autocomplete');
+    M.Autocomplete.init(ac, {
+        data
+    });
+</script>
+
+<!-- Enter -->
+<script>
+    $('#search-input').keydown(function (e) {
+        if (e.keyCode == 13) {
+            search = $('#search-input').val();
+            if (search != "") {
+                $("#search-input").val('');
+
+                window.location.href = 'filter-all-product?filter=' + search;
+
+            }
+        }
+    })
+</script>
+
+<!-- Hide Search -->
+<script>
+    // hide box search
+    $('#box-category').hide();
+    // more search
+    function openCategory() {
+        if ($('#box-category').is(":visible") == true) {
+            $('#box-category').hide();
+        } else {
+            $('#box-category').show();
+        }
+    }
+
+    // search category
+    $('.item-click').click(function (event) {
+        $('#box-category').hide();
+
+        search = $(this).data("href");
+
+        window.location.href = 'filter-all-product?filter=' + search;
+
+    });
+</script>
+
+<script>
+    //Lazy load
+    document.addEventListener("DOMContentLoaded", function () {
+        var lazyloadImages = document.querySelectorAll("iframe.lazy");
+        var lazyloadThrottleTimeout;
+
+        function lazyload() {
+            if (lazyloadThrottleTimeout) {
+                clearTimeout(lazyloadThrottleTimeout);
+            }
+
+            lazyloadThrottleTimeout = setTimeout(function () {
+                var scrollTop = window.pageYOffset;
+                lazyloadImages.forEach(function (img) {
+                    if (img.offsetTop < (window.innerHeight + scrollTop)) {
+                        img.src = img.dataset.src;
+                        img.classList.remove('lazy');
+                    }
+                });
+                // if (lazyloadImages.length == 0) {
+                //     document.removeEventListener("scroll", lazyload);
+                //     window.removeEventListener("resize", lazyload);
+                //     window.removeEventListener("orientationChange", lazyload);
+                // }
+            }, 20);
+        }
+
+        document.addEventListener("scroll", lazyload);
+        window.addEventListener("resize", lazyload);
+        window.addEventListener("orientationChange", lazyload);
+    });
+
+</script>

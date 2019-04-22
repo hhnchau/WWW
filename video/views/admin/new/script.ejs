@@ -1,0 +1,92 @@
+<script>
+    document.location.hash = encodeURIComponent("do#choi#tre#em#kingpes#new#product.html");
+</script>
+<script>
+    var data = {}
+    //Add Sn
+    '<%if (lstSn != undefined){%>'
+    '<% lstSn.forEach(function(item, index){%>';
+    data['<%-item.sn%>'] = null;
+    '<%})%>'
+    '<%}%>'
+    // Autocomplete
+    const ac = document.querySelector('.autocomplete');
+    M.Autocomplete.init(ac, {
+        data
+    });
+</script>
+
+<!-- Enter -->
+<script>
+    $('#search-input').keydown(function (e) {
+        if (e.keyCode == 13) {
+            search = $('#search-input').val();
+            if (search != "") {
+                $("#search-input").val('');
+
+                window.location.href = 'admin/edit-product?filter=' + search;
+
+            }
+        }
+    })
+</script>
+
+<script>
+    $('#btn-finish').on('click', function () {
+        if ($('#sn').val() == "")
+            return alert('Vui lòng nhập mã sản phẩm');
+        if ($('#name').val() == "")
+            return alert('Vui lòng nhập tên sản phẩm');
+        if ($('#price').val() == "")
+            return alert('Vui lòng nhập giá');
+        if ($("#category").val() == "")
+            return alert('Vui lòng nhập danh mục');
+        if ($("#video").val() == "")
+            return alert('Vui lòng nhập link video');
+
+
+        var current = new Date();
+        var dd = String(current.getDate()).padStart(2, '0');
+        var mm = String(current.getMonth() + 1).padStart(2, '0');
+        var yyyy = current.getFullYear();
+        var currentDate = dd + "/" + mm + "/" + yyyy;
+
+        var product = {
+            sn: $('#sn').val(),
+            name: $('#name').val(),
+            price: $('#price').val(),
+            cate: $('#category').val(),
+            video: $('#video').val(),
+            day: currentDate
+        }
+
+        $('#btn-finish').hide();
+        insertProduct(product);
+
+    });
+    function insertProduct(product) {
+        $.ajax({
+            method: "POST",
+            dataType: "json",
+            beforeSend: function (request) {
+                request.setRequestHeader("secret", "qwerty");
+            },
+            url: "admin/new-product.html",
+            data: {
+                pro: JSON.stringify(product)
+            },
+            success: function success(data) {
+                if (data.insert == 1)
+                    alert('Thêm sản phẩm thành công.');
+                else if (data.insert == 2)
+                    alert('Tồn tại !!!!');
+                else
+                    alert('Lỗi !!!!');
+
+                location.reload();
+            }
+        });
+
+
+    } 
+</script>

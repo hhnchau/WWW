@@ -1,0 +1,17 @@
+npm init
+npm install --save sqlite3
+npm install express ejs body-parser
+
+
+OPEN DB install plugin SQLite
+
+
+var db = require('./db');
+
+db.select(1, function(row){
+    console.log(JSON.stringify(row, null, 2));
+})
+
+db.selectAll(function(row){
+    console.log(JSON.stringify(row, null, 2));
+})
