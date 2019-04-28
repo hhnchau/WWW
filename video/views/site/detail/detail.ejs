@@ -13,7 +13,7 @@
 
 </head>
 
-<body style="background-color: #bdc3c7">
+<body style="background-color: seashell">
 
     <header>
         <%include ../base/header.ejs%>
@@ -37,59 +37,50 @@
         .container {
             margin: 0 auto;
             max-width: 1280px;
-            width: 90%;
+            width: 98%;
         }
 
         @media only screen and (min-width: 601px) {
             .container {
-                width: 90%;
+                width: 98%;
             }
+
         }
 
         @media only screen and (min-width: 993px) {
             .container {
                 width: 98%;
             }
+
+            .col {
+                margin-top: -8px;
+            }
         }
 
-
-        .pb-video-container {
-            padding-top: 20px;
+        .margin-top {
+            padding-top: 15px;
             font-family: Lato;
         }
 
-        .pb-video {
-            border: 0px solid #e6e6e6;
-            padding: 5px;
-        }
-
-        .pb-video:hover {
-            background: #2c3e50;
-        }
-
-        .pb-video-frame {
-            transition: width 1s, height 1s;
-        }
-
-        .pb-video-frame:hover {
-            height: 300px;
-        }
-
-        .pb-row {
-            margin-bottom: 10px;
-        }
-
-        .card-content{
-            padding: 8px !important;
+        .card-content {
+            padding: 0px !important;
             cursor: pointer;
         }
 
-        .col{
-            padding: 0.3rem !important;
+        .col {
+            padding: 0.6rem !important;
         }
 
-        .card-title{
+        .row {
+            margin-bottom: 0px !important;
+        }
+
+        .card-title {
             display: initial !important;
+        }
+
+        .ellipsis {
+            
         }
 
         .containers {
@@ -131,10 +122,6 @@
             transform: translate(-50%, -50%);
             -ms-transform: translate(-50%, -50%);
             text-align: center;
-        }
-
-        .fa-user:hover {
-            color: #eee;
         }
     </style>
 
