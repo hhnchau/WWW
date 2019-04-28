@@ -41,8 +41,8 @@
             return alert('Vui lòng nhập giá');
         if ($("#category").val() == "")
             return alert('Vui lòng nhập danh mục');
-        if ($("#video").val() == "")
-            return alert('Vui lòng nhập link video');
+        // if ($("#video").val() == "")
+        //     return alert('Vui lòng nhập link video');
 
 
         var current = new Date();
@@ -84,7 +84,43 @@
                 location.reload();
             }
         });
+    }
+
+    $('#btn-delete').on('click', function () {
+
+        var product = {
+            sn: $('#sn').val(),
+            name: $('#name').val(),
+            price: $('#price').val(),
+            cate: $('#category').val(),
+            video: $('#video').val(),
+            day: ""
+        }
+
+        deleteProduct(product);
+    });
+
+    function deleteProduct(product) {
+        $.ajax({
+            method: "POST",
+            dataType: "json",
+            beforeSend: function (request) {
+                request.setRequestHeader("secret", "qwerty");
+            },
+            url: "admin/delete-product.html",
+            data: {
+                pro: JSON.stringify(product)
+            },
+            success: function success(data) {
+                if (data.delete == 1)
+                    alert('Xóa sản phẩm thành công.');
+                else
+                    alert('Lỗi !!!!');
+
+                location.reload();
+            }
+        });
+    }
 
 
-    } 
 </script>

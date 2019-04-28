@@ -6,7 +6,8 @@ var db = new sqlite3.Database('./video.db', (err) => {
     console.log("Connected to database");
 });
 
-var table = "product";
+//var table = "product";
+var table = "tracking";
 
 exports.create = function () {
     db.run("CREATE TABLE " + table + " (id INTEGER PRIMARY KEY AUTOINCREMENT, sn TEXT, name TEXT, price INT, cate TEXT, video TEXT, day TEXT)", function (err) {
@@ -37,6 +38,16 @@ exports.insert = function () {
     });
 }
 
+exports.delete = function () {
+    var sql = "DELETE FROM " + table;
+    db.run(sql, function (err) {
+        if (err)
+            console.log(err);
+        else
+            console.log("Delete OK");
+    });
+}
+
 exports.insertProduct = function (params, callback) {
     db.all("SELECT * FROM " + table + " WHERE sn = '" + params.sn + "'", function (err, allRow) {
         console.log(JSON.stringify(allRow));
@@ -52,6 +63,15 @@ exports.insertProduct = function (params, callback) {
                     callback({ insert: 0 });
             });
         }
+    });
+}
+
+exports.deleteProduct = function (params, callback) {
+    db.all("DELETE FROM " + table + " WHERE sn = '" + params.sn + "'", function (err, allRow) {
+        if (!err)
+            callback({ delete: 1 });
+        else
+            callback({ delete: 0 });
     });
 }
 
@@ -81,7 +101,7 @@ exports.selectAllProductByCateory = function (cate, callback) {
     });
 }
 
-exports.selectAllProductLikeCateory = function(cate, callback){
+exports.selectAllProductLikeCateory = function (cate, callback) {
     db.all("SELECT * FROM " + table + " WHERE cate like '%" + cate + "%' ORDER BY day DESC", function (err, allRow) {
         callback(allRow);
     });

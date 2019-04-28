@@ -24,7 +24,7 @@
                 </div>
                 <%}else{%>
                 <div class="col s6">
-                    <li class="collection-item teal item-click hoverable" data-href="<%-item.scate%>"
+                    <li class="collection-item teal item-click hoverable" data-href="<%-item.cate%>"
                         style="cursor: pointer;">
                         <%-item.cate%>
                     </li>
@@ -59,17 +59,17 @@
                         <img class="image lazy responsive-img"
                             data-original="https://img.youtube.com/vi/<%-lstProduct[j].sn%>/maxresdefault.jpg">
                         <div class="overlay">
-                            <a href="/detail/?sn=<%-lstProduct[j].sn%>" class="icon">
+                            <a href="/detail/?sn=<%-lstProduct[j].sn%>" class="icon" onclick='tracking("<%-lstProduct[j].sn%>", "<%-lstProduct[j].name%>")'>
                                 <i class="medium material-icons">play_circle_filled</i>
                             </a>
                         </div>
                     </div>
-                    <a href="/detail/?sn=<%-lstProduct[j].sn%>">
+                    <a href="/detail/?sn=<%-lstProduct[j].sn%>" onclick='tracking("<%-lstProduct[j].sn%>", "<%-lstProduct[j].name%>")'>
                         <div class="card-content">
                             <h6 class="ellipsis black-text"><%-lstProduct[j].name%></h6>
                             <div class="row">
                                 <div class="col s7" style="margin-top: 15px">
-                                    <h6 class="ellipsis grey-text">MS: <%-lstProduct[j].sn%></h6>
+                                    <h6 class="ellipsis grey-text">MS: Kp<%-lstProduct[j].sn%></h6>
                                 </div>
                                 <%if (lstProduct[j].price > 0) {%>
                                 <div class="col s5">
@@ -93,17 +93,17 @@
                         <img class="image lazy responsive-img"
                             data-original="https://img.youtube.com/vi/<%-lstProduct[j].sn%>/maxresdefault.jpg">
                         <div class="overlay">
-                            <a href="/detail/?sn=<%-lstProduct[j].sn%>" class="icon">
+                            <a href="/detail/?sn=<%-lstProduct[j].sn%>" class="icon" onclick='tracking("<%-lstProduct[j].sn%>", "<%-lstProduct[j].name%>")'>
                                 <i class="medium material-icons">play_circle_filled</i>
                             </a>
                         </div>
                     </div>
-                    <a href="/detail/?sn=<%-lstProduct[j].sn%>">
+                    <a href="/detail/?sn=<%-lstProduct[j].sn%>" onclick='tracking("<%-lstProduct[j].sn%>", "<%-lstProduct[j].name%>")'>
                         <div class="card-content">
                             <h6 class="ellipsis black-text"><%-lstProduct[j].name%></h6>
                             <div class="row">
                                 <div class="col s7" style="margin-top: 15px">
-                                    <h6 class="ellipsis grey-text">MS: <%-lstProduct[j].sn%></h6>
+                                    <h6 class="ellipsis grey-text">MS: Kp<%-lstProduct[j].sn%></h6>
                                 </div>
                                 <%if (lstProduct[j].price > 0) {%>
                                 <div class="col s5">
@@ -126,17 +126,17 @@
                                             <img class="image lazy responsive-img"
                                                 data-original="https://img.youtube.com/vi/<%-lstProduct[j].sn%>/maxresdefault.jpg">
                                             <div class="overlay">
-                                                <a href="/detail/?sn=<%-lstProduct[j].sn%>" class="icon">
+                                                <a href="/detail/?sn=<%-lstProduct[j].sn%>" class="icon" onclick='tracking("<%-lstProduct[j].sn%>", "<%-lstProduct[j].name%>")'>
                                                     <i class="medium material-icons">play_circle_filled</i>
                                                 </a>
                                             </div>
                                         </div>
-                                        <a href="/detail/?sn=<%-lstProduct[j].sn%>">
+                                        <a href="/detail/?sn=<%-lstProduct[j].sn%>" onclick='tracking("<%-lstProduct[j].sn%>", "<%-lstProduct[j].name%>")'>
                                             <div class="card-content">
                                                 <h6 class="ellipsis black-text"><%-lstProduct[j].name%></h6>
                                                 <div class="row">
                                                     <div class="col s7" style="margin-top: 15px">
-                                                        <h6 class="ellipsis grey-text">MS: <%-lstProduct[j].sn%></h6>
+                                                        <h6 class="ellipsis grey-text">MS: Kp<%-lstProduct[j].sn%></h6>
                                                     </div>
                                                     <%if (lstProduct[j].price > 0) {%>
                                                     <div class="col s5">

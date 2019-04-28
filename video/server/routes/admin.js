@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
 // Login
 router.post('/login', (req, res) => {
   var params = req.body;
-  if (params.username == 'a' && params.password == 1)
+  if (params.username == 'KPAdmin' && params.password == '@@@@@')
     db.selectAllSn(function (lstSn) {
       res.render('admin/new/new', { sn: lstSn });
     });
@@ -51,6 +51,23 @@ router.post('/edit-product.html', (req, res) => {
     var json = req.body.pro;
     var params = JSON.parse(json);
     db.updateProduct(params, function (result) {
+      res.json(result);
+      res.end();
+    });
+
+  } else {
+    //Response 404
+    console.log("---SECRET-ERROR---")
+  }
+});
+
+
+router.post('/delete-product.html', (req, res) => {
+  var secret = req.headers['secret'];
+  if (secret === 'qwerty') {
+    var json = req.body.pro;
+    var params = JSON.parse(json);
+    db.deleteProduct(params, function (result) {
       res.json(result);
       res.end();
     });

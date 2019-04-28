@@ -6,6 +6,7 @@ const port = 3000;
 
 //var db = require('./db');
 //db.create();
+//db.delete();
 //db.insert();
 //db.newColume();
 //db.createTracking();
