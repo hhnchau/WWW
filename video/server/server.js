@@ -4,9 +4,9 @@ const bodyParser = require('body-parser');
 
 const port = 3000;
 
-var db = require('./db');
+//var db = require('./db');
 //db.create();
-db.insert();
+//db.insert();
 //db.newColume();
 //db.createTracking();
 

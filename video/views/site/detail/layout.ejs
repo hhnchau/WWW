@@ -41,117 +41,59 @@
 
     <div class="row">
         <div class="col s12 m12 l8">
-
+            <!-- --- -->
             <div class="video-container">
-                <iframe width="853" height="480" src="//www.youtube.com/embed/-cdQzzJ8cAU?rel=0" frameborder="0"
+                <iframe width="853" height="480" src="//www.youtube.com/embed/<%-id%>?rel=0" frameborder="0"
                     allowfullscreen></iframe>
             </div>
 
+            <!-- <div class="video-container hide-on-med-and-down" style="margin-top: 3rem">
+                <iframe width="853" height="480" src="//www.youtube.com/embed/<%-id%>?rel=0" frameborder="0"
+                    allowfullscreen></iframe>
+            </div> -->
+            <!-- --- -->
         </div>
 
         <div class="col s12 m12 l4">
 
+            <% lstProduct.forEach(function(item, index){%>
+
+
             <div class="row">
-                    <div class="col s6">
-                        <div class="card-image containers">
-                            <img class="image" src="https://img.youtube.com/vi/_pdjXASm1Dk/maxresdefault.jpg">
-                            <div class="overlay">
-                                <a href="https://www.youtube.com/watch?v=vVkYpDzIusE" class="icon">
-                                    <i class="medium material-icons">play_circle_filled</i>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col s6">
-                        <div class="card-content">
-                            <span class="ellipsis">Card Titl  sf f sdf sdf sdfsd fsd fsd fsd fshfhfh fgh fgh fg hfg hffsdfsdfsd fsd fsd fsd fsd fsd fsd fsd fsd fsd fsd fsd fsdf sd fsdf sdf sdf sd sdg hfgd fsd fsd fsd fsd fse</span>
-                            <p>MS:vVkYpDzIusE<i style="font-size: 20px">50K</i></p>
+                <div class="col s6">
+                    <div class="card-image containers">
+                        <img class="image lazy responsive-img"
+                            data-original="https://img.youtube.com/vi/<%-item.sn%>/maxresdefault.jpg">
+                        <div class="overlay">
+                            <a href="/detail/?sn=<%-item.sn%>" class="icon">
+                                <i class="medium material-icons">play_circle_filled</i>
+                            </a>
                         </div>
                     </div>
                 </div>
-
-
-                <div class="row">
-                        <div class="col s6">
-                            <div class="card-image containers">
-                                <img class="image" src="https://img.youtube.com/vi/_pdjXASm1Dk/maxresdefault.jpg">
-                                <div class="overlay">
-                                    <a href="https://www.youtube.com/watch?v=vVkYpDzIusE" class="icon">
-                                        <i class="medium material-icons">play_circle_filled</i>
-                                    </a>
+                <div class="col s6">
+                    <a href="/detail/?sn=<%-item.sn%>">
+                        <div class="card-content">
+                            <h6 class="ellipsis black-text"><%-item.name%></h6>
+                            <div class="row">
+                                <div class="col s8" style="margin-top: 1px">
+                                    <h6 class="ellipsis grey-text">MS: <%-item.sn%></h6>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="col s6">
-                            <div class="card-content">
-                                <span class="card-title">Card Title</span>
-                                <p>I am a very simple card.</p>
-                            </div>
+                                <%if (item.price > 0) {%>
+                                <div class="col s4">
+                                    <h5 class="ellipsis blue-text"><%-item.price%>K</h5>
+                                </div>
+                                <%}%>
+                                        </div>
+                                </div>
+                            </a>
                         </div>
                     </div>
 
 
-                    <div class="row">
-                            <div class="col s6">
-                                <div class="card-image containers">
-                                    <img class="image" src="https://img.youtube.com/vi/_pdjXASm1Dk/maxresdefault.jpg">
-                                    <div class="overlay">
-                                        <a href="https://www.youtube.com/watch?v=vVkYpDzIusE" class="icon">
-                                            <i class="medium material-icons">play_circle_filled</i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col s6">
-                                <div class="card-content">
-                                    <span class="card-title">Card Title</span>
-                                    <p>I am a very simple card.</p>
-                                </div>
+            <%})%>
+
+
                             </div>
                         </div>
-
-
-                        <div class="row">
-                                <div class="col s6">
-                                    <div class="card-image containers">
-                                        <img class="image" src="https://img.youtube.com/vi/_pdjXASm1Dk/maxresdefault.jpg">
-                                        <div class="overlay">
-                                            <a href="https://www.youtube.com/watch?v=vVkYpDzIusE" class="icon">
-                                                <i class="medium material-icons">play_circle_filled</i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col s6">
-                                    <div class="card-content">
-                                        <span class="card-title">Card Title</span>
-                                        <p>I am a very simple card.</p>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="row">
-                                    <div class="col s6">
-                                        <div class="card-image containers">
-                                            <img class="image" src="https://img.youtube.com/vi/_pdjXASm1Dk/maxresdefault.jpg">
-                                            <div class="overlay">
-                                                <a href="https://www.youtube.com/watch?v=vVkYpDzIusE" class="icon">
-                                                    <i class="medium material-icons">play_circle_filled</i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col s6">
-                                        <div class="card-content">
-                                            <span class="card-title">Card Titffsdfsdfsdffsdfsdfsdf sdfsdfsdfsdfsdfsdf  sf sdf sle</span>
-                                            <p>I am a very simple card.</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-            
-        </div>
-    </div>
-</div>
+                </div>

@@ -14,10 +14,11 @@ router.get('/', (req, res) => {
 
 
 router.get('/detail', (req, res) => {
+    var idVideo = req.query.sn;
     db.selectAllCateory(function (lstCate) {
         db.selectAllSn(function (lstSn) {
             db.selectAllProduct(function (lstProduct) {
-                res.render('site/detail/detail', { cate: lstCate, sn: lstSn, product: lstProduct });
+                res.render('site/detail/detail', { cate: lstCate, sn: lstSn, product: lstProduct, id: idVideo });
             });
         })
     });
@@ -39,11 +40,6 @@ router.get('/filter-all-product', (req, res) => {
             }
         })
     });
-});
-
-
-router.get('/detail', (req, res) => {
-    res.render('site/detail/detail',  { cate: null, sn: null, product: null });
 });
 
 module.exports = router;
