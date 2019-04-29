@@ -1,0 +1,173 @@
+<!-- Search -->
+<div id="search.html" class="section teal darken-1 white-text center">
+    <div class="container">
+
+        <div class="input-field">
+            <input type="text" class="white grey-text autocomplete" autocomplete="off" id="search-input"
+                placeholder="Tìm kiếm" style="text-indent: 25px">
+            <label class="label-icon" for="search-input">
+                <i class="material-icons teal-text">search</i>
+            </label>
+            <i class="material-icons" style="cursor: pointer;" onclick="openCategory()">arrow_drop_down</i>
+        </div>
+
+        <ul class="collection" id="box-category" style="border: transparent">
+
+            <% lstCate.forEach(function(item, index){%>
+            <%if(index % 2 == 0){%>
+            <div class="row">
+                <div class="col s6">
+                    <li class="collection-item teal item-click hoverable" data-href="<%-item.cate%>"
+                        style="cursor: pointer;">
+                        <%-item.cate%>
+                    </li>
+                </div>
+                <%}else{%>
+                <div class="col s6">
+                    <li class="collection-item teal item-click hoverable" data-href="<%-item.cate%>"
+                        style="cursor: pointer;">
+                        <%-item.cate%>
+                    </li>
+                </div>
+            </div>
+            <%}%>
+                        <%})%>
+        </ul>
+    </div>
+</div>
+
+<!-- Product -->
+<div class="container margin-top">
+    <div class="col-md-10 col-md-offset-1">
+
+        <%var l = lstProduct.length%>
+        <%var v = 0%>
+        <%var j = 0%>
+        <%var e = 4%>
+        <%var a = 12%>
+
+        <%for (var i = 0; i < l / 4; i++) {%>
+        <%for (j; j < l; j++) {%>
+        <%if (v == 0) {%>
+
+        <div class="row">
+            <div class="col s12 m12 l3">
+
+                     <!-- --- -->
+                <div class="card hoverable">
+                    <div class="card-image containers">
+                        <img class="image lazy responsive-img"
+                            data-original="https://img.youtube.com/vi/<%-lstProduct[j].sn%>/maxresdefault.jpg">
+                        <div class="overlay">
+                            <a href="/detail/?sn=<%-lstProduct[j].sn%>" class="icon" onclick='tracking("<%-lstProduct[j].sn%>", "<%-lstProduct[j].name%>")'>
+                                <i class="medium material-icons">play_circle_filled</i>
+                            </a>
+                        </div>
+                    </div>
+                    <a href="/detail/?sn=<%-lstProduct[j].sn%>" onclick='tracking("<%-lstProduct[j].sn%>", "<%-lstProduct[j].name%>")'>
+                        <div class="card-content">
+                            <h6 class="ellipsis black-text"><%-lstProduct[j].name%></h6>
+                            <div class="row">
+                                <div class="col s7" style="margin-top: 15px">
+                                    <h6 class="ellipsis grey-text">MS: Kp<%-lstProduct[j].sn%></h6>
+                                </div>
+                                <%if (lstProduct[j].price > 0) {%>
+                                <div class="col s5">
+                                    <h4 class="ellipsis blue-text"><%-lstProduct[j].price%>K</h4>
+                                </div>
+                                <%}%>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+                 <!-- --- -->
+            </div>
+
+            <%} else {%>
+                                <%if (j % a == 1) {%>
+
+                                <div class="col s12 m12 l3">
+                                 <!-- --- -->
+                                    <div class="card hoverable">
+                    <div class="card-image containers">
+                        <img class="image lazy responsive-img"
+                            data-original="https://img.youtube.com/vi/<%-lstProduct[j].sn%>/maxresdefault.jpg">
+                        <div class="overlay">
+                            <a href="/detail/?sn=<%-lstProduct[j].sn%>" class="icon" onclick='tracking("<%-lstProduct[j].sn%>", "<%-lstProduct[j].name%>")'>
+                                <i class="medium material-icons">play_circle_filled</i>
+                            </a>
+                        </div>
+                    </div>
+                    <a href="/detail/?sn=<%-lstProduct[j].sn%>" onclick='tracking("<%-lstProduct[j].sn%>", "<%-lstProduct[j].name%>")'>
+                        <div class="card-content">
+                            <h6 class="ellipsis black-text"><%-lstProduct[j].name%></h6>
+                            <div class="row">
+                                <div class="col s7" style="margin-top: 15px">
+                                    <h6 class="ellipsis grey-text">MS: Kp<%-lstProduct[j].sn%></h6>
+                                </div>
+                                <%if (lstProduct[j].price > 0) {%>
+                                <div class="col s5">
+                                    <h4 class="ellipsis blue-text"><%-lstProduct[j].price%>K</h4>
+                                </div>
+                                <%}%>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+                    <!-- --- -->
+                                </div>
+
+                                <%} else {%>
+
+                                <div class="col s12 m12 l3">
+                                    <!-- --- -->
+                                    <div class="card hoverable">
+                                        <div class="card-image containers">
+                                            <img class="image lazy responsive-img"
+                                                data-original="https://img.youtube.com/vi/<%-lstProduct[j].sn%>/maxresdefault.jpg">
+                                            <div class="overlay">
+                                                <a href="/detail/?sn=<%-lstProduct[j].sn%>" class="icon" onclick='tracking("<%-lstProduct[j].sn%>", "<%-lstProduct[j].name%>")'>
+                                                    <i class="medium material-icons">play_circle_filled</i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <a href="/detail/?sn=<%-lstProduct[j].sn%>" onclick='tracking("<%-lstProduct[j].sn%>", "<%-lstProduct[j].name%>")'>
+                                            <div class="card-content">
+                                                <h6 class="ellipsis black-text"><%-lstProduct[j].name%></h6>
+                                                <div class="row">
+                                                    <div class="col s7" style="margin-top: 15px">
+                                                        <h6 class="ellipsis grey-text">MS: Kp<%-lstProduct[j].sn%></h6>
+                                                    </div>
+                                                    <%if (lstProduct[j].price > 0) {%>
+                                                    <div class="col s5">
+                                                        <h4 class="ellipsis blue-text"><%-lstProduct[j].price%>K</h4>
+                                                    </div>
+                                                    <%}%>
+                                            </div>
+                                        </div>
+                                        </a>
+                                    </div>
+                                     <!-- --- -->
+                                </div>
+
+                                <%}%>
+        <%}%>
+                                <%v++%>
+                                <%if (i == Math.floor(l / 4)) {%>
+                                <%e = l % 4%>
+                                <%if (e == 0) e = 4%>
+                                <%}%>
+            <%if (v == e) {%>
+
+                            </div>
+
+                            <%v = 0%>
+                            <%j++%>
+                            <%break%>
+                            <%}%>
+                <%}%>
+                            <%}%>
+
+</div>
+</div>
+</div>

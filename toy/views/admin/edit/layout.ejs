@@ -1,0 +1,87 @@
+<!-- Search -->
+<div id="search.html" class="section teal darken-1 white-text center">
+    <div class="container">
+
+        <div class="input-field">
+            <input type="text" class="white grey-text autocomplete" autocomplete="off" id="search-input"
+                placeholder="Tìm kiếm" style="text-indent: 25px">
+            <label class="label-icon" for="search-input">
+                <i class="material-icons teal-text">search</i>
+            </label>
+        </div>
+
+    </div>
+</div>
+
+<!-- Section: Delivery Info -->
+<section id="add.html" class="section scrollspy">
+    <div class="container">
+        <div class="row">
+            <h4 class="center flow-text">
+                <span class="teal-text">Sửa Sản Phẩm</span>
+            </h4>
+
+            <div class="col s12">
+                <div class="card hoverable">
+                    <form class="col s12">
+
+                        <div class="row">
+                            <div class="input-field col s10 m8 l6 offset-s1 offset-m2 offset-l3">
+                                    <input id="sn" disabled type="text" value="<%-product.sn%>">
+                                    <label for="sn">Mã Sản Phẩm</label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="input-field col s10 m8 l6 offset-s1 offset-m2 offset-l3">
+                                <input id="name" type="text" value="<%-product.name%>">
+                                <label for="name">Tên Sản Phẩm</label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="input-field col s10 m8 l6 offset-s1 offset-m2 offset-l3">
+                                <input id="price" type="text" value="<%-product.price%>">
+                                <label for="price">Giá</label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="input-field col s10 m8 l6 offset-s1 offset-m2 offset-l3">
+                                <input id="category" type="text" value="<%-product.cate%>">
+                                <label for="category">Danh Mục</label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="input-field col s10 m8 l6 offset-s1 offset-m2 offset-l3">
+                                <input id="video" type="text" value="<%-product.video%>">
+                                <label for="video">Mô Tả</label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col s6 offset-s3">
+                                <div class="col s6">
+                                        <p class="text-center right-align">
+                                            <a id="btn-finish" class="btn">Hoàn Tất</a>
+                                        </p>
+                                    </div>
+    
+                                    <div class="col s6">
+                                        <p class="text-center left-align">
+                                            <a id="btn-delete" class="btn red">&ensp;&ensp;&ensp;Xóa&ensp;&ensp;&ensp;</a>
+                                        </p>
+                                    </div>
+
+
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
