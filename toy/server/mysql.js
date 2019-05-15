@@ -181,6 +181,7 @@ exports.insertProduct = function (params, callback) {
         var sql = "INSERT into " + table + " (sn, name, price, cate, des) values ('" + params.sn + "', '" + params.name + "', '" + params.price + "', '" + params.cate + "', '" + params.des + "')";
         db.execute(sql, function (data, err) {
             if (err) {
+                console.log(err);
                 callback({ insert: 0 });
             } else {
                 callback({ insert: 1 });
@@ -197,6 +198,7 @@ exports.updateProduct = function (params, callback) {
         var sql = "UPDATE " + table + " SET name = '" + params.name + "', price = " + params.price + ", cate = '" + params.cate + "' WHERE sn = '" + params.sn + "'";
         db.execute(sql, function (data, err) {
             if (err) {
+                console.log(err);
                 callback({ insert: 0 });
             } else {
                 callback({ insert: 1 });
@@ -250,5 +252,21 @@ exports.insertTracking = function (params, callback) {
         });
     } catch (ex) {
         console.log("InsertProduct " + ex);
+    }
+}
+
+exports.selectTracking = function (callback) {
+    try {
+        var sql = "SELECT * FROM " + tracking + " WHERE DATE(date) = CURDATE() ORDER BY date DESC";
+        db.execute(sql, function (data, err) {
+            if (err) {
+                console.log("Select " + err);
+            } else {
+                console.log(JSON.stringify(data));
+                callback(data);
+            }
+        });
+    } catch (ex) {
+        console.log("Select " + ex);
     }
 }

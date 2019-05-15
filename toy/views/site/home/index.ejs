@@ -11,6 +11,15 @@
 
     <title>Đồ chơi trẻ em Kingpes</title>
 
+    <!-- Adsense -->
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-6879436530328645",
+            enable_page_level_ads: true
+        });
+    </script>
+
 </head>
 
 <body style="background-color: #bdc3c7">
@@ -20,7 +29,7 @@
     </header>
 
     <main>
-        <%include layout.ejs%>
+        <%include layout2.ejs%>
     </main>
 
     <footer>
@@ -34,42 +43,14 @@
     <%include ../base/tracking.ejs%>
 
     <style>
-        .container {
-            margin: 0 auto;
-            max-width: 1280px;
-            width: 90%;
+        .section{
+            padding-top: 0.01rem !important;
+            padding-bottom: 0px !important;
         }
 
-        @media only screen and (min-width: 601px) {
-            .container {
-                width: 90%;
-            }
-        }
-
-        @media only screen and (min-width: 993px) {
-            .container {
-                width: 98%;
-            }
-        }
-
-
-        .margin-top {
-            padding-top: 6px;
-            font-family: Lato;
-        }
-
-        .card-content {
-            padding: 8px !important;
+        .content {
+            padding: 0px !important;
             cursor: pointer;
-        }
-
-        .col {
-            padding: 0.3rem !important;
-        }
-
-        .row{
-            margin-left: 0 !important;
-            margin-bottom: 0;
         }
 
         .ellipsis {
@@ -80,21 +61,33 @@
             -webkit-box-orient: vertical
         }
 
-        h4{
+        h4 {
+            font-size: 2.0rem !important;
             margin: 0rem !important;
             font-weight: 600 !important;
         }
 
-
-        h6{
+        h5 {
+            font-size: 1.2rem !important;
             margin: 0rem !important;
             font-weight: 1 !important;
+            line-height: normal !important;
+            margin-left: 10px !important;
+        }
+
+        h6 {
+            font-size: 0.8rem !important;
+            margin: 0rem !important;
+            font-weight: 1 !important;
+        }
+
+        .row{
+            margin-bottom: 8px !important;
         }
 
         .containers {
             position: relative;
             width: 100%;
-            max-width: 400px;
         }
 
         .image {
@@ -131,8 +124,29 @@
             -ms-transform: translate(-50%, -50%);
             text-align: center;
         }
-
     </style>
+
+    <!-- Load Facebook SDK for JavaScript -->
+    <div id="fb-root"></div>
+    <script>
+        window.fbAsyncInit = function () {
+            FB.init({
+                xfbml: true,
+                version: 'v3.2'
+            });
+        };
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+
+    <!-- Your customer chat code -->
+    <div class="fb-customerchat" attribution=setup_tool page_id="1395108214088691" theme_color="#20cef5">
+    </div>
 
 </body>
 

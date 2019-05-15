@@ -1,0 +1,45 @@
+<% var lst = analysis%>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%include ../base/meta.ejs%>
+
+        <%include ../base/css.ejs%>
+
+            <title>Đăng nhập - Đồ chơi trẻ em Kingpes</title>
+</head>
+
+<body class="grey lighten-3 center-align">
+
+    <div class="row">
+        
+        <table class="highlight centered">
+            <thead>
+              <tr>
+                  <th>ID</th>
+                  <th>Platform</th>
+                  <th>SN</th>
+                  <th>Date</th>
+              </tr>
+            </thead>
+    
+            <tbody>
+                <% lst.forEach(function(item, index){%>
+                    <tr>
+                        <td><%-item.id%></td>
+                        <td><%-item.platform%></td>
+                        <td><%-item.sn%></td>
+                        <td><%-item.date%></td>
+                    </tr>
+                <%})%>
+            </tbody>
+          </table>
+
+    </div>
+
+    <%include ../base/js.ejs%>
+
+</body>
+
+</html>

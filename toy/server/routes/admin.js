@@ -16,6 +16,28 @@ router.post('/login', (req, res) => {
     });
 });
 
+//Delete Force
+router.get('/kp/deleteforce', (req, res) => {
+  res.render('admin/deleteforce/delete');
+});
+
+//Delete Force
+router.post('/deleteforce', (req, res) => {
+  var params = req.body;
+  if (params.username == 'KPAdmin' && params.password == '@@@@@')
+    db.deleteProduct(params, function (result) {
+      res.json(result);
+      res.end();
+    });
+});
+
+//Analysis
+router.get('/kp/analysis', (req, res) => {
+  db.selectTracking(function (result) {
+    res.render('admin/analysis/analysis', {analysis: result});
+  });
+});
+
 router.post('/new-product.html', (req, res) => {
   var secret = req.headers['secret'];
   if (secret === 'qwerty') {

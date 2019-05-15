@@ -34,49 +34,17 @@
     <%include ../base/tracking.ejs%>
 
     <style>
-        .container {
-            margin: 0 auto;
-            max-width: 1280px;
-            width: 98%;
+        .section {
+            padding-top: 0.01rem !important;
+            padding-bottom: 0px !important;
         }
 
-        @media only screen and (min-width: 601px) {
-            .container {
-                width: 98%;
-            }
-
-        }
-
-        @media only screen and (min-width: 993px) {
-            .container {
-                width: 98%;
-            }
-
-            .col {
-                margin-top: -8px;
-            }
-        }
-
-        .margin-top {
-            padding-top: 15px;
-            font-family: Lato;
-        }
-
-        .card-content {
-            padding: 0px !important;
+        /* .content {
+            padding-left: -0.5rem !important;
             cursor: pointer;
-        }
-
-        .col {
-            padding: 0.6rem !important;
-        }
-
-        .row {
-            margin-bottom: 0px !important;
-        }
+        } */
 
         .ellipsis {
-
             overflow: hidden;
             text-overflow: ellipsis;
             display: -webkit-box;
@@ -84,21 +52,48 @@
             -webkit-box-orient: vertical
         }
 
-        h5{
+        h4 {
+            font-size: 1.4rem !important;
             margin: 0rem !important;
-            font-weight: 100 !important;
+            font-weight: 600 !important;
         }
 
-
-        h6{
+        h5 {
+            font-size: 1.4rem !important;
             margin: 0rem !important;
             font-weight: 1 !important;
+            line-height: normal !important;
+        }
+
+        h6 {
+            font-size: 0.9rem !important;
+            margin: 0rem !important;
+            font-weight: 0 !important;
+        }
+
+        .row {
+            margin-bottom: 7px !important;
+        }
+
+        @media screen and (min-width: 992px) {
+            .col {
+                padding-top: 0rem !important;
+                padding-bottom: 0rem !important;
+                padding-left: 0rem !important;
+            }
+
+            .de {
+                padding-left: 0.5rem !important;
+            }
+
+            .sn {
+                margin-left: 1rem !important;
+            }
         }
 
         .containers {
             position: relative;
             width: 100%;
-            max-width: 400px;
         }
 
         .image {
@@ -116,7 +111,7 @@
             height: 100%;
             width: 100%;
             opacity: 0;
-            transition: .3s ease;
+            transition: .2s ease;
             background-color: #babdbdbd;
             cursor: pointer;
         }
@@ -129,7 +124,7 @@
             color: white;
             font-size: 100px;
             position: absolute;
-            top: 50%;
+            top: 40%;
             left: 50%;
             transform: translate(-50%, -50%);
             -ms-transform: translate(-50%, -50%);
