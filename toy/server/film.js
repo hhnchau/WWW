@@ -23,9 +23,9 @@ app.use('/', site);
 
 
 
-var mysql = require('./mysql');
-mysql.createTable();
-mysql.createTracking();
+//var mysql = require('./mysql');
+//mysql.createTable();
+//mysql.createTracking();
 //mysql.deleteTable();
 //mysql.insert();
 //mysql.select();
