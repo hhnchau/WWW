@@ -1,7 +1,7 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
-const port = 3000;
+const port = 4000;
 
 var app = express();
 app.use(bodyParser.json());
@@ -23,9 +23,9 @@ app.use('/', site);
 
 
 
-//var mysql = require('./mysql');
-//mysql.createTable();
-//mysql.createTracking();
+var mysql = require('./mysql');
+mysql.createTable();
+mysql.createTracking();
 //mysql.deleteTable();
 //mysql.insert();
 //mysql.select();

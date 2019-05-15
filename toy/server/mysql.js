@@ -1,5 +1,5 @@
 const db = require('./db');
-const table = 'toy';
+const table = 'film';
 
 exports.createTable = function () {
     try {
@@ -227,7 +227,7 @@ exports.deleteProduct = function (params, callback) {
 
 
 ////////--TRACKING--////////
-const tracking = 'toytracking';
+const tracking = 'filmtracking';
 
 exports.createTracking = function () {
     try {

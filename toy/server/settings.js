@@ -2,6 +2,6 @@ exports.dbConfig = {
     host: 'localhost',
     user: 'root',
     pass: '',
-    database: 'kp-database',
+    database: 'kpdatabase',
     port: '3306'
   };
