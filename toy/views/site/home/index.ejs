@@ -9,16 +9,16 @@
 
     <%include ../base/css.ejs%>
 
-    <title>Đồ chơi trẻ em Kingpes</title>
+    <title>phimpro.info - Phim Online</title>
 
-    <!-- Adsense -->
+    <!-- Adsense
     <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script>
         (adsbygoogle = window.adsbygoogle || []).push({
             google_ad_client: "ca-pub-6879436530328645",
             enable_page_level_ads: true
         });
-    </script>
+    </script> -->
 
 </head>
 
@@ -43,6 +43,17 @@
     <%include ../base/tracking.ejs%>
 
     <style>
+
+        body {
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+
+        main {
+            flex: 1 0 auto;
+        }
+
         .section{
             padding-top: 0.01rem !important;
             padding-bottom: 0px !important;
@@ -127,7 +138,7 @@
     </style>
 
     <!-- Load Facebook SDK for JavaScript -->
-    <div id="fb-root"></div>
+    <!-- <div id="fb-root"></div>
     <script>
         window.fbAsyncInit = function () {
             FB.init({
@@ -142,11 +153,11 @@
             js = d.createElement(s); js.id = id;
             js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
             fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));</script>
+        }(document, 'script', 'facebook-jssdk'));</script> -->
 
     <!-- Your customer chat code -->
-    <div class="fb-customerchat" attribution=setup_tool page_id="1395108214088691" theme_color="#20cef5">
-    </div>
+    <!-- <div class="fb-customerchat" attribution=setup_tool page_id="1395108214088691" theme_color="#20cef5">
+    </div> -->
 
 </body>
 

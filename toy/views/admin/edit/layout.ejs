@@ -18,7 +18,7 @@
     <div class="container">
         <div class="row">
             <h4 class="center flow-text">
-                <span class="teal-text">Sửa Sản Phẩm</span>
+                <span class="teal-text">Sửa Video</span>
             </h4>
 
             <div class="col s12">
@@ -28,21 +28,28 @@
                         <div class="row">
                             <div class="input-field col s10 m8 l6 offset-s1 offset-m2 offset-l3">
                                     <input id="sn" disabled type="text" value="<%-product.sn%>">
-                                    <label for="sn">Mã Sản Phẩm</label>
+                                    <label for="sn">Mã Video</label>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="input-field col s10 m8 l6 offset-s1 offset-m2 offset-l3">
                                 <input id="name" type="text" value="<%-product.name%>">
-                                <label for="name">Tên Sản Phẩm</label>
+                                <label for="name">Tên Video</label>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="input-field col s10 m8 l6 offset-s1 offset-m2 offset-l3">
-                                <input id="price" type="text" value="<%-product.price%>">
-                                <label for="price">Giá</label>
+                                <input id="img" type="text" value="<%-product.img%>">
+                                <label for="img">Loại Thumbnail</label>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="input-field col s10 m8 l6 offset-s1 offset-m2 offset-l3">
+                                <input id="link" type="text" value="<%-product.price%>">
+                                <label for="link">Link Download</label>
                             </div>
                         </div>
 
@@ -55,7 +62,7 @@
 
                         <div class="row">
                             <div class="input-field col s10 m8 l6 offset-s1 offset-m2 offset-l3">
-                                <input id="video" type="text" value="<%-product.video%>">
+                                <input id="video" type="text" value="<%-product.des%>">
                                 <label for="video">Mô Tả</label>
                             </div>
                         </div>

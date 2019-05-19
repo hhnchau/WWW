@@ -22,7 +22,7 @@ router.get('/filter-all-product', (req, res) => {
         db.selectAllSn(function (lstSn) {
             if (filter.substring(0, 2) == 'Kp') {
                 filter = filter.substring(2, filter.lenght);
-                db.selectProductBySn(filter, function (lstProduct) {
+                db.selectProductLikeTitle(filter, function (lstProduct) {
                     res.render('site/home/index', { cate: lstCate, sn: lstSn, product: lstProduct });
                 });
             } else {

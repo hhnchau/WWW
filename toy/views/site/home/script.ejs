@@ -3,13 +3,13 @@
 <script>
     var data = {}
     //Add Cate
-    '<% lstCate.forEach(function(item, index){%>';
-    data['<%-item.cate%>'] = null;
+    '<% lstProduct.forEach(function(item, index){%>';
+    data['<%-item.name%>'] = null;
     '<%})%>'
     //Add Sn
-    '<% lstSn.forEach(function(item, index){%>';
-    data["Kp" + '<%-item.sn%>'] = null;
-    '<%})%>'
+    // '< lstSn.forEach(function(item, index){%>';
+    // data["Kp" + '<-item.sn%>'] = null;
+    // '<})%>'
     // Autocomplete
     const ac = document.querySelector('.autocomplete');
     M.Autocomplete.init(ac, {
@@ -25,7 +25,7 @@
             if (search != "") {
                 $("#search-input").val('');
 
-                window.location.href = 'filter-all-product?filter=' + search;
+                window.location.href = 'filter-all-product?filter=Kp' + search;
 
             }
         }

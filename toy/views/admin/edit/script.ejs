@@ -37,8 +37,8 @@
             return alert('Vui lòng nhập mã sản phẩm');
         if ($('#name').val() == "")
             return alert('Vui lòng nhập tên sản phẩm');
-        if ($('#price').val() == "")
-            return alert('Vui lòng nhập giá');
+        if ($('#link').val() == "")
+            //return alert('Vui lòng nhập giá');
         if ($("#category").val() == "")
             return alert('Vui lòng nhập danh mục');
         // if ($("#video").val() == "")
@@ -47,8 +47,9 @@
         var product = {
             sn: $('#sn').val(),
             name: $('#name').val(),
-            price: $('#price').val(),
+            link: $('#link').val(),
             cate: $('#category').val(),
+            img: $('#img').val(),
             des: $('#video').val(),
         }
 

@@ -3,7 +3,7 @@ const table = 'film';
 
 exports.createTable = function () {
     try {
-        var sql = "CREATE TABLE " + table + " (sn VARCHAR(30) NOT NULL , name VARCHAR(255) NOT NULL , price INT(4) NOT NULL DEFAULT '0' , cate VARCHAR(255) NOT NULL , des TEXT NULL , date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP , PRIMARY KEY (sn)) ENGINE = InnoDB;";
+        var sql = "CREATE TABLE " + table + " (sn VARCHAR(30) NOT NULL , name VARCHAR(255) NOT NULL , link TEXT NULL, cate VARCHAR(255) NOT NULL , des TEXT NULL, img VARCHAR(100) NOT NULL DEFAULT 'maxresdefault.jpg', date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP , PRIMARY KEY (sn)) ENGINE = InnoDB;";
         db.execute(sql, function (data, err) {
             if (err) {
                 console.log("Create Table " + err);
@@ -33,7 +33,7 @@ exports.deleteTable = function () {
 
 exports.insert = function () {
     try {
-        var sql = "INSERT INTO " + table + " (sn, name, price, cate) VALUES ('9slfi0HFmGU','Xe xếp hình',10,'Xe');";
+        var sql = "INSERT INTO " + table + " (sn, name, link, cate) VALUES ('9slfi0HFmGU','Xe xếp hình','link','Xe');";
         db.execute(sql, function (data, err) {
             if (err) {
                 console.log("Insert " + err);
@@ -64,7 +64,7 @@ exports.select = function () {
 
 exports.update = function () {
     try {
-        var sql = "UPDATE " + table + " SET sn = '-6t40do3ADY', name = 'Súng', price = 2, cate = 'Súng' WHERE sn = '9slfi0HFmGU'";
+        var sql = "UPDATE " + table + " SET sn = '-6t40do3ADY', name = 'Súng', link = 'link', cate = 'Súng' WHERE sn = '9slfi0HFmGU'";
         db.execute(sql, function (data, err) {
             if (err) {
                 console.log("Update " + err);
@@ -158,6 +158,22 @@ exports.selectProductBySn = function (sn, callback) {
     }
 }
 
+exports.selectProductLikeTitle = function (filter, callback) {
+    try {
+        var sql = "SELECT * FROM " + table + " WHERE name like '%" + filter + "%' ORDER BY date DESC";
+        db.execute(sql, function (data, err) {
+            if (err) {
+                console.log("Select " + err);
+            } else {
+                //console.log(JSON.stringify(data));
+                callback(data);
+            }
+        });
+    } catch (ex) {
+        console.log("Select " + ex);
+    }
+}
+
 exports.selectProductLikeCate = function (cate, callback) {
     try {
         var sql = "SELECT * FROM " + table + " WHERE cate like '%" + cate + "%' ORDER BY date DESC";
@@ -178,7 +194,9 @@ exports.selectProductLikeCate = function (cate, callback) {
 ////////--ADMIN--////////
 exports.insertProduct = function (params, callback) {
     try {
-        var sql = "INSERT into " + table + " (sn, name, price, cate, des) values ('" + params.sn + "', '" + params.name + "', '" + params.price + "', '" + params.cate + "', '" + params.des + "')";
+        var titl = params.name.replace(/'/g, "`");
+        var desc = params.des.replace(/'/g, "`");
+        var sql = "INSERT into " + table + " (sn, name, link, cate, des) values ('" + params.sn + "', '" + titl + "', '" + params.link + "', '" + params.cate + "', '" + desc + "')";
         db.execute(sql, function (data, err) {
             if (err) {
                 console.log(err);
@@ -195,7 +213,7 @@ exports.insertProduct = function (params, callback) {
 
 exports.updateProduct = function (params, callback) {
     try {
-        var sql = "UPDATE " + table + " SET name = '" + params.name + "', price = " + params.price + ", cate = '" + params.cate + "' WHERE sn = '" + params.sn + "'";
+        var sql = "UPDATE " + table + " SET name = '" + params.name + "', link = '" + params.link + "', img = '" + params.img +"', cate = '" + params.cate + "' WHERE sn = '" + params.sn + "'";
         db.execute(sql, function (data, err) {
             if (err) {
                 console.log(err);
@@ -244,6 +262,20 @@ exports.createTracking = function () {
     }
 }
 
+exports.deleteTableTracking = function () {
+    try {
+        var sql = "DROP TABLE " + tracking;
+        db.execute(sql, function (data, err) {
+            if (err) {
+                console.log("Delete Table " + err);
+            } else {
+                console.log("Delete Table OK");
+            }
+        });
+    } catch (ex) {
+        console.log("Delete Table " + ex);
+    }
+}
 
 exports.insertTracking = function (params, callback) {
     try {
