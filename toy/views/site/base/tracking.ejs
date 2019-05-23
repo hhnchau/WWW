@@ -8,6 +8,7 @@
     }
 
     function tracking(_sn, _name) {
+        alert(getCurrentTime());
         $.ajax({
             method: "POST",
             dataType: "json",
@@ -20,7 +21,7 @@
                 platform: getPlatform(),
                 sn: _sn,
                 video: _name,
-                date: getCurrentTime()
+                date: "123"
             },
             success: function success(data) {
             }

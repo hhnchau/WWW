@@ -1,6 +1,7 @@
+<% var product = pro%>
 <% var lstCate = cate%>
-<% var lstSn = sn%>
-<% var lstProduct = product%>
+<% var lstName = name%>
+<% var lstProduct = lstPro%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +10,7 @@
 
     <%include ../base/css.ejs%>
 
-    <title>phimpro.info - Phim Online</title>
+    <title>Phim Online | Phim HD | Không Quảng Cáo | Chất Lượng Tuyệt Vời</title>
 
 </head>
 
@@ -20,11 +21,11 @@
     </header>
 
     <main>
-        <%include layout1.ejs%>
+        <%include layout.ejs%>
     </main>
 
     <footer>
-        <%include ../base/footer1.ejs%>
+        <%include ../base/footer.ejs%>
     </footer>
 
     <%include ../base/js.ejs%>
@@ -96,6 +97,11 @@
             border: none !important;
         }
 
+        .collapsible-header{
+            border: none !important;
+            padding: 0rem !important;
+            padding-left: 1rem !important;
+        }
         .collapsible-body{
             border: none !important;
             padding: 1rem !important;

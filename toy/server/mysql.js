@@ -3,7 +3,7 @@ const table = 'film';
 
 exports.createTable = function () {
     try {
-        var sql = "CREATE TABLE " + table + " (sn VARCHAR(30) NOT NULL , name VARCHAR(255) NOT NULL , link TEXT NULL, cate VARCHAR(255) NOT NULL , des TEXT NULL, img VARCHAR(100) NOT NULL DEFAULT 'maxresdefault.jpg', date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP , PRIMARY KEY (sn)) ENGINE = InnoDB;";
+        var sql = "CREATE TABLE " + table + " (sn VARCHAR(30) NOT NULL , name VARCHAR(255) NOT NULL , link TEXT NULL, vip TEXT NULL, cate VARCHAR(255) NOT NULL , des TEXT NULL, img VARCHAR(100) NOT NULL DEFAULT 'maxresdefault.jpg', date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP , PRIMARY KEY (sn)) ENGINE = InnoDB;";
         db.execute(sql, function (data, err) {
             if (err) {
                 console.log("Create Table " + err);
@@ -33,7 +33,7 @@ exports.deleteTable = function () {
 
 exports.insert = function () {
     try {
-        var sql = "INSERT INTO " + table + " (sn, name, link, cate) VALUES ('9slfi0HFmGU','Xe xếp hình','link','Xe');";
+        var sql = "INSERT INTO " + table + " (sn, name, link, vip, cate) VALUES ('9slfi0HFmGU','Xe xếp hình','link','liinkvip','Xe');";
         db.execute(sql, function (data, err) {
             if (err) {
                 console.log("Insert " + err);
@@ -64,7 +64,7 @@ exports.select = function () {
 
 exports.update = function () {
     try {
-        var sql = "UPDATE " + table + " SET sn = '-6t40do3ADY', name = 'Súng', link = 'link', cate = 'Súng' WHERE sn = '9slfi0HFmGU'";
+        var sql = "UPDATE " + table + " SET sn = '-6t40do3ADY', name = 'Súng', link = 'link', vip = 'vip', cate = 'Súng' WHERE sn = '9slfi0HFmGU'";
         db.execute(sql, function (data, err) {
             if (err) {
                 console.log("Update " + err);
@@ -96,7 +96,23 @@ exports.delete = function () {
 ////////--SITE--////////
 exports.selectAllCate = function (callback) {
     try {
-        var sql = "SELECT * FROM " + table + " GROUP BY cate";
+        var sql = "SELECT cate FROM " + table + " GROUP BY cate";
+        db.execute(sql, function (data, err) {
+            if (err) {
+                console.log("Select " + err);
+            } else {
+                //console.log(JSON.stringify(data));
+                callback(data);
+            }
+        });
+    } catch (ex) {
+        console.log("Select " + ex);
+    }
+}
+
+exports.selectAllName = function (callback) {
+    try {
+        var sql = "SELECT name FROM " + table + " GROUP BY name";
         db.execute(sql, function (data, err) {
             if (err) {
                 console.log("Select " + err);
@@ -112,7 +128,39 @@ exports.selectAllCate = function (callback) {
 
 exports.selectAllSn = function (callback) {
     try {
-        var sql = "SELECT * FROM " + table + " GROUP BY sn";
+        var sql = "SELECT sn FROM " + table;
+        db.execute(sql, function (data, err) {
+            if (err) {
+                console.log("Select " + err);
+            } else {
+                //console.log(JSON.stringify(data));
+                callback(data);
+            }
+        });
+    } catch (ex) {
+        console.log("Select " + ex);
+    }
+}
+
+exports.selectAllSnByCate = function (cate, callback) {
+    try {
+        var sql = "SELECT sn FROM " + table + " WHERE cate = '" + cate + "'";
+        db.execute(sql, function (data, err) {
+            if (err) {
+                console.log("Select " + err);
+            } else {
+                //console.log(JSON.stringify(data));
+                callback(data);
+            }
+        });
+    } catch (ex) {
+        console.log("Select " + ex);
+    }
+}
+
+exports.selectAllSnByLink = function (link, callback) {
+    try {
+        var sql = "SELECT sn FROM " + table + " WHERE link = '" + link + "'";
         db.execute(sql, function (data, err) {
             if (err) {
                 console.log("Select " + err);
@@ -128,7 +176,7 @@ exports.selectAllSn = function (callback) {
 
 exports.selectAllProduct = function (callback) {
     try {
-        var sql = "SELECT * FROM " + table + " ORDER BY date DESC";
+        var sql = "SELECT sn, name, des, img, link FROM " + table + " ORDER BY RAND() LIMIT 70";
         db.execute(sql, function (data, err) {
             if (err) {
                 console.log("Select " + err);
@@ -145,6 +193,38 @@ exports.selectAllProduct = function (callback) {
 exports.selectProductBySn = function (sn, callback) {
     try {
         var sql = "SELECT * FROM " + table + " WHERE sn = '" + sn + "'";
+        db.execute(sql, function (data, err) {
+            if (err) {
+                console.log("Select " + err);
+            } else {
+                //console.log(JSON.stringify(data));
+                callback(data);
+            }
+        });
+    } catch (ex) {
+        console.log("Select " + ex);
+    }
+}
+
+exports.selectProduct = function (sn, callback) {
+    try {
+        var sql = "SELECT sn, name, des, img, link FROM " + table + " WHERE sn = '" + sn + "'";
+        db.execute(sql, function (data, err) {
+            if (err) {
+                console.log("Select " + err);
+            } else {
+                //console.log(JSON.stringify(data));
+                callback(data);
+            }
+        });
+    } catch (ex) {
+        console.log("Select " + ex);
+    }
+}
+
+exports.selectVipLink = function (sn, callback) {
+    try {
+        var sql = "SELECT vip FROM " + table + " WHERE sn = '" + sn + "'";
         db.execute(sql, function (data, err) {
             if (err) {
                 console.log("Select " + err);
@@ -213,7 +293,23 @@ exports.insertProduct = function (params, callback) {
 
 exports.updateProduct = function (params, callback) {
     try {
-        var sql = "UPDATE " + table + " SET name = '" + params.name + "', link = '" + params.link + "', img = '" + params.img +"', cate = '" + params.cate + "' WHERE sn = '" + params.sn + "'";
+        var sql = "UPDATE " + table + " SET name = '" + params.name + "', link = '" + params.link + "', img = '" + params.img + "', cate = '" + params.cate + "' WHERE sn = '" + params.sn + "'";
+        db.execute(sql, function (data, err) {
+            if (err) {
+                console.log(err);
+                callback({ insert: 0 });
+            } else {
+                callback({ insert: 1 });
+            }
+        });
+    } catch (ex) {
+        console.log("UpdateProduct " + ex);
+    }
+}
+
+exports.updateVipLink = function (params, callback) {
+    try {
+        var sql = "UPDATE " + table + " SET link = '" + params.link + "', vip = '" + params.vip + "' WHERE sn = '" + params.sn + "'";
         db.execute(sql, function (data, err) {
             if (err) {
                 console.log(err);
@@ -249,7 +345,7 @@ const tracking = 'filmtracking';
 
 exports.createTracking = function () {
     try {
-        var sql = "CREATE TABLE " + tracking + " (id INT NOT NULL , platform VARCHAR(30) NULL , sn VARCHAR(30) NULL , date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP) ENGINE = InnoDB;";
+        var sql = "CREATE TABLE " + tracking + " (id VARCHAR(8) NOT NULL , platform VARCHAR(30) NULL , sn VARCHAR(30) NULL , date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP) ENGINE = InnoDB;";
         db.execute(sql, function (data, err) {
             if (err) {
                 console.log("Create Table " + err);
@@ -300,5 +396,36 @@ exports.selectTracking = function (callback) {
         });
     } catch (ex) {
         console.log("Select " + ex);
+    }
+}
+
+exports.selectTrackingAll = function (callback) {
+    try {
+        var sql = "SELECT * FROM " + tracking + " ORDER BY date DESC";
+        db.execute(sql, function (data, err) {
+            if (err) {
+                console.log("Select " + err);
+            } else {
+                console.log(JSON.stringify(data));
+                callback(data);
+            }
+        });
+    } catch (ex) {
+        console.log("Select " + ex);
+    }
+}
+
+exports.clearAnalysis = function (callback) {
+    try {
+        var sql = "DELETE FROM " + tracking;
+        db.execute(sql, function (data, err) {
+            if (err) {
+                callback({ delete: 'Clear Err' });
+            } else {
+                callback({ delete: 'Clear Ok' });
+            }
+        });
+    } catch (ex) {
+        console.log("UpdateProduct " + ex);
     }
 }

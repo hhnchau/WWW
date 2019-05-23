@@ -3,13 +3,9 @@
 <script>
     var data = {}
     //Add Cate
-    '<% lstProduct.forEach(function(item, index){%>';
+    '<% lstName.forEach(function(item, index){%>';
     data['<%-item.name%>'] = null;
     '<%})%>'
-    //Add Sn
-    // '< lstSn.forEach(function(item, index){%>';
-    // data["Kp" + '<-item.sn%>'] = null;
-    // '<})%>'
     // Autocomplete
     const ac = document.querySelector('.autocomplete');
     M.Autocomplete.init(ac, {

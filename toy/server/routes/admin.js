@@ -43,6 +43,63 @@ router.get('/kp/analysis', (req, res) => {
   });
 });
 
+//All-Analysis
+router.get('/kp/analysis/all', (req, res) => {
+  db.selectTrackingAll(function (result) {
+    res.render('admin/analysis/analysis', {analysis: result});
+  });
+});
+
+//Clear-Analysis
+router.get('/kp/analysis/clear', (req, res) => {
+  db.clearAnalysis(function (result) {
+    res.json(result);
+    res.end();
+  });
+});
+
+//Get Link
+router.get('/getAllSn', (req, res) => {
+  db.selectAllSn(function (result) {
+    res.json(result);
+    res.end();
+  });
+});
+
+//Get Link
+router.get('/getAllSnByCate', (req, res) => {
+  var c = req.query.cate;
+  db.selectAllSnByCate(c, function (result) {
+    res.json(result);
+    res.end();
+  });
+});
+
+//Get Link
+router.get('/getAllSnByLink', (req, res) => {
+  var l = req.query.link;
+  db.selectAllSnByLink(l,function (result) {
+    res.json(result);
+    res.end();
+  });
+});
+
+router.post('/update-vip-link.html', (req, res) => {
+  var secret = req.headers['secret'];
+  if (secret === 'qwerty') {
+    var json = req.body.pro;
+    var params = JSON.parse(json);
+    db.updateVipLink(params, function (result) {
+      res.json(result);
+      res.end();
+    });
+
+  } else {
+    //Response 404
+    console.log("---SECRET-ERROR---")
+  }
+});
+
 router.post('/new-product.html', (req, res) => {
   var secret = req.headers['secret'];
   if (secret === 'qwerty') {

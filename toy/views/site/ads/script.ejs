@@ -1,0 +1,22 @@
+<script>
+    var countDown = 6;
+
+    var x = setInterval(function () {
+
+        countDown--;
+        document.getElementById("link").innerHTML = countDown;
+
+        if (countDown < 0) {
+            clearInterval(x);
+            '<%if(vip.length == 0){%>'
+                document.getElementById("link").innerHTML = "Không tìm thấy liên kết";
+                window.location.href = '/'; 
+            '<%}else{%>'
+            '<% vip.forEach(function(item, index){%>';
+                document.getElementById("link").innerHTML = "Let's go"; 
+                window.location.href = '<%-item.vip%>';
+            '<%})%>'
+            '<%}%>'
+        }
+    }, 1000);
+</script>

@@ -1,4 +1,4 @@
-<div class="section pink accent-1 white-text center">
+<div class="section pink darken-3 white-text center">
     <div class="container">
 
         <div class="input-field">
@@ -16,14 +16,14 @@
             <%if(index % 2 == 0){%>
             <div class="row">
                 <div class="col s6">
-                    <li class="collection-item teal item-click hoverable" data-href="<%-item.cate%>"
+                    <li class="collection-item pink accent-4 item-click hoverable" data-href="<%-item.cate%>"
                         style="cursor: pointer;">
                         <%-item.cate%>
                     </li>
                 </div>
                 <%}else{%>
                 <div class="col s6">
-                    <li class="collection-item teal item-click hoverable" data-href="<%-item.cate%>"
+                    <li class="collection-item pink accent-4 item-click hoverable" data-href="<%-item.cate%>"
                         style="cursor: pointer;">
                         <%-item.cate%>
                     </li>
@@ -41,7 +41,7 @@
                     <div class="card hoverable">
                             <div class="card-image containers">
                                 <img class="image lazy responsive-img"
-                                    data-original="https://img.youtube.com/vi/<%-item.sn%>/maxresdefault.jpg">
+                                    data-original="https://img.youtube.com/vi/<%-item.sn%>/<%-item.img%>">
                                 <div class="overlay">
                                     <a href="/detail/?sn=<%-item.sn%>" class="icon" onclick='tracking("<%-item.sn%>", "<%-item.name%>")'>
                                         <i class="medium material-icons">play_circle_filled</i>
@@ -53,13 +53,14 @@
                                     <h5 class="ellipsis black-text"><%-item.name%></h5>
                                     <div class="row" style="padding-bottom: 8px; padding-left: 10px; padding-right: 10px;">
                                         <div class="col s9 m8 l8" style="margin-top: 15px;">
-                                            <h6 class="ellipsis grey-text">MS: Kp<%-item.sn%></h6>
+                                            <%if (item.link != '') {%>
+                                                <a href="<%-item.link%>" onclick='tracking("<%-item.sn%>", "Download")'>
+                                                    <h6 class="ellipsis blue-text"><img src="img/vip.gif" alt="Vip" height="30" width="30"></h6>
+                                                </a>
+                                            <%}else{%>
+                                                <a><h6 class="ellipsis grey-text">&ensp;</h6></a>
+                                            <%}%>
                                         </div>
-                                        <%if (item.price > 0) {%>
-                                        <div class="col s3 m4 l4">
-                                            <h4 class="ellipsis blue-text right"><%-item.price%>K</h4>
-                                        </div>
-                                        <%}%>
                                     </div>
                                 </div>
                             </a>
