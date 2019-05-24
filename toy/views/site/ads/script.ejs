@@ -1,6 +1,6 @@
 <script>
     var countDown = 6;
-
+    $("#btn").hide();
     var x = setInterval(function () {
 
         countDown--;
@@ -8,13 +8,17 @@
 
         if (countDown < 0) {
             clearInterval(x);
+
+            $("#loading").hide();
+            $("#link").hide();
+            $("#btn").show();
             '<%if(vip.length == 0){%>'
-                document.getElementById("link").innerHTML = "Không tìm thấy liên kết";
-                window.location.href = '/'; 
+                $("#find").text("Không tìm thấy liên kết");
+                $("#btn").text("Trang Chủ");  
             '<%}else{%>'
             '<% vip.forEach(function(item, index){%>';
-                document.getElementById("link").innerHTML = "Let's go"; 
-                window.location.href = '<%-item.vip%>';
+                $("#find").text("Liên kết đã sẵn sàng");
+                $("#btn").text("Play");  
             '<%})%>'
             '<%}%>'
         }

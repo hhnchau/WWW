@@ -52,13 +52,13 @@
                                 <div class="content" style="margin-top: 5px;">
                                     <h5 class="ellipsis black-text"><%-item.name%></h5>
                                     <div class="row" style="padding-bottom: 8px; padding-left: 10px; padding-right: 10px;">
-                                        <div class="col s9 m8 l8" style="margin-top: 15px;">
+                                        <div class="col s9 m8 l8">
                                             <%if (item.link != '') {%>
                                                 <a href="<%-item.link%>" onclick='tracking("<%-item.sn%>", "Download")'>
                                                     <h6 class="ellipsis blue-text"><img src="img/vip.gif" alt="Vip" height="30" width="30"></h6>
                                                 </a>
                                             <%}else{%>
-                                                <a><h6 class="ellipsis grey-text">&ensp;</h6></a>
+                                                <a><h6 class="ellipsis grey-text" style="height: 30px;">&ensp;</h6></a>
                                             <%}%>
                                         </div>
                                     </div>

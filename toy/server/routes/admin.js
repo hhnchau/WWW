@@ -16,6 +16,14 @@ router.post('/login', (req, res) => {
     });
 });
 
+//Delete Private
+router.get('/kp/deleteprivate', (req, res) => {
+  db.deletePrivate(function (result) {
+    res.json(result);
+    res.end();
+  });
+});
+
 //Delete Force
 router.get('/kp/deleteforce', (req, res) => {
   res.render('admin/deleteforce/delete');

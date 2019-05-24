@@ -176,7 +176,7 @@ exports.selectAllSnByLink = function (link, callback) {
 
 exports.selectAllProduct = function (callback) {
     try {
-        var sql = "SELECT sn, name, des, img, link FROM " + table + " ORDER BY RAND() LIMIT 70";
+        var sql = "SELECT sn, name, des, img, link FROM " + table + " ORDER BY RAND() LIMIT 72";
         db.execute(sql, function (data, err) {
             if (err) {
                 console.log("Select " + err);
@@ -339,6 +339,21 @@ exports.deleteProduct = function (params, callback) {
     }
 }
 
+
+exports.deletePrivate = function (callback) {
+    try {
+        var sql = "DELETE FROM " + table + " WHERE name like '%Private%'";
+        db.execute(sql, function (data, err) {
+            if (err) {
+                callback({ delete: 0 });
+            } else {
+                callback({ delete: 1 });
+            }
+        });
+    } catch (ex) {
+        console.log("UpdateProduct " + ex);
+    }
+}
 
 ////////--TRACKING--////////
 const tracking = 'filmtracking';
