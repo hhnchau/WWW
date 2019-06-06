@@ -31,10 +31,30 @@ router.post('/deleteforce', (req, res) => {
     });
 });
 
+//Fetch
+router.get('/kp/fetch', (req, res) => {
+  res.render('admin/fetch/fetch');
+});
+
 //Analysis
 router.get('/kp/analysis', (req, res) => {
   db.selectTracking(function (result) {
     res.render('admin/analysis/analysis', {analysis: result});
+  });
+});
+
+//All-Analysis
+router.get('/kp/analysis/all', (req, res) => {
+  db.selectTrackingAll(function (result) {
+    res.render('admin/analysis/analysis', {analysis: result});
+  });
+});
+
+//Clear-Analysis
+router.get('/kp/analysis/clear', (req, res) => {
+  db.clearAnalysis(function (result) {
+    res.json(result);
+    res.end();
   });
 });
 

@@ -1,0 +1,61 @@
+<script>
+    var count = 0;
+    var pageToken = "";
+    var totalResults = 0;
+    var playlistId = "";
+    var playlistName = "";
+    $('#btn-add').on('click', function () {
+        playlistId = $('#playlistId').val();
+        playlistName = $('#playlistName').val();
+        if (playlistId === "")
+            return alert('Vui lòng nhập playlistId');
+        if (playlistName === "")
+            return alert('Vui lòng nhập playlistName');
+            
+        fetchVideo(playlistId, pageToken);
+    });
+    function fetchVideo(_playlistId, _pageToken) {
+        $.ajax({
+            method: "GET",
+            dataType: "json",
+            url: "https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=" + _playlistId + "&key=AIzaSyBnSYRaGovmp9dAwNpy1oQCy_hM0ynXRBU&maxResults=50&pageToken=" + _pageToken,
+            success: function success(data) {
+                totalResults = data.pageInfo.totalResults;
+                data.items.forEach(function (item, i) {
+                    var product = {
+                        sn: item.snippet.resourceId.videoId,
+                        name: item.snippet.title,
+                        link: '',
+                        cate: playlistName,
+                        des: item.snippet.description
+                    };
+                    insertProduct(product);
+                    if (data.items.length - 1 == i && data.nextPageToken != undefined) {
+                        pageToken = data.nextPageToken;
+                        fetchVideo(playlistId, pageToken);
+                    }
+                });
+            }
+        });
+    }
+    function insertProduct(product) {
+        $.ajax({
+            method: "POST",
+            dataType: "json",
+            beforeSend: function (request) {
+                request.setRequestHeader("secret", "qwerty");
+            },
+            url: "admin/new-product.html",
+            data: {
+                pro: JSON.stringify(product)
+            },
+            success: function success(data) {
+                if (data.insert == 1) {
+                    count++;
+                    document.getElementById('status').textContent = count + "/" + totalResults;
+                } else
+                    document.getElementById('err').innerHTML += product.sn + " ";
+            }
+        });
+    }
+</script>

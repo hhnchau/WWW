@@ -27,6 +27,7 @@ app.use('/', site);
 //mysql.createTable();
 //mysql.createTracking();
 //mysql.deleteTable();
+//mysql.deleteTableTracking();
 //mysql.insert();
 //mysql.select();
 //mysql.update();

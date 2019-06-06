@@ -178,7 +178,9 @@ exports.selectProductLikeCate = function (cate, callback) {
 ////////--ADMIN--////////
 exports.insertProduct = function (params, callback) {
     try {
-        var sql = "INSERT into " + table + " (sn, name, price, cate, des) values ('" + params.sn + "', '" + params.name + "', '" + params.price + "', '" + params.cate + "', '" + params.des + "')";
+        var titl = params.name.replace(/'/g, "`");
+        var desc = params.des.replace(/'/g, "`");
+        var sql = "INSERT into " + table + " (sn, name, price, cate, des) values ('" + params.sn + "', '" + titl + "', '" + params.price + "', '" + params.cate + "', '" + desc + "')";
         db.execute(sql, function (data, err) {
             if (err) {
                 console.log(err);
@@ -244,6 +246,21 @@ exports.createTracking = function () {
     }
 }
 
+exports.deleteTableTracking = function () {
+    try {
+        var sql = "DROP TABLE " + tracking;
+        db.execute(sql, function (data, err) {
+            if (err) {
+                console.log("Delete Table " + err);
+            } else {
+                console.log("Delete Table OK");
+            }
+        });
+    } catch (ex) {
+        console.log("Delete Table " + ex);
+    }
+}
+
 
 exports.insertTracking = function (params, callback) {
     try {
@@ -268,5 +285,36 @@ exports.selectTracking = function (callback) {
         });
     } catch (ex) {
         console.log("Select " + ex);
+    }
+}
+
+exports.selectTrackingAll = function (callback) {
+    try {
+        var sql = "SELECT * FROM " + tracking + " ORDER BY date DESC";
+        db.execute(sql, function (data, err) {
+            if (err) {
+                console.log("Select " + err);
+            } else {
+                console.log(JSON.stringify(data));
+                callback(data);
+            }
+        });
+    } catch (ex) {
+        console.log("Select " + ex);
+    }
+}
+
+exports.clearAnalysis = function (callback) {
+    try {
+        var sql = "DELETE FROM " + tracking;
+        db.execute(sql, function (data, err) {
+            if (err) {
+                callback({ delete: 'Clear Err' });
+            } else {
+                callback({ delete: 'Clear Ok' });
+            }
+        });
+    } catch (ex) {
+        console.log("UpdateProduct " + ex);
     }
 }
