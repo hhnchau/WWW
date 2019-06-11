@@ -128,7 +128,7 @@ exports.selectAllSn = function (callback) {
 
 exports.selectAllProduct = function (callback) {
     try {
-        var sql = "SELECT * FROM " + table + " ORDER BY date DESC";
+        var sql = "SELECT * FROM " + table + " ORDER BY RAND() LIMIT 72";
         db.execute(sql, function (data, err) {
             if (err) {
                 console.log("Select " + err);
