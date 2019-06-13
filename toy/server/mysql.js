@@ -128,12 +128,28 @@ exports.selectAllSn = function (callback) {
 
 exports.selectAllProduct = function (callback) {
     try {
-        var sql = "SELECT * FROM " + table + " ORDER BY RAND() LIMIT 72";
+        //var sql = "SELECT * FROM " + table + " ORDER BY RAND() LIMIT 72";
+        var sql = "SELECT * FROM " + table + " ORDER BY RAND()";
         db.execute(sql, function (data, err) {
             if (err) {
                 console.log("Select " + err);
             } else {
                 //console.log(JSON.stringify(data));
+                callback(data);
+            }
+        });
+    } catch (ex) {
+        console.log("Select " + ex);
+    }
+}
+
+exports.selectProduct = function (sn, callback) {
+    try {
+        var sql = "SELECT sn, name, des, price FROM " + table + " WHERE sn = '" + sn + "'";
+        db.execute(sql, function (data, err) {
+            if (err) {
+                console.log("Select " + err);
+            } else {
                 callback(data);
             }
         });

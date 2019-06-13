@@ -42,13 +42,12 @@ router.get('/detail', (req, res) => {
     db.selectAllCate(function (lstCate) {
         db.selectAllSn(function (lstSn) {
             db.selectAllProduct(function (lstProduct) {
-                res.render('site/detail/detail', { cate: lstCate, sn: lstSn, product: lstProduct, id: idVideo });
+                db.selectProduct(idVideo, function (product) {
+                    res.render('site/detail/detail', { cate: lstCate, sn: lstSn, lstPro: lstProduct, pro: product[0] });
+                })
             });
         })
     });
 });
-
-
-
 
 module.exports = router;

@@ -40,9 +40,20 @@
 <div class="row">
     <div class="de col s12 m12 l8" style="padding-bottom: 0.5rem !important;">
         <div class="video-container">
-            <iframe width="53" height="480" src="//www.youtube.com/embed/<%-id%>?rel=0" frameborder="0"
+            <iframe width="53" height="480" src="//www.youtube.com/embed/<%-product.sn%>?rel=0" frameborder="0"
                 allowfullscreen></iframe>
         </div>
+        <div style="padding-left: 0.5rem; padding-top: 1rem;"><%-product.name%></div>
+        <%if (product.price > 0) {%>
+            <!-- <div class="red-text" style="padding-left: 0.5rem; font-size: 1.5rem">200K <span class="black-text" style="font-size: 1.2rem; text-decoration: line-through;">500k</span></div> -->
+            <div class="red-text" style="padding-left: 0.5rem; font-size: 1.5rem"><%-product.price%>K</div>
+        <%}%>
+        <ul class="collapsible">
+            <li>
+            <div class="collapsible-header"><span class="blue-text">THÊM THÔNG TIN</span></div>
+            <div class="collapsible-body"><span><%=product.des%></span></div>
+            </li>
+        </ul>
     </div>
 
     <div class="col s12 m12 l4">
