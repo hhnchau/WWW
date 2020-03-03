@@ -8,7 +8,7 @@ pm2 list
 
 
 ///////STOP SERVER////////
-pm2 stop server
+pm2 stop toy
 pm2 stop serxer
 pm2 stop all
 service nginx stop
@@ -19,7 +19,10 @@ service mysql stop
 service mysql start
 service nginx start
 pm2 start /home/server/server.js
+pm2 stop /home/server/server.js
 pm2 start /home/server/serxer.js
+pm2 start /home/toys/server/toy.js
+pm2 start /home/film/server/film.js
 
 
 
@@ -33,6 +36,12 @@ pm2 restart server
 ///////LOG/////////
 pm2 log
 
+
+///////SQLITE//////
+//Install
+sudo yum install sqlite
+//Update All
+sudo yum update
 
 
 ////////MYSQL//////
@@ -114,4 +123,56 @@ sudo systemctl start nginx
 sudo systemctl restart nginx
 sudo systemctl status nginx
 sudo systemctl enable nginx
+
+
+//////MONGO DB/////////
+
+//Tao repo
+sudo vi /etc/yum.repos.d/mongodb-org.repo
+//Copy vao file repo o tren
+[mongodb-org-3.4]
+name=MongoDB Repository
+baseurl=https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/3.4/x86_64/
+gpgcheck=1
+enabled=1
+gpgkey=https://www.mongodb.org/static/pgp/server-3.4.asc
+
+//Kiem tra
+yum repolist
+
+//install
+sudo yum install mongodb-org
+
+//Start
+sudo systemctl start mongod
+
+//Reload
+sudo systemctl reload mongod
+
+//Stop
+udo systemctl stop mongod
+
+
+///////GIT////////
+
+//Install
+sudo yum install git
+
+//Check version
+git --version
+
+//Add User Name
+git config --global user.name "hhnchau"
+git config --global user.email "hhnchau@gmail.com"
+
+//CD
+cd /home/tubeviewer
+
+//BACK
+cd ..
+
+git clone https://github.com/hhnchau/kingpes-mongo.git
+
+
+
 
